@@ -48,27 +48,26 @@ body {
     color: #FFFFFF;
     text-align: left;
   }
+  .green {
+    background-color: rgb(143, 188, 143);
+  }
   
-  /* Roast types */
-.green {
-  background-color: DarkSeaGreen;
-}
-
-.light {
-  background-color: Sienna;
-}
-
-.city {
-  background-color: SaddleBrown;
-}
-
-.vienna {
-  background-color: Brown;
-}
-
-.italian {
-  background-color: black;
-}
+  .light {
+    background-color: rgb(160, 82, 45);
+  }
+  
+  .city {
+    background-color: rgb(139, 69, 19);
+  }
+  
+  .vienna {
+    background-color: #A52A2A;
+  }
+  
+  .italian {
+    background-color: #000000;
+  }
+  
   
   /* Typography */
   h1 {
