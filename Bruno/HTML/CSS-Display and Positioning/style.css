@@ -90,6 +90,13 @@ footer {
   top: 50px;
 }
 
+
+/* fazer com que ao passar o rato mude de cor 
+.welcome:hover{
+  color:blueviolet;
+  background: blueviolet;
+}
+ */
 .question {
   text-align: center;
   position:relative;
