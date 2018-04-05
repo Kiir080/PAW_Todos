@@ -31,15 +31,15 @@
             </div>
             <div class="field">
                 <h4>Email</h4>
-                <input type="email" name="email" required>
+                <input class="email" type="email" name="email" required >
             </div>
             <div class="field">
                 <h4>Confirmar-Email</h4>
-                <input type="email" name="Cemail" required>
+                <input class="email" type="email" name="Confirmação de email" required >
             </div>
             <div class="field">
                 <h4>Codigo-Postal</h4>
-                <input type="text" name="Codigo-Postal" required>
+                <input type="text" name="Codigo-Postal" pattern="[0-9]{4}-[0-9]{3}" required>
             </div>
             <div class="field">
                 <h4>Cidade</h4>
@@ -52,17 +52,12 @@
             <option value="Espanha">Espanha</option>
         </select>
         <h4>Data de nascimento</h4>
-        <select name="dropdown" required>
-            <option value=1 selected>1</option>
-            <option value=2>2</option>
+        <select name="dropdown" id="day" required>
+                
         </select>
-        <select name="dropdown" required>
-            <option value=1 selected>1</option>
-            <option value=2>2</option>
+        <select name="dropdown" id="month" required>
         </select>
-        <select name="dropdown" required>
-            <option value=2018 selected>2018</option>
-            <option value=2019>2019</option>
+        <select name="dropdown" id="year" required>
         </select>
         <div id="passwordDataAndCCond">
             <div class="field">
@@ -75,7 +70,7 @@
             </div>
             <div class="field">
                 <h4>Nº de Carta de Condução</h4>
-                <input type="text" name="Nº de Carta de Condução" minlength="11"  pattern="P-[0-9]{11} [0-9]" required>
+                <input type="text" name="Nº de Carta de Condução" pattern="P-[0-9]{7} [0-9]" required>
             </div>
         </div>
         <input type="checkbox" name="condicoes" value="Aceito">Aceito os termos e condições gerais
@@ -83,6 +78,8 @@
         <input type="submit" value="Criar o meu perfil">
 
     </form>
+    <script src="./script.js"></script> 
+    <script src="./scriptD.js"></script> 
 </body>
 
 </html>
