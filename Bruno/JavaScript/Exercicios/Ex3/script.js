@@ -1,17 +1,17 @@
 "use strict";
-let email = [];
-(function getEmail() {
-    email = document.getElementsByClassName("email");
-    for (let i = 0; i < email.length; i++) {
-        checkEmail(email[i]);
-        email[i].addEventListener("blur", function (event) {
+let target = [];
+(function getTarget() {
+    target = document.getElementsByClassName("email");
+    for (let i = 0; i < target.length; i++) {
+        checkTarget(target[i]);
+        target[i].addEventListener("blur", function (event) {
             checkStrings();
         });
     }
 
 })()
 
-function checkEmail(e) {
+function checkTarget(e) {
     e.addEventListener("input", function (event) {
 
         if (e.validity.typeMismatch) {
@@ -24,11 +24,11 @@ function checkEmail(e) {
 
 function checkStrings() {
 
-    if (email[0].value !== email[1].value) {
-        email[1].setCustomValidity(email[1].getAttribute("name") + " Não corresponde");
+    if (target[0].value !== target[1].value) {
+        target[1].setCustomValidity(target[1].getAttribute("name") + " Não corresponde");
 
     } else {
-        email[1].setCustomValidity("");
+        target[1].setCustomValidity("");
     }
 
 

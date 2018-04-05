@@ -62,11 +62,11 @@
         <div id="passwordDataAndCCond">
             <div class="field">
                 <h4>Nova Palavra Passe</h4>
-                <input type="password" name="Nova Palavra Passe" required>
+                <input class="password" type="password" name="Nova Palavra Passe" minlength="6" required>
             </div>
             <div class="field">
                 <h4>Confirmar Palavra Passe</h4>
-                <input type="password" name="Confirmar Palavra Passe" required>
+                <input class="password" type="password" name="Confirmar Palavra Passe" minlength="6" required>
             </div>
             <div class="field">
                 <h4>Nº de Carta de Condução</h4>
@@ -80,6 +80,7 @@
     </form>
     <script src="./script.js"></script> 
     <script src="./scriptD.js"></script> 
+    <script src="./checkPassword.js"></script> 
 </body>
 
 </html>
