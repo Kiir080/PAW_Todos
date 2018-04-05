@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
 <body>
     <form id="Clients">
         <div id="MP">
@@ -10,46 +15,73 @@
             <input type="radio" name="Morada Preferencial" value="Profissional">Profissional
             <br>
         </div>
-        <div>
-            <h3>Titulo</h3>
-            <select name="dropdown" required>
-                <option value="Titulo1" selected>Titulo1</option>
-                <option value="Titulo2">Titulo2</option>
-            </select>
+        <h3>Titulo</h3>
+        <select name="dropdown" required>
+            <option value="Titulo1" selected>Titulo1</option>
+            <option value="Titulo2">Titulo2</option>
+        </select>
+        <div id="infCliente">
+            <div class="field">
+                <h4>Nome</h4>
+                <input type="text" name="Nome" required>
+            </div>
+            <div class="field">
+                <h4>Apelido</h4>
+                <input type="text" name="Apelido" required>
+            </div>
+            <div class="field">
+                <h4>Email</h4>
+                <input type="email" name="email" required>
+            </div>
+            <div class="field">
+                <h4>Confirmar-Email</h4>
+                <input type="email" name="Cemail" required>
+            </div>
+            <div class="field">
+                <h4>Codigo-Postal</h4>
+                <input type="text" name="Codigo-Postal" required>
+            </div>
+            <div class="field">
+                <h4>Cidade</h4>
+                <input type="text" name="Cidade" required>
+            </div>
+        </div>
+        <h4>País</h4>
+        <select name="dropdown" required>
+            <option value="Portugal" selected>Portugal</option>
+            <option value="Espanha">Espanha</option>
+        </select>
+        <h4>Data de nascimento</h4>
+        <select name="dropdown" required>
+            <option value=1 selected>1</option>
+            <option value=2>2</option>
+        </select>
+        <select name="dropdown" required>
+            <option value=1 selected>1</option>
+            <option value=2>2</option>
+        </select>
+        <select name="dropdown" required>
+            <option value=2018 selected>2018</option>
+            <option value=2019>2019</option>
+        </select>
+        <div id="passwordDataAndCCond">
+            <div class="field">
+                <h4>Nova Palavra Passe</h4>
+                <input type="password" name="Nova Palavra Passe" required>
+            </div>
+            <div class="field">
+                <h4>Confirmar Palavra Passe</h4>
+                <input type="password" name="Confirmar Palavra Passe" required>
+            </div>
+            <div class="field">
+                <h4>Nº de Carta de Condução</h4>
+                <input type="text" name="Nº de Carta de Condução" minlength="11"  pattern="P-[0-9]{11} [0-9]" required>
+            </div>
+        </div>
+        <input type="checkbox" name="condicoes" value="Aceito">Aceito os termos e condições gerais
+        <br>
+        <input type="submit" value="Criar o meu perfil">
 
-        </div>
-        <div>
-            <h4>Nome</h4>
-            <input type="text" name="Nome" required>
-            <h4>Apelido</h4>
-            <input type="text" name="Apelido" required>
-            <h4>Email</h4>
-            <input type="email" name="email" required>
-            <h4>Confirmar-Email</h4>
-            <input type="email" name="Cemail" required>
-            <h4>Codigo-Postal</h4>
-            <input type="text" name="Codigo-Postal" required>
-            <h4>Cidade</h4>
-            <input type="text" name="Cidade" required>
-            <h4>País</h4>
-            <select name="dropdown" required>
-                <option value="Portugal" selected>Portugal</option>
-                <option value="Espanha">Espanha</option>
-            </select>
-            <h4>Data de nascimento</h4>
-            <select name="dropdown" required>
-                    <option value="Portugal" selected>Portugal</option>
-                    <option value="Espanha">Espanha</option>
-                </select>
-                <select name="dropdown" required>
-                        <option value=1 selected>1</option>
-                        <option value=2>2</option>
-                    </select>
-                    <select name="dropdown" required>
-                            <option value="Portugal" selected>Portugal</option>
-                            <option value="Espanha">Espanha</option>
-                        </select>
-        </div>
     </form>
 </body>
 
