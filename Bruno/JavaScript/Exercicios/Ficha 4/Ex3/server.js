@@ -1,19 +1,21 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
+var url = require('url');
+
 
 http.createServer(function (request, response) {
     console.log('request ', request.url);
-
+    var q = url.parse(request.url, true);
     var filePath = '.' + request.url;
     if (filePath == './') {
         filePath = './form.html';
     }
 
-    if(filePath == './submit'){
-        let data ;
-        request.pipe(data)
-        fs.writeFile('xpto.txt',data, function (err) {
+    if(q.pathname=='/submit'){
+       
+        var qdata = q.query; 
+        fs.writeFile('xpto.txt',JSON.stringify(qdata), function (err) {
             if (err) throw err;
             console.log('Saved!');
           }); 

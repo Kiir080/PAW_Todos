@@ -10,24 +10,24 @@
     <form id="Clients" action="http://127.0.0.1:30/submit" method="POST">
         <div id="MP">
             <h3>Morada Preferencial</h3>
-            <input type="radio" name="Morada Preferencial" value="Casa">Casa
+            <input type="radio" name="moradaPref" value="Casa">Casa
             <br>
-            <input type="radio" name="Morada Preferencial" value="Profissional">Profissional
+            <input type="radio" name="moradaPref" value="Profissional">Profissional
             <br>
         </div>
         <h3>Titulo</h3>
-        <select name="dropdown" required>
+        <select name="dropdownTitulo" required>
             <option value="Titulo1" selected>Titulo1</option>
             <option value="Titulo2">Titulo2</option>
         </select>
         <div id="infCliente">
             <div class="field">
                 <h4>Nome</h4>
-                <input type="text" name="Nome" required>
+                <input type="text" name="nome" required>
             </div>
             <div class="field">
                 <h4>Apelido</h4>
-                <input type="text" name="Apelido" required>
+                <input type="text" name="apelido" required>
             </div>
             <div class="field">
                 <h4>Email</h4>
@@ -35,11 +35,11 @@
             </div>
             <div class="field">
                 <h4>Confirmar-Email</h4>
-                <input class="email" type="email" name="Confirmação de email" required >
+                <input class="email" type="email" name="confirmacaoEmail" required >
             </div>
             <div class="field">
                 <h4>Codigo-Postal</h4>
-                <input type="text" name="Codigo-Postal" pattern="[0-9]{4}-[0-9]{3}" required>
+                <input type="text" name="codigoPostal" pattern="[0-9]{4}-[0-9]{3}" required>
             </div>
             <div class="field">
                 <h4>Cidade</h4>
@@ -47,30 +47,30 @@
             </div>
         </div>
         <h4>País</h4>
-        <select name="dropdown" required>
+        <select name="dropdownPais" required>
             <option value="Portugal" selected>Portugal</option>
             <option value="Espanha">Espanha</option>
         </select>
         <h4>Data de nascimento</h4>
-        <select name="dropdown" id="day" required>
+        <select name="dropdownDay" id="day" required>
                 
         </select>
-        <select name="dropdown" id="month" required>
+        <select name="dropdownMonth" id="month" required>
         </select>
-        <select name="dropdown" id="year" required>
+        <select name="dropdownYear" id="year" required>
         </select>
         <div id="passwordDataAndCCond">
             <div class="field">
                 <h4>Nova Palavra Passe</h4>
-                <input class="password" type="password" name="Nova Palavra Passe" minlength="6" required>
+                <input class="password" type="password" name="password" minlength="6" required>
             </div>
             <div class="field">
                 <h4>Confirmar Palavra Passe</h4>
-                <input class="password" type="password" name="Confirmar Palavra Passe" minlength="6" required>
+                <input class="password" type="password" name="confirmarPassword" minlength="6" required>
             </div>
             <div class="field">
                 <h4>Nº de Carta de Condução</h4>
-                <input type="text" name="Nº de Carta de Condução" pattern="P-[0-9]{7} [0-9]" required>
+                <input type="text" name="NumCartaC" pattern="P-[0-9]{7} [0-9]" required>
             </div>
         </div>
         <input type="checkbox" name="condicoes" value="Aceito">Aceito os termos e condições gerais
