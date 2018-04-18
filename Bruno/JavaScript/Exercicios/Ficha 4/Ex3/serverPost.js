@@ -2,8 +2,10 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 
-function checkData(qdata){
-    console.log(qdata.nome);
+function checkData(qdata, callback){
+    let res = '{"' + qdata.replace(/=/g,'":"').replace(/&/g,'","')+'"}';
+    let a = JSON.parse(res);
+    callback(a);
 }
 
 http.createServer(function (request, response) {
@@ -22,16 +24,18 @@ http.createServer(function (request, response) {
          qdata.push(chunk);
         }).on('end', () => {
             qdata = Buffer.concat(qdata).toString();
-            checkData(qdata);
+            checkData(qdata, function writeFile(a){
+                fs.writeFile('xptoPost.json',a, function (err) {
+                    if (err) throw err;
+                    console.log('Saved!');
+                });
+            });
             console.log('All data readed!!');
         });
 
         
 
-        fs.writeFile('xptoPost.txt', qdata, function (err) {
-            if (err) throw err;
-            console.log('Saved!');
-        });
+     
     } else {
         var extname = String(path.extname(filePath)).toLowerCase();
         var mimeTypes = {

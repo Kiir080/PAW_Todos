@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <form id="Clients" action="/submit" method="POST">
+        <div id="MP">
+            <h3>Morada Preferencial</h3>
+            <input type="radio" name="moradaPref" value="Casa">Casa
+            <br>
+            <input type="radio" name="moradaPref" value="Profissional">Profissional
+            <br>
+        </div>
+        <h3>Titulo</h3>
+        <select name="dropdownTitulo" required>
+            <option value="Titulo1" selected>Titulo1</option>
+            <option value="Titulo2">Titulo2</option>
+        </select>
+        <div id="infCliente">
+            <div class="field">
+                <h4>Nome</h4>
+                <input type="text" name="nome">
+            </div>
+            <div class="field">
+                <h4>Apelido</h4>
+                <input type="text" name="apelido" required>
+            </div>
+            <div class="field">
+                <h4>Email</h4>
+                <input class="email" type="email" name="email" required >
+            </div>
+            <div class="field">
+                <h4>Confirmar-Email</h4>
+                <input class="email" type="email" name="confirmacaoEmail" required >
+            </div>
+            <div class="field">
+                <h4>Codigo-Postal</h4>
+                <input type="text" name="codigoPostal" pattern="[0-9]{4}-[0-9]{3}" required>
+            </div>
+            <div class="field">
+                <h4>Cidade</h4>
+                <input type="text" name="Cidade" required>
+            </div>
+        </div>
+        <h4>País</h4>
+        <select name="dropdownPais" required>
+            <option value="Portugal" selected>Portugal</option>
+            <option value="Espanha">Espanha</option>
+        </select>
+        <h4>Data de nascimento</h4>
+        <select name="dropdownDay" id="day" required>
+                
+        </select>
+        <select name="dropdownMonth" id="month" required>
+        </select>
+        <select name="dropdownYear" id="year" required>
+        </select>
+        <div id="passwordDataAndCCond">
+            <div class="field">
+                <h4>Nova Palavra Passe</h4>
+                <input class="password" type="password" name="password" minlength="6" required>
+            </div>
+            <div class="field">
+                <h4>Confirmar Palavra Passe</h4>
+                <input class="password" type="password" name="confirmarPassword" minlength="6" required>
+            </div>
+            <div class="field">
+                <h4>Nº de Carta de Condução</h4>
+                <input type="text" name="NumCartaC" pattern="P-[0-9]{7} [0-9]" required>
+            </div>
+        </div>
+        <input type="checkbox" name="condicoes" value="Aceito">Aceito os termos e condições gerais
+        <br>
+        <input type="submit" value="Criar o meu perfil">
+
+    </form>
+    <script src="./script.js"></script> 
+    <script src="./scriptD.js"></script> 
+    <script src="./checkPassword.js"></script> 
+</body>
+
+</html>

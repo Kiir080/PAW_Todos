@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#infCliente, #passwordDataAndCCond{
+    display: grid;
+    grid-template-columns: 40% 40%;
+    grid-auto-rows: 20%;
+    padding: 1% 0%;
+}
+
+input[type=text], input[type=email], input[type=password], input[type=number]{
+    width:90%
+}
+
+input:focus:invalid {
+    box-shadow: 0 0 5px 1px red;
+  }
+
+  input:focus:valid {
+    box-shadow: 0 0 5px 1px green;
+  }
+
+input[type=submit]{
+    font-size: 15px;
+    font-weight: bold;
+    color:green;
+    margin: 1% 0%;
+  }
