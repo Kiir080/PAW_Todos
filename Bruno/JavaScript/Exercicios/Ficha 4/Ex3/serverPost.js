@@ -25,7 +25,7 @@ http.createServer(function (request, response) {
         }).on('end', () => {
             qdata = Buffer.concat(qdata).toString();
             checkData(qdata, function writeFile(a){
-                fs.writeFile('xptoPost.json',a, function (err) {
+                fs.writeFile('xptoPost.json',JSON.stringify(a), function (err) {
                     if (err) throw err;
                     console.log('Saved!');
                 });
