@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Example</title>
+  </head>
+
+  <body>
+    <form id="signUp" action='/submitL' method='POST'>
+        <fieldset>
+          <legend>Sign Up (<abbr title="Mandatory fields">*</abbr>)</legend>
+          <label for="username">Username(<abbr title="Value between 5 and 8">*</abbr>)</label>   
+          <input type="text" minlength="5" maxlength="8" required id="username" name="username" />
+          <label for="password">Password(<abbr title="More than 4 characters: at least one uppercase character and one digit ">*</abbr>)</label>   
+          <input type="password" minlength="4" id="password" required name='password'
+            />
+          <button>Submit</button>
+        </fieldset>
+  </form>
+  </body>
+
+</html>

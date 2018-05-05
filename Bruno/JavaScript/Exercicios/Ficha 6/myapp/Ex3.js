@@ -5,15 +5,21 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const expressSanitizer = require('express-sanitizer'); //Para retirar comandos JS dos pedidos (impedir SQL injection etc...)
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(expressSanitizer());
-app.use(express.static(__dirname + '/views'));
-
 app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/views/form.html');
 });
 
-app.use(checkData);
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(expressSanitizer());
+app.use(express.static(__dirname + '/views'));
+
+//app.use(checkData);  
+
+app.post('/submit',checkData);
+
+
+
 
 function checkData(req,res,next){
     if((req.body.password.length > 6 || /\d/.test(req.body.password)) 
@@ -32,12 +38,13 @@ function checkData(req,res,next){
     next();
 }
 
-app.post('/submit',(req,res)=>{
-    
-});
-
-
 
 app.listen(8000,() => {
     console.log('Servidor ativo na porta 8000');
 });
+
+
+
+
+
+
