@@ -45,7 +45,9 @@ function signUp(body) {
 }
 
 function signIn(body) {
+  console.log(body.password);
   bcrypt.hash(body.password, saltRounds, function (err, hash) {
+    console.log(hash);
     body.password = hash;
 
     User.find({
@@ -72,6 +74,7 @@ function signIn(body) {
 
     });
 
+   
   
 }
 
