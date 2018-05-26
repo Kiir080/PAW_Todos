@@ -11,11 +11,19 @@ const mongoMan = new mongoManager('hospital', 'users');
 
 const User = mongoMan.connect(userSchema);
 
+
+var session = require('express-session');
+
+
+
+
+
+
 function signUp(body) {
   bcrypt.hash(body.password, saltRounds, function (err, hash) {
     body.password = hash;
     let temp = new User(body);
-    
+
     User.find({
       username: `${temp.username}`
     }).or([{
@@ -69,16 +77,8 @@ function signIn(body,resp) {
 
          
       });
-      
-
-
-
-  
-
-   
-  
+        
 }
-
 
 exports.signUp = signUp;
 exports.signIn = signIn;
