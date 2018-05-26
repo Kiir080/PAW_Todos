@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="./cssLogin.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <main>
+        <div class="loginBox">
+          <form id="signUp" action='/submitL' method='POST'>
+            <fieldset>
+                <legend>Bem-vindo<abbr title="Mandatory fields"></abbr></legend>
+                <label for="username">ID<abbr title="Value between 1 and 500"></abbr></label>   
+                <input type="text" minlength="1" maxlength="500" required id="username" name="username" />
+                <label for="password">Password<abbr title="More than 4 characters: at least one uppercase character and one digit "></abbr></label>   
+                <input type="password" minlength="4" id="password" required name='password'
+                />
+                <button class="formButton">Login</button>
+            </fieldset>
+          </form>
+        </div>
+      </main>
+    </div>
+  </body>
+
+</html>
