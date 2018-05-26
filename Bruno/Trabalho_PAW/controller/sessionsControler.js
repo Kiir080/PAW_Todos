@@ -7,19 +7,15 @@ const userSchema = require('../Modulo_Mongoose/schemas/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var escape = require('escape-regexp');
-
 const mongoMan = new mongoManager('hospital', 'users');
 
 const User = mongoMan.connect(userSchema);
 
 function signUp(body) {
   bcrypt.hash(body.password, saltRounds, function (err, hash) {
-    body.password = escape(hash);
+    body.password = hash;
     let temp = new User(body);
-
     
-
     User.find({
       username: `${temp.username}`
     }).or([{
@@ -46,25 +42,28 @@ function signUp(body) {
 
 }
 
-function signIn(body) {
-  console.log(body.password);
-  bcrypt.hash(body.password, saltRounds, function (err, hash) {
-    console.log(hash);
-    body.password = escape(hash);
+function signIn(body,resp) {
 
     User.find({
       username: `${body.username}`
-    }).and([{
-      password: `${body.password}`
-    }]).exec(function(err, res) {
+    }).exec(function(err, res) {
       if (err) throw err;
 
       if (res.length === 1) {
         console.log('Utilizador existe');
-        mongoMan.disconnect();
+        bcrypt.compare(body.password, res[0].password, function(err, res) {
+          if(res===true){
+            resp.status(200).send("palavra passe certa");
+          }else{
+            resp.status(200).send("palavra passe errada");
+          }
+          mongoMan.disconnect();
+        });
+ 
       } else {
         console.log("Utilizador Não existe");
         mongoMan.disconnect();
+        
       }
 
 
@@ -74,7 +73,7 @@ function signIn(body) {
 
 
 
-    });
+  
 
    
   

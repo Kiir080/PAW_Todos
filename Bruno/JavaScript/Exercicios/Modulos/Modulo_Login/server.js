@@ -45,12 +45,15 @@ app.post('/submit', (req, res) => {
     const s = require('./signUp');
 
     s.signUp(req.body);
+    res.status(200).send("a");
+    
 });
 
 app.post('/submitL', (req, res) => {
     const s = require('./signUp');
 
-    s.signIn(req.body);
+    s.signIn(req.body,res);
+    
 });
 
 

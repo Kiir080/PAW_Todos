@@ -3,6 +3,7 @@ const {
 } = require('../Modulo_Mongoose/mongoManager');
 
 const userSchema = require('../Modulo_Mongoose/schemas/user');
+var escape = require('escape-regexp');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -44,25 +45,28 @@ function signUp(body) {
 
 }
 
-function signIn(body) {
-  console.log(body.password);
-  bcrypt.hash(body.password, saltRounds, function (err, hash) {
-    console.log(hash);
-    body.password = hash;
+function signIn(body,resp) {
 
     User.find({
       username: `${body.username}`
-    }).and([{
-      password: `${body.password}`
-    }]).exec(function(err, res) {
+    }).exec(function(err, res) {
       if (err) throw err;
 
       if (res.length === 1) {
         console.log('Utilizador existe');
-        mongoMan.disconnect();
+        bcrypt.compare(body.password, res[0].password, function(err, res) {
+          if(res===true){
+            resp.status(200).send("palavra passe certa");
+          }else{
+            resp.status(200).send("palavra passe errada");
+          }
+          mongoMan.disconnect();
+        });
+ 
       } else {
         console.log("Utilizador Não existe");
         mongoMan.disconnect();
+        
       }
 
 
@@ -72,11 +76,12 @@ function signIn(body) {
 
 
 
-    });
+  
 
    
   
 }
+
 
 
 exports.signUp = signUp;
