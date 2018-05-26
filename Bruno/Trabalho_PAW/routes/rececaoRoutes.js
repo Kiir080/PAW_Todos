@@ -5,16 +5,16 @@ const {
     mongoManager
 } = require('../Modulo_Mongoose/mongoManager');
 
-let mongoM = new mongoManager('hospital', 'doentes');
+let mongoMan = new mongoManager('hospital', 'doentes');
 
-const doenteSchema = require('../Modulo_Mongoose/schemas/doente');
+const doenteSchema = require('../Modulo_Mongoose/schemas/doente.js');
 
 
 
 router.post('/addFicha',function(req,res){
     const doente = mongoMan.connect(doenteSchema);
     doente.find({
-        Numero_Utente : `${req.body.nUtente}`
+        Numero_Utente : `${req.body.Numero_Utente}`
     }).exec((err,result)=>{
         if (err) throw err;
         else if (result.length === 1) {
@@ -30,7 +30,7 @@ router.post('/addFicha',function(req,res){
 router.post('/addDoente',function(req,res){
     const Doente = mongoMan.connect(doenteSchema);
     Doente.find({
-        Numero_Utente : `${req.body.nUtente}`
+        Numero_Utente : `${req.body.Numero_Utente}`
     }).exec((err,result)=>{
         if (err) throw err;
         else if (result.length === 1) {
@@ -40,15 +40,19 @@ router.post('/addDoente',function(req,res){
             var temp = new Doente(req.body);
             temp.save((err) => {
                 if (err) throw err;
+                res.status(200).send("Doente adicionado");
+                mongoMan.disconnect();
             });
       }
     })
 });
 
+module.exports = router;
+
 // function findByNumUtente(req,res){
 //     const doente = mongoMan.connect(doenteSchema);
 //     doente.find({
-//         Numero_Utente : `${res.body.nUtente}`
+//         Numero_Utente : `${res.body.Numero_Utente}`
 //     }).exec((err,result)=>{
 //         if (err) throw err;
 //         if (result.length === 1) {

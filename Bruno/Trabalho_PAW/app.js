@@ -11,11 +11,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Middleware to sanitize data
 app.use(expressSanitizer());
 
+const rececaoRoutes = require('./routes/rececaoRoutes.js');
+
+app.use('/', rececaoRoutes);
+
 app.use(function(req, res) {
     res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-
 app.listen(8000, () => { 
-    console.log('Example app listening on port 8000!'); 
+    console.log('Ex ample app listening on port 8000!'); 
 });
