@@ -41,13 +41,14 @@ router.post('/addDoente',function(req,res){
             temp.save((err) => {
                 if (err) throw err;
                 res.status(200).send("Doente adicionado");
-                mongoMan.disconnect();
+                
             });
       }
     })
 });
-
 module.exports = router;
+
+
 
 // function findByNumUtente(req,res){
 //     const doente = mongoMan.connect(doenteSchema);

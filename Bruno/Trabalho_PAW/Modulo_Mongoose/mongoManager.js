@@ -26,6 +26,10 @@ class mongoManager {
     disconnect(){
         client.disconnect();
     }
+
+    close(){
+        client.connection.close();
+    }
     
 }
 

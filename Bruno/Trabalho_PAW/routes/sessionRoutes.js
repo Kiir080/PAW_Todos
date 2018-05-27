@@ -4,6 +4,7 @@ const router = express.Router();
 var path = require('path');
 
 const sessionController = require('../controller/sessionsControler.js');
+
 var session =  require('express-session') ;
 
 router.post('/signUp', function (req, res) {
@@ -18,9 +19,9 @@ router.post('/signIn', function (req, res) {
     sessionController.signIn(req.body, function (userExists, passwordOK) {
         if (userExists === true && passwordOK ===true ) {
             req.session.logedIn = true;
-            resp.status(200).sendFile(path.resolve(__dirname + '/../views/Receção.html'));
+            res.status(200).sendFile(path.resolve(__dirname + '/../views/Receção.html'));
         } else {
-            resp.redirect("/");
+            res.redirect("/");
         }
     });
 });
