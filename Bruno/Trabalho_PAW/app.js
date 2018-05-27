@@ -12,7 +12,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 
 const rececaoRoutes = require('./routes/rececaoRoutes.js');
+const sessionRoutes = require("./routes/sessionRoutes.js");
 
+
+app.use('/', sessionRoutes);
 app.use('/', rececaoRoutes);
 
 app.use(function(req, res) {
@@ -20,5 +23,5 @@ app.use(function(req, res) {
 });
 
 app.listen(8000, () => { 
-    console.log('Ex ample app listening on port 8000!'); 
+    console.log('Example app listening on port 8000!'); 
 });

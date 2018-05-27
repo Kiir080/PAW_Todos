@@ -12,14 +12,7 @@ const mongoMan = new mongoManager('hospital', 'users');
 const User = mongoMan.connect(userSchema);
 
 
-var session = require('express-session');
-
-
-
-
-
-
-function signUp(body) {
+function signUp(body,callback) {
   bcrypt.hash(body.password, saltRounds, function (err, hash) {
     body.password = hash;
     let temp = new User(body);
@@ -32,12 +25,13 @@ function signUp(body) {
       if (err) throw err;
 
       if (res.length !== 0) {
-        console.log("Não inserido");
+        callback("Não inserido");
         mongoMan.disconnect();
       } else {
         temp.save((err) => {
           if (err) throw err;
-          console.log('Inserido');
+          
+          callback('Inserido');
           mongoMan.disconnect();
         });
       }
@@ -50,7 +44,7 @@ function signUp(body) {
 
 }
 
-function signIn(body,resp) {
+function signIn(body,callback) {
 
     User.find({
       username: `${body.username}`
@@ -60,16 +54,13 @@ function signIn(body,resp) {
       if (res.length === 1) {
         console.log('Utilizador existe');
         bcrypt.compare(body.password, res[0].password, function(err, res) {
-          if(res===true){
-            resp.status(200).send("palavra passe certa");
-          }else{
-            resp.status(200).send("palavra passe errada");
-          }
           mongoMan.disconnect();
+          callback(true,res);
         });
  
       } else {
         console.log("Utilizador Não existe");
+        callback(false);
         mongoMan.disconnect();
         
       }
