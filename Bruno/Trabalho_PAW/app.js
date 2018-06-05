@@ -3,6 +3,13 @@ const bodyParser = require('body-parser');
 var expressSanitizer = require('express-sanitizer');
 const app = express();
 
+const {
+    mongoManager
+} = require('./Modulo_Mongoose/mongoManager.js');
+
+let mongoMan = new mongoManager('hospital');
+
+
 var session =  require('express-session') ;
 
 app.set('view engine', 'pug');
@@ -38,8 +45,8 @@ app.use(session({
     next();
   });
 
-app.use('/', sessionRoutes);
-app.use('/', rececaoRoutes);
+//app.use('/', sessionRoutes);
+//app.use('/', rececaoRoutes);
 app.use('/', teste);
 
 

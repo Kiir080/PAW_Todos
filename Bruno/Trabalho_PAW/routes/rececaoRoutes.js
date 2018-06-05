@@ -5,14 +5,14 @@ const {
     mongoManager
 } = require('../Modulo_Mongoose/mongoManager');
 
-let mongoMan = new mongoManager('hospital', 'doentes');
+
 
 const doenteSchema = require('../Modulo_Mongoose/schemas/doente.js');
 
 
 
 router.post('/addFicha',function(req,res){
-    const doente = mongoMan.connect(doenteSchema);
+    const doente = mongoManager.connect(doenteSchema,'doentes');
     doente.find({
         Numero_Utente : `${req.body.Numero_Utente}`
     }).exec((err,result)=>{
@@ -28,7 +28,7 @@ router.post('/addFicha',function(req,res){
 
 
 router.post('/addDoente',function(req,res){
-    const Doente = mongoMan.connect(doenteSchema);
+    const doente = mongoManager.connect(doenteSchema,'doentes');
     Doente.find({
         Numero_Utente : `${req.body.Numero_Utente}`
     }).exec((err,result)=>{

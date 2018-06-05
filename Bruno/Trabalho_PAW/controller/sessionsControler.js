@@ -7,9 +7,8 @@ const userSchema = require('../Modulo_Mongoose/schemas/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const mongoMan = new mongoManager('hospital', 'users');
 
-const User = mongoMan.connect(userSchema);
+const User = mongoManager.connect(userSchema, 'users');
 
 
 function signUp(body,callback) {
