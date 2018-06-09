@@ -29,6 +29,11 @@ let doenteSchema = new Schema({
     },
 });
 
+
+doenteSchema.statics.findByNumU=function(targetNumU,callback){
+    return this.model('doentes').findOne({ Numero_Utente: targetNumU},callback);
+}
+
 doenteSchema.methods.setInternamento=function(){
     Ficha_UrgenciaSchema.setInternamento();
 }

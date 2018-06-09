@@ -5,7 +5,7 @@ var expressSanitizer = require('express-sanitizer');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
-var flash = require('connect-flash');
+//var flash = require('connect-flash');
 
 //imports from local modules
 const userSchema = require('./Modulo_Mongoose/schemas/user.js');
@@ -29,6 +29,12 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 
+
+
+
+
+
+
 app.use(express.static(__dirname + '/views')); //ver ficha 7 caso precise
 
 
@@ -40,7 +46,7 @@ app.use(bodyParser.urlencoded({
 //Middleware to sanitize data
 app.use(expressSanitizer());
 
-app.use(flash());
+//app.use(flash());
 
 app.use(session({
     secret: 'Terronhas',
@@ -58,7 +64,7 @@ app.use('/', rececaoRoutes);
 app.use('/', teste);
 
 //Setup passport
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 

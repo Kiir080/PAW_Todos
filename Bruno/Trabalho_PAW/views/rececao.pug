@@ -4,14 +4,15 @@ header
   title Rece&ccedil;&atilde;o
   link(rel='stylesheet' type='text/css' href='rececaoFirstPage.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  script(src='./jquery.min.js')
 main
   .searchBox
-    form.search(action='')
-      input(type='text' placeholder='Introduza o Nº de Utente')
+    form.search
+      input(type='text' id='Numero_Utente' placeholder='Introduza o Nº de Utente')
       button(type='submit')
         i.fa.fa-search
   .table
-    table#resultTable
-      tr
-        td Nome
-        td Ze manel
+    table#target.table(border='1' align='center')
+
+script(src='./rececao.js')    
+      

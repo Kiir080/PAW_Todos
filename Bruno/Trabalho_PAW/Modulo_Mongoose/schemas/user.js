@@ -14,11 +14,18 @@ let userSchema = new Schema({
     username: {type:String, required:true},
     password: String,
     email: String,
-    departamento: {type:String, enum:['Rececao','Triagem','Consulta','Exames','Gestor','Administrador']}
+    departamento: {type:String, enum:['rececao','triagem','consulta','exames','gestor','administrador']}
 });
 
+userSchema.methods.findById=function(targetId){
+    return this.model('users').findOne({id: targetId});
+}
+
+
+
 userSchema.plugin(passportLocalMongoose,{
-    usernameQueryFields: ['id']
+    usernameQueryFields: ['id'],
+    selectFields: ['username','departamento']
 });
 
 module.exports = userSchema;

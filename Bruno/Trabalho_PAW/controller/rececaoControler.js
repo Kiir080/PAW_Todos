@@ -49,5 +49,18 @@ function addDoente(body,callback){
 }
 
 
+function pesquisaUtente(body,callback){
+    const Doente = mongoManager.connect(doenteSchema,'doentes');
+    Doente.findByNumU(body.Numero_Utente,function(err,result){
+        if(result!==null){
+            callback(result);
+        }else{
+            callback(null);
+        }
+    }  
+);
+}
+
+exports.pesquisaUtente = pesquisaUtente;
 exports.addDoente = addDoente;
 exports.addFichaUrgencia = addFichaUrgencia;
