@@ -16,7 +16,7 @@ class mongoManager {
     }
 
     static connect(Schema, collectionName){   
-        return client.model(collectionName,Schema);
+           return client.model(collectionName,Schema); 
     }
 
     disconnect(){

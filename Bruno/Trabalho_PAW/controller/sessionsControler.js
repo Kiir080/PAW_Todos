@@ -18,20 +18,16 @@ function signUp(body,callback) {
 
     User.find({
       username: `${temp.username}`
-    }).or([{
-      email: `${temp.email}`
-    }]).exec((err, res) => {
+    }).exec((err, res) => {
       if (err) throw err;
 
       if (res.length !== 0) {
         callback("Não inserido");
-        mongoMan.disconnect();
       } else {
         temp.save((err) => {
           if (err) throw err;
           
           callback('Inserido');
-          mongoMan.disconnect();
         });
       }
 
@@ -53,15 +49,12 @@ function signIn(body,callback) {
       if (res.length === 1) {
         console.log('Utilizador existe');
         bcrypt.compare(body.password, res[0].password, function(err, res) {
-          mongoMan.disconnect();
+
           callback(true,res);
         });
- 
       } else {
         console.log("Utilizador Não existe");
         callback(false);
-        mongoMan.disconnect();
-        
       }
 
 

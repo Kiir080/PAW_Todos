@@ -1,66 +1,44 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-    mongoManager
-} = require('../Modulo_Mongoose/mongoManager');
+const rececaoController = require('../controller/rececaoControler.js');
 
 
 
-const doenteSchema = require('../Modulo_Mongoose/schemas/doente.js');
+router.get('/rececao',function(req,res){
+   if(req.session.passport){
+    res.render('rececao');
+   }else{
+       res.redirect('/');
+   }
+   
+    }
+);
 
-
+router.post('/rececao',function(req,res){
+    res.send(req.session);
+    }
+);
 
 router.post('/addFicha',function(req,res){
-    const Doente = mongoManager.connect(doenteSchema,'doentes');
-    Doente.find({
-        Numero_Utente : `${req.body.Numero_Utente}`
-    }).exec((err,result)=>{
-        if (err) throw err;
-        else if (result.length === 1) {
-            result.Ficha_Urgencia.push()
-        mongoMan.disconnect();
-        } else {
-       
-      }
+    rececaoController.addFichaUrgencia(req.body,function(err){
+        if(!err){
+            res.status(200).send("Ficha adicionada"); 
+        }else{
+            res.status(300).send(err.message);
+        }
     })
 });
 
 
 router.post('/addDoente',function(req,res){
-    const Doente = mongoManager.connect(doenteSchema,'doentes');
-    Doente.find({
-        Numero_Utente : `${req.body.Numero_Utente}`
-    }).exec((err,result)=>{
-        if (err) throw err;
-        else if (result.length === 1) {
-            res.status(200).send("Numero de Utente ja existe");
-        mongoMan.disconnect();
-        } else {
-            var temp = new Doente(req.body);
-            temp.save((err) => {
-                if (err) throw err;
-                res.status(200).send("Doente adicionado");
-                
-            });
-      }
+    rececaoController.addDoente(req.body,function(err){
+        if(!err){
+            res.status(200).send("Doente adicionado"); 
+        }else{
+            res.status(300).send(err.message);
+        }
     })
 });
 module.exports = router;
 
-
-
-// function findByNumUtente(req,res){
-//     const doente = mongoMan.connect(doenteSchema);
-//     doente.find({
-//         Numero_Utente : `${res.body.Numero_Utente}`
-//     }).exec((err,result)=>{
-//         if (err) throw err;
-//         if (result.length === 1) {
-//             result.Ficha_Urgencia.push()
-//         mongoMan.disconnect();
-//         } else {
-       
-//       }
-//     })
-// }

@@ -1,0 +1,24 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Login
+  link(rel='stylesheet' type='text/css' href='./cssLogin.css')
+.container
+  main
+    .loginBox
+      form#signUp(action='/signIn' method='POST')
+        fieldset
+          legend
+            | Bem-vindo
+            abbr(title='Mandatory fields')
+          label(for='username')
+            | username
+            abbr(title='Username')
+          input#username(type='text' minlength='1' maxlength='16' required='' name='username')
+          label(for='password')
+            | Password
+            abbr(title='More than 4 characters: at least one uppercase character and one digit ')
+          input#password(type='password' minlength='4' required='' name='password')
+          button.formButton Login
+    
+    

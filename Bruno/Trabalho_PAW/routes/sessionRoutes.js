@@ -1,33 +1,38 @@
 const express = require('express');
 const router = express.Router();
+var passport = require('passport');
 
-var path = require('path');
-
-const sessionController = require('../controller/sessionsControler.js');
-
-var session =  require('express-session') ;
-
-router.post('/signUp', function (req, res) {
-    sessionController.signUp(req.body, (string) => {
-        console.log(string);
-        resp.status(200).send(string);
-    });
-});
-
-
-router.post('/signIn', function (req, res) {
-    sessionController.signIn(req.body, function (userExists, passwordOK) {
-        if (userExists === true && passwordOK ===true ) {
-            req.session.logedIn = true;
-            res.status(200).sendFile(path.resolve(__dirname + '/../views/Receção.html'));
-        } else {
-            res.redirect("/");
-        }
-    });
-});
+const {
+    mongoManager
+} = require('../Modulo_Mongoose/mongoManager.js');
+const userSchema = require('../Modulo_Mongoose/schemas/user');
+const User = mongoManager.connect(userSchema, 'users');
 
 router.get('/', function (req, res) {
-    res.sendFile(path.resolve(__dirname + '/../views/LoginTrabalho.html'));
+    res.render('login');
 });
+
+router.post('/signUp', function (req, res) {
+    User.register(new User({
+            username: req.sanitize(req.body.username),
+            email: req.sanitize(req.body.email),
+            departamento: req.sanitize(req.body.departamento)
+        }),
+        req.sanitize(req.body.password),
+        function (err, user) {
+            if (err) {
+                console.log(err);
+            }
+
+            passport.authenticate('local')(req, res, function () {
+                res.status(200).redirect('/');
+            });
+        });
+});
+
+router.post('/signIn', passport.authenticate('local', {
+    successRedirect: '/rececao',
+    failureRedirect: '/'
+}));
 
 module.exports = router;

@@ -1,60 +1,85 @@
+//imports from foreign modules
 const express = require('express');
 const bodyParser = require('body-parser');
 var expressSanitizer = require('express-sanitizer');
-const app = express();
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+var flash = require('connect-flash');
 
+//imports from local modules
+const userSchema = require('./Modulo_Mongoose/schemas/user.js');
+const rececaoRoutes = require('./routes/rececaoRoutes.js');
+const sessionRoutes = require("./routes/sessionRoutes.js");
+const teste = require("./routes/Teste.js");
 const {
     mongoManager
 } = require('./Modulo_Mongoose/mongoManager.js');
 
+//Initialize mongo Module
 let mongoMan = new mongoManager('hospital');
 
+const User = mongoManager.connect(userSchema, 'users');
 
-var session =  require('express-session') ;
+//Initialize express
+const app = express();
 
+//Setup view engine
 app.set('view engine', 'pug');
 app.set('views', './views');
+
 
 app.use(express.static(__dirname + '/views')); //ver ficha 7 caso precise
 
 
 //Middleware to handle POST requests
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 //Middleware to sanitize data
 app.use(expressSanitizer());
 
-const rececaoRoutes = require('./routes/rececaoRoutes.js');
-const sessionRoutes = require("./routes/sessionRoutes.js");
-const teste = require("./routes/Teste.js");
-
+app.use(flash());
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'Terronhas',
     resave: false,
     saveUninitialized: false,
     cookie: {}
-  }));
+}));
 
-  app.use('/',(req, res, next)=>{
-    if(req.session.logedIn){
-        console.log("you are logedIn");
-        res.status(200).sendFile(__dirname + '/views/TriagemHtml.html');
-    }else{
-        console.log("you aren't logedIn");
-    }
-    next();
-  });
+app.use(passport.initialize());
+app.use(passport.session());
 
+//Get routes
 app.use('/', sessionRoutes);
 app.use('/', rececaoRoutes);
 app.use('/', teste);
 
+//Setup passport
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
-app.use(function(req, res) {
-    res.status(404).send({url: req.originalUrl + ' not found'})
+
+/* app.all('*', (req, res, next) => {
+    if (!req.session.logedIn) {
+        console.log("you aren't logedIn");
+        res.status(200).redirect('/');
+    }
+    next();
+}); */
+
+//Middleware to handle URL's that not exists
+app.use(function (req, res) {
+    res.status(404).send({
+        url: req.originalUrl + ' not found'
+    })
 });
 
-app.listen(8000, () => { 
-    console.log('Example app listening on port 8000!'); 
+//Start
+app.listen(8000, () => {
+    console.log('Example app listening on port 8000!');
 });
