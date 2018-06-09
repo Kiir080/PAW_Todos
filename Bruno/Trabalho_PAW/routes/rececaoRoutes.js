@@ -12,8 +12,8 @@ const doenteSchema = require('../Modulo_Mongoose/schemas/doente.js');
 
 
 router.post('/addFicha',function(req,res){
-    const doente = mongoManager.connect(doenteSchema,'doentes');
-    doente.find({
+    const Doente = mongoManager.connect(doenteSchema,'doentes');
+    Doente.find({
         Numero_Utente : `${req.body.Numero_Utente}`
     }).exec((err,result)=>{
         if (err) throw err;
@@ -28,7 +28,7 @@ router.post('/addFicha',function(req,res){
 
 
 router.post('/addDoente',function(req,res){
-    const doente = mongoManager.connect(doenteSchema,'doentes');
+    const Doente = mongoManager.connect(doenteSchema,'doentes');
     Doente.find({
         Numero_Utente : `${req.body.Numero_Utente}`
     }).exec((err,result)=>{

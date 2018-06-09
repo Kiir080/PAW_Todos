@@ -20,7 +20,7 @@ let Ficha_UrgenciaSchema = new Schema({
     Observacoes: String,
     Exame: [ExameSchema],
     Numero_Processo: {type: Number, min: 0, max: 999999999},
-    Estado: ['Triagem', 'Consulta', 'Exame', 'Internamento', 'Terminado'],
+    Estado: ['Triagem', 'Consulta', 'TriagemExame','ConsultaExame' , 'Internamento', 'Terminado'],
     Triagem: DepartementosSchema,
     Exames: DepartementosSchema,
     Consulta: DepartementosSchema,

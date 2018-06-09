@@ -45,8 +45,8 @@ app.use(session({
     next();
   });
 
-//app.use('/', sessionRoutes);
-//app.use('/', rececaoRoutes);
+app.use('/', sessionRoutes);
+app.use('/', rececaoRoutes);
 app.use('/', teste);
 
 
