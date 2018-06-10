@@ -1,28 +1,70 @@
 <!DOCTYPE html>
 <html>
 <header>
-    <meta charset="utf-8">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Receção</title>
-    <link rel="stylesheet" type="text/css" href="rececaoFirstPage.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./x.js"></script>
 </header>
 
 <body>
-   <main>
-       <div class="searchBox">
-       <form class="search" action="">
-        <input type="text" placeholder="Introduza o Nº de Utente"/>
-        <button type="submit"><i class="fa fa-search"></i></button>
-       </form>
+    <main>
+        <div class="p-5 shadow-lg container">
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Success!</strong> Indicates a successful or positive action.
+            </div>
+            <form action="">
+                <div class="w-100 d-inline-flex form-group">
+                    <div class="input-group">
+                        <input id="searchBox" class="form-control" type="text" minlength="9" maxlength="9" placeholder="Introduza o Nº de Utente"
+                        />
+                        <div class="input-group-btn">
+                            <button id="searchButton" class="btn btn-secondary" type="submit">Procurar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" collapse">
+                    <ul class="py-3 list-group">
+                        <li class="list-group-item list-group-item-dark">
+                            <strong>Informações do Doente:</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <strong id="nU">Numero Utente:</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <strong id="n">Nome:</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <strong id="i">Idade:</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <strong id="g">Genero:</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <strong id="m">Morada:</strong>
+                        </li>
+                    </ul>
+
+                    <div class="form-group">
+                        <label for="comment">Observações:</label>
+                        <textarea required id="Obs" name="Obs" class="form-control" rows="4"></textarea>
+                    </div>
+
+                </div>
+                <div class="btn-group d-flex justify-content-end">
+                    <button type="submit" class="p-2 btn btn-secondary" formaction="/" formmethod="GET">Adicionar Doente</button>
+                    <button type="submit" class="p-2 btn btn-success " formaction="" formmethod="GET">Criar Ficha de Urgencia </button>
+                </div>
+            </form>
+
+
         </div>
-       
-       <div class="table">
-        <table id="resultTable">
-            <tr>
-                <td>Nome</td>
-                <td>Ze manel</td>
-            </tr>
-       </table>
-    </div>
-   </main> 
+    </main>
 </body>
+
+</html>

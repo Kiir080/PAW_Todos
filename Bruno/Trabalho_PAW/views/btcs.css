@@ -1,0 +1,11 @@
+.yellow{
+    background: hsl(61, 90%, 49%) !important;
+  }
+  
+.green{
+    background:  hsl(128, 93%, 41%) !important;
+}  
+
+.red{
+    background:  hsl(0, 92%, 47%) !important;
+}  

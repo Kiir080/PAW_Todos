@@ -1,65 +1,95 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: "Work Sans";
 }
 
-h1 { 
-    text-align: center 
+h1 {
+    text-align: center
 }
 
 .container {
-    display:grid;
-    width:100%;
-    grid-template-areas:"body"
-                        "main";
-    grid-template-rows: 40px 87vh 40px;    
+    display: grid;
+    width: 100%;
+    grid-template-areas: "body" "main";
+    grid-template-rows: 40px 87vh 40px;
     grid-template-columns: 100%;
 }
 
-main{
+main {
     grid-area: main;
-    padding:2px 0px;
-    height:100%;
+    padding: 2px 0px;
+    height: 100%;
     margin: 2px;
-    font-family: "Helvetica Neue","Arial","sans-serif","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-.table-responsive{
+.table-responsive {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
-    width:700px;
-    margin:30px auto 30px;
+    width: 700px;
+    margin: 30px auto 30px;
     padding: 10px 10px;
     border-radius: 4px;
-  }
+}
 
-.table{
+.table {
     width: 100%;
-    margin-bottom : .5em;
+    margin-bottom: .5em;
     table-layout: fixed;
     text-align: center;
-  }
+}
 
-
-main .formButton{
-    display:inline-block;
+main .formButton {
+    display: inline-block;
     background-color: #5cb85c;
-    border:1px solid #4cae4c;
-    padding:5px 5px 5px 5px;
-    margin:5px 0px 5px 6px;
-    color:white;
-    cursor:pointer;
+    border: 1px solid #4cae4c;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 0px 5px 6px;
+    color: white;
+    cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
-    width:35%;
+    width: 35%;
     animation-name: buttonColorChangeNoHover;
     animation-duration: 2s;
 }
 
-main .formButton:hover{
+main .formButton:hover {
     border-color: #004E89;
     animation-name: buttonColorChangeHover;
     animation-duration: 2s;
+}
+
+main .formButton:disabled{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
+
+#feedback {
+    font-size: 1.4em;
+}
+
+#selectable .ui-selecting {
+    background: #FECA40;
+}
+
+#selectable .ui-selected {
+    background: #F39814;
+    color: white;
+}
+
+#selectable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#selectable td {
+    margin: 1px;
+    padding: 0.1em;
+    font-size: 1.0em;
+    height: 12px;
 }

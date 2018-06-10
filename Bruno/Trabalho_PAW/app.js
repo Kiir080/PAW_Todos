@@ -7,10 +7,18 @@ var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 //var flash = require('connect-flash');
 
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+
+
+
 //imports from local modules
 const userSchema = require('./Modulo_Mongoose/schemas/user.js');
 const rececaoRoutes = require('./routes/rececaoRoutes.js');
 const sessionRoutes = require("./routes/sessionRoutes.js");
+const triagemRoutes = require("./routes/triagemRoutes.js");
 const teste = require("./routes/Teste.js");
 const {
     mongoManager
@@ -22,17 +30,11 @@ let mongoMan = new mongoManager('hospital');
 const User = mongoManager.connect(userSchema, 'users');
 
 //Initialize express
-const app = express();
+
 
 //Setup view engine
 app.set('view engine', 'pug');
 app.set('views', './views');
-
-
-
-
-
-
 
 
 app.use(express.static(__dirname + '/views')); //ver ficha 7 caso precise
@@ -61,6 +63,7 @@ app.use(passport.session());
 //Get routes
 app.use('/', sessionRoutes);
 app.use('/', rececaoRoutes);
+app.use('/', triagemRoutes);
 app.use('/', teste);
 
 //Setup passport
@@ -85,6 +88,21 @@ app.use(function (req, res) {
     })
 });
 
+
+/* function socketConnection(result){
+io.on('connection', (socket) => { 
+
+    //   socket.on('hello-message', data => console.log(data));
+           setInterval( function(){
+               socket.emit('server-answer',result)}, 5000);
+               socket.on('disconnect', function() {
+                   console.log('client disconnected');
+               });  
+});
+}
+
+exports.socketConnection=socketConnection;
+ */
 //Start
 app.listen(8000, () => {
     console.log('Example app listening on port 8000!');

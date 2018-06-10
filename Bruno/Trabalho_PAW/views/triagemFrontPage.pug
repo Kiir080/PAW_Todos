@@ -1,0 +1,21 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Triagem
+  link(rel='stylesheet' type='text/css' href='./cssTriagem.css')
+  script(src='./jquery.min.js')
+  script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+  
+.container
+  main
+    .table-responsive
+      table(border='1' align='center')
+        tr#temp
+            th Numero_Utente
+            th Nome
+            th Hora
+            th Data Entrada
+            th Estado
+        tbody#selectable
+      button.formButton(type='button' disabled='') Iniciar Triagem
+    script(src='./triagem.js')      

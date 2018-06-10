@@ -9,6 +9,7 @@ body{
 .container {
     display:grid;
     width:100%;
+    height: 100%;
     grid-template-areas:"body"
                         "main";
     grid-template-rows: 40px 87vh 40px;    
@@ -26,7 +27,8 @@ main{
 main .CentralizarBox{
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
     background-color: #f5f5f5;
-    width:500px;
+    width:90%;
+    height:95%;
     margin:30px auto 30px;
     padding: 10px 10px;
     border-radius: 4px;
@@ -34,36 +36,42 @@ main .CentralizarBox{
 
 
 main form{
-    padding-left: 5px;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
+form label {
+    padding-left: 5%; 
+}
 
-main textarea{
-    display: inline-block;
+form textarea{
     border: 3px solid #555;
-    border-radius: 0px;
-    width:390px;
-    margin: 5px 0px 0px auto;
-    height: 200px;
-
+    border-radius: 1px;
+    width:95%;
+    height: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
 }
 
-main .formButton{
+form .formButton{
     display:inline-block;
     background-color: #5cb85c;
     border:1px solid #4cae4c;
-    padding:5px 5px 5px 5px;
     margin:5px 0px 5px 6px;
     color:white;
     cursor:pointer;
     border-radius: 4px;
     font-weight: bold;
-    width:45%;
+    width:10%;
+    height:10%;
     animation-name: buttonColorChangeNoHover;
     animation-duration: 2s;
 }
 
-main .formButton:hover{
+form .formButton:hover{
     border-color: #004E89;
     animation-name: buttonColorChangeHover;
     animation-duration: 2s;

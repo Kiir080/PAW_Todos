@@ -4,7 +4,7 @@ const router = express.Router();
 const rececaoController = require('../controller/rececaoControler.js');
 const subDomain = 'Rececao';
 
-router.use('/' + subDomain + '*', (req, res, next) => {
+/* router.use('/' + subDomain + '*', (req, res, next) => {
     if (req.user) {
         if (req.user._doc.departamento !== subDomain) {
             res.status(403).send('FORBIDDEN!!');
@@ -15,11 +15,12 @@ router.use('/' + subDomain + '*', (req, res, next) => {
         res.redirect('/');
     }
     
-});
+}); */
 
 
 router.get('/' + subDomain, function (req, res) {
-    res.render('rececao');
+    //res.render('rececao');
+    res.render('rececaoT');
 });
 
 router.post('/' + subDomain + '/pesquisaU', function (req, res) {

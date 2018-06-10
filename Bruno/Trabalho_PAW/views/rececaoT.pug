@@ -1,0 +1,41 @@
+doctype html
+header
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  title Rece&ccedil;&atilde;o
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+  script(src='./x.js')
+main
+  .p-5.shadow-lg.container
+    .alert.alert-success.alert-dismissible.fade.show
+      button.close(type='button' data-dismiss='alert') &times;
+      strong Success!
+      |  Indicates a successful or positive action.
+    form(action='')
+      .w-100.d-inline-flex.form-group
+        .input-group
+          input#searchBox.form-control(type='text' minlength='9' maxlength='9' placeholder='Introduza o Nº de Utente')
+          .input-group-btn
+            button#searchButton.btn.btn-secondary(type='submit') Procurar
+      .collapse
+        ul.py-3.list-group
+          li.list-group-item.list-group-item-dark
+            strong Informa&ccedil;&otilde;es do Doente:
+          li.list-group-item
+            strong#nU Numero Utente:
+          li.list-group-item
+            strong#n Nome:
+          li.list-group-item
+            strong#i Idade:
+          li.list-group-item
+            strong#g Genero:
+          li.list-group-item
+            strong#m Morada:
+        .form-group
+          label(for='comment') Observa&ccedil;&otilde;es:
+          textarea#Obs.form-control(required='' name='Obs' rows='4')
+      .btn-group.d-flex.justify-content-end
+        button.p-2.btn.btn-secondary(type='submit' formaction='/' formmethod='GET') Adicionar Doente
+        button.p-2.btn.btn-success(type='submit' formaction='' formmethod='GET') Criar Ficha de Urgencia 
