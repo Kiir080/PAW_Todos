@@ -9,11 +9,11 @@ $(function(){
             data:{Numero_Utente:id},
             success: function (result) {
                 if(result){
-                    $("#nU").append("<span>"+ result.Numero_Utente+"</span>");
-                    $("#n").append("<span>"+ result.Nome+"</span>");
-                    $("#i").append("<span>"+ result.Idade+"</span>");
-                    $("#g").append("<span>"+ result.Genero+"</span>");
-                    $("#m").append("<span>"+ result.Morada+"</span>");
+                    $("#nU").after("<span>"+ result.Numero_Utente+"</span>");
+                    $("#n").after("<span>"+ result.Nome+"</span>");
+                    $("#i").after("<span>"+ result.Idade+"</span>");
+                    $("#g").after("<span>"+ result.Genero+"</span>");
+                    $("#m").after("<span>"+ result.Morada+"</span>");
                     $('.collapse').collapse();
                 }
             }
