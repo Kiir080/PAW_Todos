@@ -1,13 +1,13 @@
 //imports from foreign modules
-const express = require('express');
-const bodyParser = require('body-parser');
-var expressSanitizer = require('express-sanitizer');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var session = require('express-session');
+const express = require('express'); //faz a ligação com o servidor
+const bodyParser = require('body-parser'); //pedidos post, poem tudo direitinho
+var expressSanitizer = require('express-sanitizer'); //limpar o input
+var passport = require('passport'); //autenticação
+var LocalStrategy = require('passport-local').Strategy; //autenticação 
+var session = require('express-session'); //cookies 
 //var flash = require('connect-flash');
 
-const app = express();
+const app = express(); 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
@@ -86,6 +86,7 @@ app.use(function (req, res) {
     res.status(404).send({
         url: req.originalUrl + ' not found'
     })
+    next();
 });
 
 
