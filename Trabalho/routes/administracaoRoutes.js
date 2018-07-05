@@ -30,13 +30,8 @@ router.post('/' + subDomain + '/eliminaAcao', function (req, res) {
 });
 
 router.post('/getAcoes',function(req,res){
-    adminController.getAcao(req.body,function(result){
-        if(result !== null){
+    adminController.getAcao(req.body.data,function(result){
             res.status(200).send(result);
-        }else{
-            res.status(200).send(null);
-        }
-        
     })
 })
 

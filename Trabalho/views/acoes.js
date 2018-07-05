@@ -1,36 +1,35 @@
-(function () {
+$(function () {
 
     $(document).ready(function () {
 
         $('#searchButton').click((function (event) {
+            event.preventDefault();
+            //let id = $('#searchBox').val();
 
-            let id = $('#searchBox').val();
-
-       $.ajax({
-
-                method: "POST",
-
-                url: "getAcoes",
-
-                data: {
-                    numeroInterno: id
+            $.post("getAcoes", {
+                    data: {
+                        numeroInterno: $('#searchBox').val()
+                    }
                 },
-                success: function (result) {
-                    if (result === null) {
-                        $('#list').append('<li class="list-group-item">' +
-                            '<strong>' + 'Não existe Ações' + '</strong>' +
+                function (result) {
+                    $("#list").empty();
+                    if (result.length === 0) {
+                        $('#list').append('<li class="list-group-item list-group-item-dark">' +
+                            '<strong> ' + 'Não existe Ações' + '</strong>' +
                             '</li>');
                     } else {
 
                         for (i = 0; i < result.length; i++) {
-                            $('#list').append('<li class="list-group-item">' +
-                                '<strong>Tipo:</strong>' + '<span>' + result[i].tipo + '</span>' +
+                            $('#list').append(
+                                '<li class="list-group-item list-group-item-dark" ' + '<strong>Ação ' + (i+1) + '</strong>' + '</li>' +
+                                '<li class="list-group-item">' +
+                                '<strong>Tipo:</strong>' + '<span> ' + result[i].tipo + '</span>' +
                                 '</li>' +
                                 '<li class="list-group-item">' +
-                                '<strong>Data:</strong>' + '<span>' + result[i].data + '</span>' +
+                                '<strong>Data:</strong>' + '<span> ' + new Date(result[i].data).toLocaleDateString() + '</span>' +
                                 '</li>' +
                                 '<li class="list-group-item">' +
-                                '<strong>Descricão:</strong>' + '<span>' + result[i].descricao + '</span>' +
+                                '<strong>Descricão:</strong>' + '<span> ' + result[i].descricao + '</span>' +
                                 '</li>');
                         }
 
@@ -39,7 +38,7 @@
 
                 }
 
-            });
+            );
 
 
         }));
