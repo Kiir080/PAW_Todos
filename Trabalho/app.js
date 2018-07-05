@@ -24,6 +24,7 @@ const {
 let mongoMan = new mongoManager('segsocial');
 
 const User = mongoManager.connect(userSchema, 'users');
+~
 
 //Initialize express
 

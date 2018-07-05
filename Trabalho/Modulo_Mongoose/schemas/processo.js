@@ -5,6 +5,7 @@ let Schema = mongoose.Schema;
 let ProblemasSchema = require('./problemas.js');
 let EntidadeSchema = require('./entidade.js');
 
+
 let processoSchema = new Schema({
     estado: {
         type: String,
@@ -42,5 +43,8 @@ let processoSchema = new Schema({
     problema:ProblemasSchema
 
 });
-dossierSchema.plugin(uniqueValidator);
+
+
+
+processoSchema.plugin(uniqueValidator);
 module.exports = processoSchema;

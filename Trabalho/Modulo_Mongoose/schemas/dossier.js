@@ -27,7 +27,7 @@ let dossierSchema = new Schema({
     },
     contacto: {
         type: Number,
-        max: 9,
+        max: 999999999,
         min: 1,
         required: true
     },
