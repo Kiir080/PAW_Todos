@@ -25,7 +25,6 @@ let processoSchema = new Schema({
         min: 1,
         max: 999999,
         required: true,
-        index:true,
         unique:true
     },
 

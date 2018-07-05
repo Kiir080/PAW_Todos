@@ -44,11 +44,12 @@ function editarEntidade(body, callback) {
     });
 }
 
+
+
 function atualizarEntidade(body, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossier');
-
     procurarEntidade(body.id, function (res) {
-        Dossier.updateMany({ 'processo.problema.entidade.id': body.id }, { 'processo.problema.entidade.nome': res.nome, 'processo.problema.entidade.contacto': res.contacto }).exec(function (err) {
+        Dossier.updateMany({ 'processo.entidade.id': body.id }, { 'processo.entidade.nome': res.nome, 'processo.entidade.contacto': res.contacto }).exec(function (err) {
             if (err) callback(err);
             else {
                 callback();
