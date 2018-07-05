@@ -15,4 +15,18 @@ router.post('/' + subDomain + '/addFicha', function (req, res) {
     })
 });
 
+router.post('/' + subDomain + '/atualizarProblema', function (req, res) {
+    processoController.atualizarProblema(req.body, function (err) {
+        if (!err) {
+            res.status(200).send("Problema atualizado");
+        } else {
+            res.status(300).send(err.message);
+        }
+    })
+});
+
+
+
+
+
 module.exports = router;

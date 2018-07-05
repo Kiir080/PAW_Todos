@@ -64,4 +64,27 @@ function procurarEntidade(id, callback) {
 
 }
 
+function atualizarProblema (body, callback) {
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.findByNumeroInterno(body.numeroInterno,(err, result) => {
+    if (err) callback(err);
+    else if (result !== null) {
+        
+        result.processo.problema.descricao = body.descricao;
+        result.processo.problema.tipo = body.tipo;
+        result.processo.problema.data = body.data;
+        
+        result.save();
+        callback();
+
+    } else {
+        callback(new Error('Não atualizou o problema'));
+    }
+})
+}
+
+
+
+
 exports.addProcesso = addProcesso;
+exports.atualizarProblema = atualizarProblema;
