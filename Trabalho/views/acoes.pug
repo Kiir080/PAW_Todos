@@ -1,0 +1,21 @@
+doctype html
+header
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  title Rece&ccedil;&atilde;o
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+  script(src='acoes.js')
+main.p-5.shadow-lg.container
+  form
+    .w-100.d-inline-flex.form-group
+      .input-group
+        input#searchBox.form-control(type='text' minlength='1' maxlength='9' placeholder='Introduza o Nº Interno')
+        .input-group-btn
+          button#searchButton.btn.btn-secondary(type='submit') Procurar
+    .collapse
+      ul#list.py-3.list-group
+        li.list-group-item.list-group-item-dark
+          strong Informa&ccedil;&otilde;es  de A&ccedil;&otilde;es :
+    

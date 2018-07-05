@@ -38,5 +38,20 @@ function eliminaAcao(body, callback) {
 
 }
 
+function getAcao(body,callback){
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+
+    Dossier.findOne({'processo.numeroInterno': body.numeroInterno}).exec(function(err,result){
+        if (err) callback(err);
+        if (result !== null) {
+            callback(result.processo.problema.acoes);
+        } else {
+            callback(null);
+        }
+
+    });
+}
+
+exports.getAcao=getAcao;
 exports.eliminaAcao = eliminaAcao;
 exports.criaAcao = criaAcao;

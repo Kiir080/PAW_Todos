@@ -5,6 +5,10 @@ const adminController = require('../controller/administracaoController');
 const subDomain = 'administracao';
 
 
+router.get('/verAcoes',function(req,res){
+    res.render('acoes');
+})
+
 router.post('/' + subDomain + '/addAcao', function (req, res) {
     adminController.criaAcao(req.body, function (err) {
         if (err) res.status(300).send(err.message);
@@ -24,5 +28,16 @@ router.post('/' + subDomain + '/eliminaAcao', function (req, res) {
 
     });
 });
+
+router.post('/getAcoes',function(req,res){
+    adminController.getAcao(req.body,function(result){
+        if(result !== null){
+            res.status(200).send(result);
+        }else{
+            res.status(200).send(null);
+        }
+        
+    })
+})
 
 module.exports = router;
