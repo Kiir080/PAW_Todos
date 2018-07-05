@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 let Schema = mongoose.Schema;
 
@@ -9,7 +10,9 @@ let dossierSchema = new Schema({
         type: Number,
         min: 0,
         max: 999999999,
-        required: true
+        required: true,
+        index:true,
+        unique:true
     },
     nomeAluno: { type:String, required: true},
     DataNascimento: {
@@ -46,5 +49,7 @@ dossierSchema.statics.findByNumeroInterno=function(numeroInterno,callback){
 
 
 }
+
+dossierSchema.plugin(uniqueValidator);
 
 module.exports = dossierSchema;

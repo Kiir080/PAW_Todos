@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const uniqueValidator = require('mongoose-unique-validator');
 let Schema = mongoose.Schema;
 
 let ProblemasSchema = require('./problemas.js');
@@ -23,7 +23,9 @@ let processoSchema = new Schema({
         type: Number,
         min: 1,
         max: 999999,
-        required: true
+        required: true,
+        index:true,
+        unique:true
     },
 
     dataRegisto: {
@@ -40,5 +42,5 @@ let processoSchema = new Schema({
     problema:ProblemasSchema
 
 });
-
+dossierSchema.plugin(uniqueValidator);
 module.exports = processoSchema;
