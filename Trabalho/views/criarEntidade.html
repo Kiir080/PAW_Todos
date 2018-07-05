@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Criar Entidade</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+    <div class="p-5 shadow-lg container">
+        <main>
+            <div class="criarEntidade"></div>
+            <form action="/criarEntidade" method="POST">
+                <fieldset>
+                    <div class="titulo" align="center">
+                        <legend>
+                            <h1>CRIAR ENTIDADE</h1>
+                            <abbr title="Mandatory fields"></abbr>
+                        </legend>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Id:</label>
+                        <input name="id" type="text" id="usr" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Nome:</label>
+                        <input name="nome" type="text" id="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Contacto:</label>
+                        <input name="contacto" type="number"  id="num" required>
+                    </div>
+                    <div class="btn-group d-flex justify-content-end">
+                            <button type="submit" class="p-2 btn btn-success ">Submeter</button>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+        </main>
+    </div>
+
+</body>

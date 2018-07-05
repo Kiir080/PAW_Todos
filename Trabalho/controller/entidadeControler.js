@@ -6,6 +6,7 @@ const {
 const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
 const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
 
+
 function criarEntidade(body, callback) {
     const Entidade = mongoManager.connect(entidadeSchema, 'entidade');
     Entidade.findOne({

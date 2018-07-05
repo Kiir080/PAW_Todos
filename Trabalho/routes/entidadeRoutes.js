@@ -4,6 +4,11 @@ const router = express.Router();
 const dossierController = require('../controller/entidadeControler.js');
 const subDomain = 'Entidade';
 
+
+router.get('/'+subDomain,function(req,res){
+    res.render('criarEntidade');
+})
+
 router.post('/' + subDomain + '/criarEntidade', function (req, res) {
     dossierController.criarEntidade(req.body, function (err) {
         if (!err) {

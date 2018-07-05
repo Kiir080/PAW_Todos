@@ -1,0 +1,48 @@
+doctype html
+head
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  title Criar Processo
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+.p-5.shadow-lg.container
+  main
+    .criarProcesso
+    form(action='/Dossier/addFicha' method='POST')
+      fieldset
+        .titulo(align='center')
+          legend
+            h1 CRIAR PROCESSO
+            abbr(title='Mandatory fields')
+        .form-group
+          label(for='usr') N&uacute;mero Aluno:
+          input#usr(name='numeroAluno' type='number' required='')
+        .form-group
+          label(for='pwd') Assistente Social:
+          input#nom(name='assistenteSocial' type='text' required='')
+        .form-group
+          label(for='pwd') N&uacute;mero Interno:
+          input#num(name='numeroInterno' type='number' required='')
+        .form-group
+          label(for='comment') Observa&ccedil;&otilde;es:
+          textarea#Obs.form-control(required='' name='observacoes' rows='5')
+        .form-group
+          label(for='comment') Descri&ccedil;&atilde;o do Problema:
+          textarea#dcs.form-control(required='' name='descricao' rows='2')
+        .w-50.form-group
+          label(for='tipo') Tipo:
+          select#tipo.form-control(name='tipo')
+            option(value='aberto') Aberto
+            option(value='acompanhamento') Em acompanhamento
+            option(value='encerrado') Encerrado
+        .w-50.form-group
+          label(for='entidade') Entidade:
+          select#entidade.form-control(name='id')
+            option(value='um') 1
+            option(value='dois') 2
+        .form-group
+          label(for='pwd') Data:
+          input#data(name='data' type='date' required='')
+        .btn-group.d-flex.justify-content-end
+          button.p-2.btn.btn-success(type='submit') Submeter

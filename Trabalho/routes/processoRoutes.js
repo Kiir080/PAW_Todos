@@ -5,6 +5,10 @@ const processoController = require('../controller/processoControler.js');
 const subDomain = 'Dossier';
 
 
+router.get('/'+subDomain,function(req,res){
+    res.render('criarProcesso');
+})
+
 router.post('/' + subDomain + '/addFicha', function (req, res) {
     processoController.addProcesso(req.body, function (err) {
         if (!err) {

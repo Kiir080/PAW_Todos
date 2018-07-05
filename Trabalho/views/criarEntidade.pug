@@ -1,0 +1,28 @@
+doctype html
+head
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  title Criar Entidade
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+.p-5.shadow-lg.container
+  main
+    .criarEntidade
+    form(action='/Entidade/criarEntidade' method='POST')
+      fieldset
+        .titulo(align='center')
+          legend
+            h1 CRIAR ENTIDADE
+            abbr(title='Mandatory fields')
+        .form-group
+          label(for='usr') Id:
+          input#usr(name='id' type='text' required='')
+        .form-group
+          label(for='pwd') Nome:
+          input#nom(name='nome' type='text' required='')
+        .form-group
+          label(for='pwd') Contacto:
+          input#num(name='contacto' type='number' required='')
+        .btn-group.d-flex.justify-content-end
+          button.p-2.btn.btn-success(type='submit') Submeter
