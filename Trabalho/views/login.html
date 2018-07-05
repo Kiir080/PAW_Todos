@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="p-5 shadow-lg container" align="center">
+        <main>
+            <div class="loginBox">
+                <form class="form-control p-2 w-75" id="signUp" action='/signIn' method='POST'>
+                    <fieldset>
+                        <div class="page-header font-weight-bold">
+                            <legend>Bem-vindo
+                                <abbr title="Mandatory fields"></abbr>
+                            </legend>
+                        </div>
+                        <div class="form-group text-left font-weight-bold">
+                            <label for="username">ID
+                                <abbr title="Value between 1 and 500"></abbr>
+                            </label>
+                            <input class="form-control" type="text" minlength="1" maxlength="500" required id="username" name="username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />     
+                        </div>
+                        <div class="form-group text-left font-weight-bold">
+                            <label for="password">Password
+                                <abbr title="More than 4 characters: at least one uppercase character and one digit "></abbr>
+                            </label>
+                            <input class="form-control" type="password" minlength="4" id="password" required name='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
+                        </div>
+                        <div class="btn-group d-flex justify-content-center w-25">
+                            <button type="submit" class="p-2 btn btn-success medio">Login</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

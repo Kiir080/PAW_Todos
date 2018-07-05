@@ -33,14 +33,14 @@ head
         .w-50.form-group
           label(for='tipo') Tipo:
           select#tipo.form-control(name='tipo')
-            option(value='aberto') Aberto
-            option(value='acompanhamento') Em acompanhamento
-            option(value='encerrado') Encerrado
+            option(value='absentismo') Absentismo
+            option(value='indisciplina') Indisciplina
+            option(value='consumoDrogas') Consumo de Drogas
         .w-50.form-group
           label(for='entidade') Entidade:
           select#entidade.form-control(name='id')
-            option(value='um') 1
-            option(value='dois') 2
+            option(value=1) 1
+            option(value=2) 2
         .form-group
           label(for='pwd') Data:
           input#data(name='data' type='date' required='')

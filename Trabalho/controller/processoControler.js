@@ -33,7 +33,7 @@ function addProcesso(body, callback) {
                         entidade: {
                             id: res.id,
                             nome: res.nome,
-                            contacto: res.contactoE
+                            contacto: res.contacto
                         }
                     }
                 });

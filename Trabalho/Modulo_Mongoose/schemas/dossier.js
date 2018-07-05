@@ -10,9 +10,7 @@ let dossierSchema = new Schema({
         type: Number,
         min: 0,
         max: 999999999,
-        required: true,
-        index:true,
-        unique:true
+        required: true
     },
     nomeAluno: { type:String, required: true},
     DataNascimento: {

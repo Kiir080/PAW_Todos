@@ -16,6 +16,7 @@ const dossierRoutes = require('./routes/dossierRoutes.js');
 const processoRoutes = require("./routes/processoRoutes.js");
 const administracaoRoutes = require("./routes/administracaoRoutes.js");
 const entidadeRoutes = require("./routes/entidadeRoutes.js");
+const sessionRoutes = require("./routes/sessionRoutes.js");
 const {
     mongoManager
 } = require('./Modulo_Mongoose/mongoManager.js');
@@ -60,7 +61,9 @@ app.use(passport.session());
 app.use('/', dossierRoutes);
 app.use('/', processoRoutes);
 app.use('/', administracaoRoutes);
-app.use('/',entidadeRoutes)
+app.use('/',entidadeRoutes);
+app.use('/', sessionRoutes);
+
 
 
 //Setup passport
