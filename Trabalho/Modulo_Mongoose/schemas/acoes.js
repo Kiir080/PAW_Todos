@@ -9,7 +9,8 @@ let acoesSchema = new Schema({
     },
     tipo: {
         type: String,
-        enum:['reunião','pedido','encaminhamento','expulsão','suspensão']
+        enum:['reunião','pedido','encaminhamento','expulsão','suspensão'],
+        required:true
     },
     descricao: String,
 });

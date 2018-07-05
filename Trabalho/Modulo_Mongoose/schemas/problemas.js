@@ -8,11 +8,12 @@ let acoesSchema= require('./acoes.js')
 let problemaSchema = new Schema({
     data: {
         type: Date,
-        default: Date.now
+        required: true
     },
     tipo: {
         type: String,
-        enum:['absentismo','indisciplina','consumoDrogas']
+        enum:['absentismo','indisciplina','consumoDrogas'],
+        required: true
     },
     descricao: String,
     acoes:[acoesSchema]
