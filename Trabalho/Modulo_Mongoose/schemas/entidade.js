@@ -6,12 +6,15 @@ let entidadeSchema = new Schema({
     id: {
         type: Number,
         min: 0,
-        max: 999999999
+        max: 999999999,
+        required:true
     },
-    nome: String,
+    nome: {type:String, required:true},
     contacto: {
         type: Number,
-        max: 9
+        max: 9,
+        min: 1,
+        required:true
     }
 });
 

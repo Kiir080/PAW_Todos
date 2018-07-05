@@ -8,20 +8,25 @@ let dossierSchema = new Schema({
     numeroAluno: {
         type: Number,
         min: 0,
-        max: 999999999
+        max: 999999999,
+        required: true
     },
-    nomeAluno: String,
+    nomeAluno: { type:String, required: true},
     DataNascimento: {
         type: Date
     },
     anoLetivo: {
         type: String,
         min: 9,
-        max: 9
+        max: 9,
+        required: true
+
     },
     contacto: {
         type: Number,
-        max: 9
+        max: 9,
+        min: 1,
+        required: true
     },
     processo: processoSchema,
 
