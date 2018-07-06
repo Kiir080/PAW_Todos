@@ -7,6 +7,12 @@ var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session'); 
 
 
+
+
+
+
+
+
 const app = express(); 
 
 
@@ -70,7 +76,6 @@ app.use('/', sessionRoutes);
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 
 //Middleware to handle URL's that not exists

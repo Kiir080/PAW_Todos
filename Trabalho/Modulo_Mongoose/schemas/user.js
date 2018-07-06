@@ -13,7 +13,7 @@ let userSchema = new Schema({
     id: {type: Number, min: 1, max: 500, set: currentId},
     username: {type:String, required:true},
     password: String,
-    departamento: {type:String, enum:['assistenteSocial','administrador']}
+    departamento: {type:String, enum:['assistenteSocial','administracao']}
 });
 
 userSchema.methods.findById=function(targetId){
