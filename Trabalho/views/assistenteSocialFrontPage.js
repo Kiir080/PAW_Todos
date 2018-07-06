@@ -76,7 +76,7 @@ function ajaxRequestA2() {
                         '<strong>Contacto do Encarregado de Educação: </strong>' + '<span> ' + result.contacto + '</span>' +
                         '</li>');
                 }
-                $('.collapse').collapse();
+                $('.collapse2').collapse();
 
             }
 
@@ -157,7 +157,7 @@ function ajaxRequestA3() {
                         }
 
                     }
-                    $('.collapse').collapse();
+                    $('.collapse3').collapse();
 
                 }
 
