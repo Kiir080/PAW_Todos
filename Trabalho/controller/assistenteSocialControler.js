@@ -6,7 +6,7 @@ const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
 const procurarEntidade = require('./administracaoControler').procurarEntidade;
 
 function criarDossier(body, callback) {
-    const Dossier = mongoManager.connect(dossierSchema, 'dossier');
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
         numeroAluno: `${body.numeroAluno}`
     }).exec((err, result) => {
@@ -50,7 +50,7 @@ const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
 const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
 
 function addProcesso(body, callback) {
-    const Dossier = mongoManager.connect(dossierSchema, 'dossier');
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
         numeroAluno: `${body.numeroAluno}`
     }).exec((err, result) => {

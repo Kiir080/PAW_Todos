@@ -3,7 +3,7 @@ const {
 } = require('../Modulo_Mongoose/mongoManager');
 
 const dossierSchema = require('../Modulo_Mongoose/schemas/dossier');
-
+const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
 
 function criaAcao(body, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
@@ -38,10 +38,12 @@ function eliminaAcao(body, callback) {
 
 }
 
-function getAcao(body,callback){
+function getAcao(body, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
 
-    Dossier.findOne({'processo.numeroInterno': body.numeroInterno}).exec(function(err,result){
+    Dossier.findOne({
+        'processo.numeroInterno': body.numeroInterno
+    }).exec(function (err, result) {
         if (err) callback(err);
         if (result !== null) {
             callback(result.processo.problema.acoes);
@@ -52,12 +54,8 @@ function getAcao(body,callback){
     });
 }
 
-const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
-const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
-
-
 function criarEntidade(body, callback) {
-    const Entidade = mongoManager.connect(entidadeSchema, 'entidade');
+    const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
     Entidade.findOne({
         id: `${body.id}`
     }).exec((err, result) => {
@@ -78,7 +76,7 @@ function criarEntidade(body, callback) {
 
 
 function editarEntidade(body, callback) {
-    const Entidade = mongoManager.connect(entidadeSchema, 'entidade');
+    const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
     Entidade.findOne({
         id: `${body.id}`
     }).exec((err, result) => {
@@ -97,20 +95,25 @@ function editarEntidade(body, callback) {
 
 
 function atualizarEntidade(body, callback) {
-    const Dossier = mongoManager.connect(dossierSchema, 'dossier');
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     procurarEntidade(body.id, function (res) {
-        Dossier.updateMany({ 'processo.entidade.id': body.id }, { 'processo.entidade.nome': res.nome, 'processo.entidade.contacto': res.contacto }).exec(function (err) {
+        Dossier.updateMany({
+            'processo.entidade.id': body.id
+        }, {
+            'processo.entidade.nome': res.nome,
+            'processo.entidade.contacto': res.contacto
+        }).exec(function (err) {
             if (err) callback(err);
             else {
                 callback();
             }
         });
-    
+
     });
 }
 
 function procurarEntidade(id, callback) {
-    const Entidade = mongoManager.connect(entidadeSchema, 'entidade');
+    const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
     Entidade.findOne({
         id: `${id}`
     }).exec((err, result) => {
@@ -125,10 +128,9 @@ function procurarEntidade(id, callback) {
 
 }
 
-exports.procurarEntidade=procurarEntidade;
+exports.procurarEntidade = procurarEntidade;
 exports.criarEntidade = criarEntidade;
 exports.editarEntidade = editarEntidade;
-exports.atualizarEntidade = atualizarEntidade;
-exports.getAcao=getAcao;
+exports.getAcao = getAcao;
 exports.eliminaAcao = eliminaAcao;
 exports.criaAcao = criaAcao;

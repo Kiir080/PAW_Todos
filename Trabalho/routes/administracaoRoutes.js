@@ -2,15 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 const adminControler = require('../controller/administracaoController');
-const entidadeControler = require('../controller/entidadeControler.js');
 const subDomain = 'administracao';
 
 router.get('/'+subDomain,function(req,res){
     res.render('criarEntidade');
-})
+});
+
+router.get('/'+subDomain+'/verAcoes',function(req,res){
+    res.render('acoes');
+});
 
 router.post('/' + subDomain + '/criarEntidade', function (req, res) {
-    entidadeControler.criarEntidade(req.body, function (err) {
+    adminControlerControler.criarEntidade(req.body, function (err) {
         if (!err) {
             res.status(200).send("Entidade criada");
         } else {
@@ -20,7 +23,7 @@ router.post('/' + subDomain + '/criarEntidade', function (req, res) {
 });
 
 router.post('/' + subDomain + '/editarEntidade', function (req, res) {
-    entidadeControler.editarEntidade(req.body, function (err) {
+    adminControlerControler.editarEntidade(req.body, function (err) {
         if (!err) {
             res.status(200).send("Entidade editada");
         } else {
@@ -31,7 +34,7 @@ router.post('/' + subDomain + '/editarEntidade', function (req, res) {
 
 
 router.post('/' + subDomain + '/atualizarEntidade', function (req, res) {
-    entidadeControler.editarEntidade(req.body, function (err) {
+    adminControlerControler.editarEntidade(req.body, function (err) {
         if (!err) {
             res.status(200).send("Entidade atualizada");
         } else {
@@ -40,9 +43,6 @@ router.post('/' + subDomain + '/atualizarEntidade', function (req, res) {
     })
 });
 
-router.get('/'+subDomain+'/verAcoes',function(req,res){
-    res.render('acoes');
-});
 
 router.post('/' + subDomain + '/addAcao', function (req, res) {
     adminControler.criaAcao(req.body, function (err) {
