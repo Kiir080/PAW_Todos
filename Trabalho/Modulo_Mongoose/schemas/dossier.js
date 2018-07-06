@@ -13,7 +13,7 @@ let dossierSchema = new Schema({
         required: true
     },
     nomeAluno: { type:String, required: true},
-    DataNascimento: {
+    dataNascimento: {
         type: Date
     },
     anoLetivo: {

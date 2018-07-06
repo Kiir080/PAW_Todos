@@ -46,9 +46,6 @@ function criarDossier(body, callback) {
     })
 }
 
-const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
-const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
-
 function addProcesso(body, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
@@ -112,6 +109,45 @@ function atualizarProblema (body, callback) {
 }
 
 
+function getProcessos(callback){
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.find().select({ 'processo.numeroInterno': 1, numeroAluno: 1, nomeAluno: 1, 'processo.estado':1}).exec(function(err,result){
+        if (err) callback(err);
+        else {
+            callback(null,result);
+        }
+    })
+}
+
+
+function getDossier(body,callback){
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.findOne({
+        numeroAluno: `${body.numeroAluno}`
+    }).exec((err, result) => {
+        if (err) callback(err);
+        else{
+            callback(result);
+        }
+    });
+}
+
+
+function getProcesso(body,callback){
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.findOne({
+        'processo.numeroInterno': `${body.numeroInterno}`
+    }).exec((err, result) => {
+        if (err) callback(err);
+        else{
+            callback(result);
+        }
+    });
+}
+
+exports.getProcesso=getProcesso;
+exports.getDossier=getDossier;
+exports.getProcessos=getProcessos;
 exports.addProcesso = addProcesso;
 exports.atualizarProblema = atualizarProblema;
 exports.criarDossier = criarDossier;

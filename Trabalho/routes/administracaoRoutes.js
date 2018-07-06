@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const adminControler = require('../controller/administracaoController');
+const adminControler = require('../controller/administracaoControler');
 const subDomain = 'administracao';
+const assistenteSocialControler = require('../controller/assistenteSocialControler.js');
 
 router.get('/'+subDomain,function(req,res){
     res.render('criarEntidade');

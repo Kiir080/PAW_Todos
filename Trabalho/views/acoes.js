@@ -4,13 +4,11 @@ $(function () {
 
         $('#searchButton').click((function (event) {
             event.preventDefault();
-            //let id = $('#searchBox').val();
+            let id = $('#searchBox').val();
 
-            $.post("getAcoes", {
-                    data: {
-                        numeroInterno: $('#searchBox').val()
-                    }
-                },
+            $.post("getAcoes",{data:{
+                numeroInterno:id
+            }},
                 function (result) {
                     $("#list").empty();
                     if (result.length === 0) {

@@ -18,10 +18,9 @@ const app = express();
 
 //imports from local modules
 const userSchema = require('./Modulo_Mongoose/schemas/user.js');
-const dossierRoutes = require('./routes/dossierRoutes.js');
-const processoRoutes = require("./routes/processoRoutes.js");
+
 const administracaoRoutes = require("./routes/administracaoRoutes.js");
-const entidadeRoutes = require("./routes/entidadeRoutes.js");
+const assistenteSocialRoutes = require("./routes/assistenteSocialRoutes.js");
 const sessionRoutes = require("./routes/sessionRoutes.js");
 const {
     mongoManager
@@ -64,10 +63,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Get routes
-app.use('/', dossierRoutes);
-app.use('/', processoRoutes);
+app.use('/', assistenteSocialRoutes);
 app.use('/', administracaoRoutes);
-app.use('/',entidadeRoutes);
 app.use('/', sessionRoutes);
 
 

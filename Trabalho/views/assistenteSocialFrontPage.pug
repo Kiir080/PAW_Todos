@@ -1,0 +1,47 @@
+
+
+doctype html
+header
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  title Assistente Social
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+  script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+  script(src='../assistenteSocialFrontPage.js')
+main.p-5.shadow-lg.container
+  #tabs
+    ul.nav.nav-tabs.row.d-flex.justify-content-center
+      li.nav-item
+        a#a1.nav-link.active(href='#tab1' data-toggle='tab') Processos Atribuidos
+      li.nav-item
+        a#a2.nav-link(href='#tab2' data-toggle='tab') Pesquisar Dossiers
+      li.nav-item
+        a#a3.nav-link(href='#tab3' data-toggle='tab') Pesquisar Processos
+      li.nav-item
+        a#a4.nav-link(href='#tab4' data-toggle='tab') Entidades
+  .tab-content.row.w-75.mx-auto
+    #tab1.tab-pane.container.active.bg-light.col
+    #tab2.tab-pane.container.fade.bg-light.col
+      .input-group.mb-3.p-2
+        input#searchBox2.form-control(type='text' placeholder='Introduza o Numero do Aluno')
+        .input-group-append
+          button#searchButton2.btn.btn-success(type='submit') Pesquisar
+      .collapse
+        ul#list2.py-3.list-group
+    #tab3.tab-pane.container.fade.bg-light.col
+      .input-group.mb-3.p-2
+        input#searchBox3.form-control(type='text' placeholder='Introduza o Numero Interno do Processo')
+        .input-group-append
+          button#searchButton3.btn.btn-success(type='submit') Pesquisar
+      .collapse
+        ul#list3.py-3.list-group
+    #tab4.tab-pane.container.fade.bg-light.col
+  form.w-75.bg-light.rounded-bottom.row.mx-auto(action='assistenteSocial/criarDossierLanding' method='POST')
+    button.btn.btn-primary(type='submit') Criar Dossier 
+
+
+
+
+     

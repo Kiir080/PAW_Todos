@@ -3,7 +3,8 @@ const {
 } = require('../Modulo_Mongoose/mongoManager');
 
 const dossierSchema = require('../Modulo_Mongoose/schemas/dossier');
-const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
+const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
+
 
 function criaAcao(body, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
@@ -20,6 +21,7 @@ function criaAcao(body, callback) {
         }
     }, callback);
 }
+
 
 function eliminaAcao(body, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
@@ -128,6 +130,17 @@ function procurarEntidade(id, callback) {
 
 }
 
+function getEntidades(callback){
+    const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
+    Entidade.find().exec(function(err,result){
+        if (err) callback(err);
+        else {
+            callback(null,result);
+        }
+    })
+}
+
+exports.getEntidades=getEntidades;
 exports.procurarEntidade = procurarEntidade;
 exports.criarEntidade = criarEntidade;
 exports.editarEntidade = editarEntidade;
