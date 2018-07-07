@@ -4,32 +4,34 @@ const {
 
 const dossierSchema = require('../Modulo_Mongoose/schemas/dossier.js');
 const procurarEntidade = require('./administracaoControler').procurarEntidade;
+const userSchema = require('../Modulo_Mongoose/schemas/user.js');
 
-function criarDossier(body, callback) {
+function criarDossier(req, callback) {
+    const body=req.body;
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
-        numeroAluno: `${body.numeroAluno}`
+        numeroAluno: `${req.sanitize(body.numeroAluno)}`
     }).exec((err, result) => {
         if (err) callback(err);
         else if (result !== null) {
             callback(new Error('O Numero do Aluno já existe'));
         } else {
-            procurarEntidade(body.id, function (res) {
+            procurarEntidade(req.sanitize(body.id), function (res) {
                 var temp = new Dossier({
-                    numeroAluno: body.numeroAluno,
-                    nomeAluno: body.nomeAluno,
-                    dataNascimento: body.dataNascimento,
-                    anoLetivo: body.anoLetivo,
-                    contacto: body.contacto,
+                    numeroAluno: req.sanitize(body.numeroAluno),
+                    nomeAluno: req.sanitize(body.nomeAluno),
+                    dataNascimento: req.sanitize(body.dataNascimento),
+                    contacto: req.sanitize(body.contacto),
                     processo: {
                         estado: 'aberto',
-                        assistenteSocial: body.assistenteSocial,
-                        numeroInterno: body.numeroInterno,
-                        dataRegisto: body.dataRegisto,
-                        observacoes: body.observacoes,
+                        anoLetivo: req.sanitize(body.anoLetivo),
+                        assistenteSocial: req.sanitize(body.assistenteSocial),
+                        numeroInterno: req.sanitize(body.numeroInterno),
+                        dataRegisto: req.sanitize(body.dataRegisto),
+                        observacoes: req.sanitize(body.observacoes),
                         problema: {
-                            descricao: body.descricao,
-                            tipo: body.tipo,
+                            descricao: req.sanitize(body.descricao),
+                            tipo: req.sanitize(body.tipo),
                             data: body.data
                         },
                         entidade: {
@@ -46,30 +48,31 @@ function criarDossier(body, callback) {
     })
 }
 
-function addProcesso(body, callback) {
+function addProcesso(req, callback) {
+    const body=req.body;
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
-        numeroAluno: `${body.numeroAluno}`
+        numeroAluno: `${req.sanitize(body.numeroAluno)}`
     }).exec((err, result) => {
         if (err) callback(err);
         else if (result !== null) {
-            procurarEntidade(body.id, function (res) {
+            procurarEntidade(req.sanitize(body.id), function (res) {
                 var temp = new Dossier({
-                    numeroAluno: result.numeroAluno,
+                    numeroAluno:result.numeroAluno,
                     nomeAluno: result.nomeAluno,
                     dataNascimento: result.dataNascimento,
-                    anoLetivo: result.anoLetivo,
                     contacto: result.contacto,
                     processo: {
-                        numeroInterno: body.numeroInterno,
+                        numeroInterno: req.sanitize(body.numeroInterno),
+                        anoLetivo: req.sanitize(body.anoLetivo),
                         estado: 'aberto',
-                        assistenteSocial: body.assistenteSocial,
+                        assistenteSocial: req.sanitize(body.assistenteSocial),
                         dataRegisto: Date.now(),
-                        observacoes: body.observacoes,
+                        observacoes:req.sanitize( body.observacoes),
                         problema: {
-                            descricao: body.descricao,
-                            tipo: body.tipo,
-                            data: body.data
+                            descricao: req.sanitize(body.descricao),
+                            tipo: req.sanitize(body.tipo),
+                            data: req.sanitize(body.data)
                         },
                         entidade: {
                             id: res.id,
@@ -89,15 +92,16 @@ function addProcesso(body, callback) {
 
 }
 
-function atualizarProblema (body, callback) {
+function atualizarProblema (req, callback) {
+    const body=req.body;
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    Dossier.findByNumeroInterno(body.numeroInterno,(err, result) => {
+    Dossier.findByNumeroInterno(req.sanitize(body.numeroInterno),(err, result) => {
     if (err) callback(err);
     else if (result !== null) {
         
-        result.processo.problema.descricao = body.descricao;
-        result.processo.problema.tipo = body.tipo;
-        result.processo.problema.data = body.data;
+        result.processo.problema.descricao = req.sanitize(body.descricao);
+        result.processo.problema.tipo = req.sanitize(body.tipo);
+        result.processo.problema.data = req.sanitize(body.data);
         
         result.save();
         callback();
@@ -111,7 +115,7 @@ function atualizarProblema (body, callback) {
 
 function getProcessos(callback){
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    Dossier.find().select({ 'processo.numeroInterno': 1, numeroAluno: 1, nomeAluno: 1, 'processo.estado':1}).exec(function(err,result){
+    Dossier.find().select({ 'processo.numeroInterno': 1, numeroAluno: 1, nomeAluno: 1, 'processo.estado':1,'processo.assistenteSocial':1,'processo.anoLetivo':1,'processo.dataRegisto':1,'processo.problema.tipo':1,'processo.entidade':1}).exec(function(err,result){
         if (err) callback(err);
         else {
             callback(null,result);
@@ -120,10 +124,10 @@ function getProcessos(callback){
 }
 
 
-function getDossier(body,callback){
+function getDossier(req,callback){
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
-        numeroAluno: `${body.numeroAluno}`
+        numeroAluno: `${req.sanitize(req.body.numeroAluno)}`
     }).exec((err, result) => {
         if (err) callback(err);
         else{
@@ -133,10 +137,10 @@ function getDossier(body,callback){
 }
 
 
-function getProcesso(body,callback){
+function getProcesso(req,callback){
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
-        'processo.numeroInterno': `${body.numeroInterno}`
+        'processo.numeroInterno': `${req.sanitize(req.body.numeroInterno)}`
     }).exec((err, result) => {
         if (err) callback(err);
         else{
@@ -145,6 +149,33 @@ function getProcesso(body,callback){
     });
 }
 
+function checkIfExistsNumeroAluno(numeroAluno,callback){
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.findOne({
+        numeroAluno : `${numeroAluno}`
+    }).exec((err, result) => {
+        if (err) callback(err);
+        else{
+            callback(null,result !== null);
+        }
+    });
+}
+
+function checkIfExistsAssSocial(assistenteSocial,callback){
+    const User =  mongoManager.connect(userSchema, 'users');
+    User.findOne({id: `${assistenteSocial}`}).exec(function(err,result){
+        if (err) callback(err);
+        else if(result !== null){
+            callback(null,result.departamento === 'assistenteSocial')
+        }else{
+            callback(null,false);
+        }
+    })
+   
+}
+
+exports.checkIfExistsAssSocial=checkIfExistsAssSocial;
+exports.checkIfExistsNumeroAluno=checkIfExistsNumeroAluno;
 exports.getProcesso=getProcesso;
 exports.getDossier=getDossier;
 exports.getProcessos=getProcessos;

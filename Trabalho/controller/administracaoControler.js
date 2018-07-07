@@ -6,33 +6,34 @@ const dossierSchema = require('../Modulo_Mongoose/schemas/dossier');
 const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
 
 
-function criaAcao(body, callback) {
+function criaAcao(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
 
     Dossier.update({
-        'processo.numeroInterno': body.numeroInterno
+        'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
     }, {
         $push: {
             'processo.problema.acoes': {
-                data: body.data,
-                tipo: body.tipo,
-                descricao: body.descricao
+                data: req.sanitize(req.body.data),
+                tipo: req.sanitize(req.body.tipo),
+                descricao: req.sanitize(req.body.descricao)
             }
-        }
+        },
+        $set: {'processo.estado':'acompanhamento', dataEncaminhamento: Date.now}
     }, callback);
 }
 
 
-function eliminaAcao(body, callback) {
+function eliminaAcao(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
 
     Dossier.update({
-        'processo.numeroInterno': body.numeroInterno
+        'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
     }, {
         $pull: {
             'processo.problema.acoes': {
-                data: body.data,
-                tipo: body.tipo,
+                data: req.sanitize(req.body.data),
+                tipo: req.sanitize(req.body.tipo),
             }
         }
     }, callback);
@@ -40,11 +41,11 @@ function eliminaAcao(body, callback) {
 
 }
 
-function getAcao(body, callback) {
+function getAcao(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
 
     Dossier.findOne({
-        'processo.numeroInterno': body.numeroInterno
+        'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
     }).exec(function (err, result) {
         if (err) callback(err);
         if (result !== null) {
@@ -56,19 +57,19 @@ function getAcao(body, callback) {
     });
 }
 
-function criarEntidade(body, callback) {
+function criarEntidade(req, callback) {
     const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
     Entidade.findOne({
-        id: `${body.id}`
+        id: `${req.sanitize(req.body.id)}`
     }).exec((err, result) => {
         if (err) callback(err);
         else if (result !== null) {
             callback(new Error('A entidade já existe'));
         } else {
             var temp = new Entidade({
-                id: body.id,
-                nome: body.nome,
-                contacto: body.contactoE
+                id: req.sanitize(req.body.id),
+                nome: req.sanitize(req.body.nome),
+                contacto: req.sanitize(req.body.contactoE)
             });
             temp.save(callback(err));
         }
@@ -77,18 +78,18 @@ function criarEntidade(body, callback) {
 
 
 
-function editarEntidade(body, callback) {
+function editarEntidade(req, callback) {
     const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
     Entidade.findOne({
-        id: `${body.id}`
+        id: `${req.sanitize(req.body.id)}`
     }).exec((err, result) => {
         if (err) callback(err);
         else {
-            result.nome = body.nome;
-            result.contacto = body.contactoE;
+            result.nome = req.sanitize(req.body.nome);
+            result.contacto = req.sanitize(req.body.contactoE);
 
             result.save();
-            atualizarEntidade(body, callback);
+            atualizarEntidade(req, callback);
 
         }
     });
@@ -96,11 +97,11 @@ function editarEntidade(body, callback) {
 
 
 
-function atualizarEntidade(body, callback) {
+function atualizarEntidade(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    procurarEntidade(body.id, function (res) {
+    procurarEntidade(req.sanitize(req.body.id), function (res) {
         Dossier.updateMany({
-            'processo.entidade.id': body.id
+            'processo.entidade.id': req.sanitize(req.body.id)
         }, {
             'processo.entidade.nome': res.nome,
             'processo.entidade.contacto': res.contacto

@@ -1,5 +1,3 @@
-
-
 doctype html
 header
   meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
@@ -21,7 +19,7 @@ main.p-5.shadow-lg.container
         a#a3.nav-link(href='#tab3' data-toggle='tab') Pesquisar Processos
       li.nav-item
         a#a4.nav-link(href='#tab4' data-toggle='tab') Entidades
-  .tab-content.row.w-75.mx-auto
+  .tab-content.row.w-100.mx-auto
     #tab1.tab-pane.container.active.bg-light.col
     #tab2.tab-pane.container.fade.bg-light.col
       .input-group.mb-3.p-2
@@ -38,10 +36,7 @@ main.p-5.shadow-lg.container
       .collapse3
         ul#list3.py-3.list-group
     #tab4.tab-pane.container.fade.bg-light.col
-  form.w-75.bg-light.rounded-bottom.row.mx-auto(action='assistenteSocial/criarDossierLanding' method='POST')
-    button.btn.btn-primary(type='submit') Criar Dossier 
-
-
-
-
-     
+  form.w-100.bg-light.rounded-bottom.row.mx-auto(action='assistenteSocial/criarDossierLanding' method='GET')
+    .btn-group 
+      button.btn.btn-primary(type='submit') Criar Dossier
+      button.btn.btn-primary(type='submit' formaction='assistenteSocial/criarProcessoLanding') Adicionar Processo a Dossier

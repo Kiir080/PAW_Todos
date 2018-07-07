@@ -19,7 +19,13 @@ let processoSchema = new Schema({
         max: 999999,
         required: true
     },
+    anoLetivo: {
+        type: String,
+        min: 9,
+        max: 9,
+        required: true
 
+    },
     numeroInterno: {
         type: Number,
         min: 1,
@@ -32,7 +38,12 @@ let processoSchema = new Schema({
         type: Date,
         default: Date.now
     },
-
+    dataEncaminhamento: {
+        type: Date,
+    },
+    dataEncerrado: {
+        type: Date,
+    },
     observacoes: {
         type: String
     },

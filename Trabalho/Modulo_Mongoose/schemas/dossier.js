@@ -16,20 +16,13 @@ let dossierSchema = new Schema({
     dataNascimento: {
         type: Date
     },
-    anoLetivo: {
-        type: String,
-        min: 9,
-        max: 9,
-        required: true
-
-    },
     contacto: {
         type: Number,
         max: 999999999,
         min: 1,
         required: true
     },
-    processo: processoSchema,
+    processo: processoSchema
 
 });
 

@@ -1,0 +1,69 @@
+doctype html
+head
+  title Dossier
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+  script(src='../criarDossier.js')
+.p-5.shadow-lg.container
+  main
+    .loginBox
+      form(action='criarDossier' method='POST')
+        fieldset
+          .page-header(align='center')
+            legend
+              | Criar Dossier
+              abbr(title='Mandatory fields')
+          div
+            label(for='nome')
+              | Nome:
+              abbr(title='Tem de ter entre 1 a 500 caracteres')
+            input#nome(type='text' minlength='1' maxlength='500' required='' name='nomeAluno')
+          div
+            label(for='numero')
+              | N&uacute;mero Aluno:
+              abbr(title='Value between 1 and 9')
+            input#numero(type='number' minlength='1' maxlength='9' required='' name='numeroAluno')
+            label(for='ano')
+              | Ano Letivo:
+            input#ano(type='text' minlenght='9' maxlength='9' required='' name='anoLetivo' pattern='(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' title='Formato: AAAA-AAAA')
+          div
+            label(for='data')
+              | Data de Nascimento:
+            input#data(type='date' required='' name='dataNascimento')
+            label(for='contacto')
+              | Contacto:
+            input#contacto(type='number' minlength='1' maxlength='9' required='' name='contacto')
+          button.btn.btn-info-ligth(type='button' data-toggle='collapse' data-target='#demo') Criar Processo
+          #demo.collapse
+            .criarProcesso
+            form(action='assistenteSocial/criarDossier' method='POST')
+              fieldset
+                .form-group
+                  label(for='pwd') Assistente Social:
+                  input#nom(name='assistenteSocial' type='text' required='')
+                .form-group
+                  label(for='pwd') N&uacute;mero Interno:
+                  input#num(name='numeroInterno' type='number' required='')
+                .form-group
+                  label(for='comment') Observa&ccedil;&otilde;es:
+                  textarea#Obs.form-control(required='' name='observacoes' rows='5')
+                .form-group
+                  label(for='comment') Descri&ccedil;&atilde;o do Problema:
+                  textarea#dcs.form-control(required='' name='descricao' rows='2')
+                .w-50.form-group
+                  label(for='tipo') Tipo de Problema:
+                  select#tipo.form-control(name='tipo')
+                    option(value='absentismo') Absentismo
+                    option(value='indisciplina') Indisciplina
+                    option(value='consumoDrogas') Consumo de Drogas
+                .w-50.form-group
+                  label(for='entidade') Entidade:
+                  select#entidade.form-control(name='id')
+                .form-group
+                  label(for='pwd') Data:
+                  input#data(name='data' type='date' required='')
+                .btn-group.d-flex.justify-content-end
+                  button.p-2.btn.btn-success(type='submit') Criar

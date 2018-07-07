@@ -24,10 +24,10 @@ function ajaxRequestA1() {
                 } else if (result.length === 0) {
                     $('#tab1').append('<div class="alert alert-danger alert-dismissible p-2">' +
                         ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                        '<strong>Não existem Processos Atribuidos</strong>' +
+                        '<strong>Não existem Processos</strong>' +
                         ' </div>');
                 } else {
-                    $('#tab1').append('<table class="table table-striped table-hover table-responsive text-right">' + '<thead class="thead-dark">' + '<tr>' + '<th>Numero Interno</th>' + '<th>Nome Aluno</th>' + '<th>Numero Aluno</th>' + '<th>Estado</th>'+ '<th>Assistente Social</th>'+ '<th>Ano Letivo</th>'+ '<th>Data de Registo </th>'+ '<th>Entidade</th>' + '<th>Tipo de Problema</th>'+ '</tr>' + '</thead>' + '<tbody id="selectable"></tbody>')
+                    $('#tab1').append('<table class="table table-striped table-hover table-responsive text-right mx-auto">' + '<thead class="thead-dark">' + '<tr>' + '<th>Numero Interno</th>' + '<th>Nome Aluno</th>' + '<th>Numero Aluno</th>' + '<th>Estado</th>'+ '<th>Assistente Social</th>'+ '<th>Ano Letivo</th>'+ '<th>Data de Registo </th>'+ '<th>Entidade</th>' + '<th>Tipo de Problema</th>'+ '</tr>' + '</thead>' + '<tbody id="selectable"></tbody>')
                     for (i = 0; i < result.length; i++) {
                         $("#selectable").append("<tr>" +
                             "<td>" + result[i].processo.numeroInterno + "</td>" +
@@ -37,7 +37,6 @@ function ajaxRequestA1() {
                             "<td>" + result[i].processo.assistenteSocial + "</td>"+
                             "<td>" + result[i].processo.anoLetivo + "</td>"+
                             "<td>" + new Date(result[i].processo.dataRegisto).toLocaleDateString() + "</td>"+
-                            "<td>" + result[i].processo.entidade.nome + "</td>"+
                             "<td>" + result[i].processo.problema.tipo + "</td>"+
                             +"</tr>");
                     }

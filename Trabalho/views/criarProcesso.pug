@@ -6,6 +6,7 @@ head
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+  script(src='../criarProcesso.js')
 .p-5.shadow-lg.container
   main
     .criarProcesso
@@ -17,7 +18,7 @@ head
             abbr(title='Mandatory fields')
         .form-group
           label(for='usr') N&uacute;mero Aluno:
-          input#usr(name='numeroAluno' type='number' required='')
+          input#numAluno(name='numeroAluno' type='number' required='')
         .form-group
           label(for='pwd') Assistente Social:
           input#nom(name='assistenteSocial' type='text' required='')
@@ -39,8 +40,6 @@ head
         .w-50.form-group
           label(for='entidade') Entidade:
           select#entidade.form-control(name='id')
-            option(value=1) 1
-            option(value=2) 2
         .form-group
           label(for='pwd') Data:
           input#data(name='data' type='date' required='')

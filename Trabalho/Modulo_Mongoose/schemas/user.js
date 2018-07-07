@@ -10,10 +10,9 @@ function currentId(){
 }
 
 let userSchema = new Schema({
-    id: {type: Number, min: 1, max: 500, set: currentId},
-    username: {type:String, required:true},
-    password: String,
-    departamento: {type:String, enum:['assistenteSocial','administracao']}
+    id: {type: Number, min: 1, max: 500, required:true},
+    password: { type:String},
+    departamento: {type:String, enum:['assistenteSocial','administracao'], required:true}
 });
 
 userSchema.methods.findById=function(targetId){
@@ -21,8 +20,8 @@ userSchema.methods.findById=function(targetId){
 }
 
 userSchema.plugin(passportLocalMongoose,{
-    usernameQueryFields: ['id'],
-    selectFields: ['username','departamento']
+    usernameField: 'id',
+    selectFields: ['id','departamento']
 });
 
 module.exports = userSchema;

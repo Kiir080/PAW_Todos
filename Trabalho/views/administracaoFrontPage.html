@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<header>
+
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administração</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../administracaoFrontPage.js"></script>
+
+</header>
+
+<body>
+    <main class="p-5 shadow-lg container">
+        <div id="tabs">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a id="a1" class="nav-link active" href="#tab1" data-toggle="tab">Processos Atribuidos</a>
+                </li>
+                <li class="nav-item">
+                    <a id="a2" class="nav-link" href="#tab2" data-toggle="tab">Pesquisar Dossiers</a>
+                </li>
+                <li class="nav-item">
+                    <a id="a3" class="nav-link" href="#tab3" data-toggle="tab">Pesquisar Processos</a>
+                </li>
+                <li class="nav-item">
+                    <a id="a4" class="nav-link" href="#tab4" data-toggle="tab">Entidades</a>
+                </li>
+                <li class="nav-item">
+                    <a id="a5" class="nav-link" href="#tab5" data-toggle="tab">Pesquisar Assistente Social</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane container active"></div>
+            <div id="tab2" class="tab-pane container fade">
+                <div class="input-group mb-3 p-2">
+                    <input type="text" class="form-control" placeholder="Introduza o Numero do Aluno">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="submit">Pesquisar</button>
+                    </div>
+                </div>
+                <div class="collapse2">
+                </div>
+            </div>
+            <div id="tab3" class="tab-pane container fade">
+                <div class="input-group mb-3 p-2">
+                    <input type="text" class="form-control" placeholder="Introduza o Numero Interno do Processo">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="submit">Pesquisar</button>
+                    </div>
+                </div>
+                <div class="collapse3">
+                </div>
+            </div>
+            <div id="tab4" class="tab-pane container fade">
+            </div>
+        </div>
+        <div id="tab5" class="tab-pane container fade">
+            <div class="input-group mb-3 p-2">
+                <input type="text" class="form-control" placeholder="Introduza o Identificador do Assistente Social">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit">Pesquisar</button>
+                </div>
+            </div>
+            <div class="collapse5">
+            </div>
+        </div>
+        </div>
+
+
+    </main>
+</body>
+
+</html>
