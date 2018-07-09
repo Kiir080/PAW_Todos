@@ -25,6 +25,9 @@ head
         .form-group
           label(for='pwd') N&uacute;mero Interno:
           input#num(name='numeroInterno' type='number' required='')
+        .form-group 
+          label(for='ano') Ano Letivo:
+          input#ano(type='text' minlenght='9' maxlength='9' required='' name='anoLetivo' pattern='(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' title='Formato: AAAA-AAAA')  
         .form-group
           label(for='comment') Observa&ccedil;&otilde;es:
           textarea#Obs.form-control(required='' name='observacoes' rows='5')

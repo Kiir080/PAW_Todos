@@ -4,29 +4,11 @@ const {
 
 const dossierSchema = require('../Modulo_Mongoose/schemas/dossier');
 const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
-
-
-function criaAcao(req, callback) {
-    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-
-    Dossier.update({
-        'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
-    }, {
-        $push: {
-            'processo.problema.acoes': {
-                data: req.sanitize(req.body.data),
-                tipo: req.sanitize(req.body.tipo),
-                descricao: req.sanitize(req.body.descricao)
-            }
-        },
-        $set: {'processo.estado':'acompanhamento', dataEncaminhamento: Date.now}
-    }, callback);
-}
-
+const comumControler = require('../controller/comumControler.js');
 
 function eliminaAcao(req, callback) {
-    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
 
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.update({
         'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
     }, {
@@ -34,12 +16,42 @@ function eliminaAcao(req, callback) {
             'processo.problema.acoes': {
                 data: req.sanitize(req.body.data),
                 tipo: req.sanitize(req.body.tipo),
+                descricao: req.sanitize(req.body.descricao)
             }
         }
+
+    }, {
+        multi: true
     }, callback);
 
 
 }
+
+function editaAcao(req, callback) {
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.updateOne({
+        $and: [{
+                'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
+            },
+            {
+                'processo.problema.acoes': {
+                    $elemMatch: {
+                        data: req.sanitize(req.body.data),
+                        tipo: req.sanitize(req.body.tipo),
+                        descricao: req.sanitize(req.body.descricao)
+                    }
+                }
+            }
+        ]
+    }, {
+        $set: {
+            'processo.problema.acoes.$.data': new Date(req.sanitize(req.body.dataNew)).toISOString(),
+            'processo.problema.acoes.$.tipo': req.sanitize(req.body.tipoNew),
+            'processo.problema.acoes.$.descricao': req.sanitize(req.body.descricaoNew)
+        }
+    }, callback);
+}
+
 
 function getAcao(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
@@ -99,7 +111,7 @@ function editarEntidade(req, callback) {
 
 function atualizarEntidade(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    procurarEntidade(req.sanitize(req.body.id), function (res) {
+    comumControler.procurarEntidade(req.sanitize(req.body.id), function (res) {
         Dossier.updateMany({
             'processo.entidade.id': req.sanitize(req.body.id)
         }, {
@@ -115,36 +127,25 @@ function atualizarEntidade(req, callback) {
     });
 }
 
-function procurarEntidade(id, callback) {
-    const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
-    Entidade.findOne({
-        id: `${id}`
-    }).exec((err, result) => {
-        if (err) callback(err);
-        if (result !== null) {
-            callback(result);
-        } else {
-            callback(new Error('A entidade nao existe'));
-        }
 
-    });
+function getProcessosAssSocial(assistenteSocial, callback) {
 
-}
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
 
-function getEntidades(callback){
-    const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
-    Entidade.find().exec(function(err,result){
+
+    Dossier.find({
+        'processo.assistenteSocial': assistenteSocial
+    }).exec(function (err, result) {
         if (err) callback(err);
         else {
-            callback(null,result);
+            callback(null, result);
         }
-    })
+    });
 }
 
-exports.getEntidades=getEntidades;
-exports.procurarEntidade = procurarEntidade;
+exports.editaAcao = editaAcao;
+exports.getProcessosAssSocial = getProcessosAssSocial;
 exports.criarEntidade = criarEntidade;
 exports.editarEntidade = editarEntidade;
 exports.getAcao = getAcao;
 exports.eliminaAcao = eliminaAcao;
-exports.criaAcao = criaAcao;

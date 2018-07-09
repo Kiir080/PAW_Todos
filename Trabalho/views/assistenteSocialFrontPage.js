@@ -16,7 +16,7 @@ function ajaxRequestA1() {
             $("#tab1").empty()
 
             $.post('assistenteSocial/getProcessos', function (result) {
-                if (result === null) {
+                if (result === "") {
                     $('#tab1').append('<div class="alert alert-danger alert-dismissible p-2">' +
                         ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
                         '<strong>Aconteceu Um erro tente novamente mais tarde</strong>' +
@@ -27,18 +27,18 @@ function ajaxRequestA1() {
                         '<strong>Não existem Processos Atribuidos</strong>' +
                         ' </div>');
                 } else {
-                    $('#tab1').append('<table class="table table-striped table-hover table-responsive text-right">' + '<thead class="thead-dark">' + '<tr>' + '<th>Numero Interno</th>' + '<th>Nome Aluno</th>' + '<th>Numero Aluno</th>' + '<th>Estado</th>'+ '<th>Assistente Social</th>'+ '<th>Ano Letivo</th>'+ '<th>Data de Registo </th>'+ '<th>Entidade</th>' + '<th>Tipo de Problema</th>'+ '</tr>' + '</thead>' + '<tbody id="selectable"></tbody>')
+                    $('#tab1').append('<table class="table table-striped table-hover table-responsive text-right">' + '<thead class="thead-dark">' + '<tr>' + '<th>Numero Interno</th>' + '<th>Nome Aluno</th>' + '<th>Numero Aluno</th>' + '<th>Estado</th>' + '<th>Assistente Social</th>' + '<th>Ano Letivo</th>' + '<th>Data de Registo </th>' + '<th>Entidade</th>' + '<th>Tipo de Problema</th>' + '</tr>' + '</thead>' + '<tbody id="selectable"></tbody>')
                     for (i = 0; i < result.length; i++) {
                         $("#selectable").append("<tr>" +
                             "<td>" + result[i].processo.numeroInterno + "</td>" +
                             "<td>" + result[i].nomeAluno + "</td>" +
                             "<td>" + result[i].numeroAluno + "</td>" +
-                            "<td>" + result[i].processo.estado + "</td>"+
-                            "<td>" + result[i].processo.assistenteSocial + "</td>"+
-                            "<td>" + result[i].processo.anoLetivo + "</td>"+
-                            "<td>" + new Date(result[i].processo.dataRegisto).toLocaleDateString() + "</td>"+
-                            "<td>" + result[i].processo.entidade.nome + "</td>"+
-                            "<td>" + result[i].processo.problema.tipo + "</td>"+
+                            "<td>" + result[i].processo.estado + "</td>" +
+                            "<td>" + result[i].processo.assistenteSocial + "</td>" +
+                            "<td>" + result[i].processo.anoLetivo + "</td>" +
+                            "<td>" + new Date(result[i].processo.dataRegisto).toLocaleDateString() + "</td>" +
+                            "<td>" + result[i].processo.entidade.nome + "</td>" +
+                            "<td>" + result[i].processo.problema.tipo + "</td>" +
                             +"</tr>");
                     }
                 }
@@ -55,13 +55,11 @@ function ajaxRequestA2() {
         event.preventDefault();
         let id = $('#searchBox2').val();
         $.post("assistenteSocial/getDossier", {
-                data: {
-                    numeroAluno: id
-                }
+                numeroAluno: id
             },
             function (result) {
                 $("#list2").empty();
-                if (result === null) {
+                if (result === "") {
                     $('#list2').append('<div class="alert alert-danger alert-dismissible p-2">' +
                         ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
                         '<strong>Esse Dossier não existe!!!</strong>' +
@@ -74,9 +72,6 @@ function ajaxRequestA2() {
                         '</li>' +
                         '<li class="list-group-item">' +
                         '<strong>Idade: </strong>' + '<span> ' + calculaIdade(result.dataNascimento) + '</span>' +
-                        '</li>' +
-                        '<li class="list-group-item">' +
-                        '<strong>Ano Letivo: </strong>' + '<span> ' + result.anoLetivo + '</span>' +
                         '</li>' +
                         '<li class="list-group-item">' +
                         '<strong>Contacto do Encarregado de Educação: </strong>' + '<span> ' + result.contacto + '</span>' +
@@ -98,13 +93,11 @@ function ajaxRequestA3() {
             event.preventDefault();
             let id = $('#searchBox3').val();
             $.post("assistenteSocial/getProcesso", {
-                    data: {
-                        numeroInterno: id
-                    }
+                    numeroInterno: id
                 },
                 function (result) {
                     $("#list3").empty();
-                    if (result === null) {
+                    if (result === "") {
                         $('#list3').append('<div class="alert alert-danger alert-dismissible p-2">' +
                             ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
                             '<strong>Esse Dossier não existe!!!</strong>' +
@@ -119,6 +112,9 @@ function ajaxRequestA3() {
                             '<strong>Identificador de Assistente Social Atribuido: </strong>' + '<span> ' + result.processo.assistenteSocial + '</span>' +
                             '</li>' +
                             '<li class="list-group-item">' +
+                            '<strong>Ano Letivo: </strong>' + '<span> ' + result.processo.anoLetivo + '</span>' +
+                            '</li>' +
+                            '<li class="list-group-item">' +
                             '<strong>Estado do Processo: </strong>' + '<span> ' + result.processo.estado + '</span>' +
                             '</li>' +
                             '<li class="list-group-item">' +
@@ -130,7 +126,7 @@ function ajaxRequestA3() {
                             '<li class="list-group-item">' +
                             '<strong>Entidade: </strong>' + '<span> ' + result.processo.entidade.nome + '</span>' +
                             '</li>' +
-                            '<li class="list-group-item list-group-item-dark" ' + '<strong>Descriminação do Problema ' + '</strong>' + 
+                            '<li class="list-group-item list-group-item-dark" ' + '<strong>Descriminação do Problema ' + '</strong>' +
                             '</li>' +
                             '<li class="list-group-item">' +
                             '<strong>Tipo de Problema: </strong>' + '<span> ' + result.processo.problema.tipo + '</span>' +
@@ -143,9 +139,9 @@ function ajaxRequestA3() {
                             '</li>');
 
                         if (result.processo.problema.acoes.length > 0) {
-                            
-                            $('#list3').append('<li class="list-group-item list-group-item-dark" ' + '<strong>Diligências Tomadas ' + '</strong>' + 
-                            '</li>');
+
+                            $('#list3').append('<li class="list-group-item list-group-item-dark" ' + '<strong>Diligências Tomadas ' + '</strong>' +
+                                '</li>');
 
                             for (i = 0; i < result.processo.problema.acoes.length; i++) {
                                 $('#list3').append(
@@ -161,7 +157,10 @@ function ajaxRequestA3() {
                                     '</li>');
                             }
                         }
-
+                        $('#btnG').show();
+                        $('#addA').click(function () {
+                            $('#num').val(id);
+                        })
                     }
                     $('.collapse3').collapse();
 
@@ -182,7 +181,7 @@ function ajaxRequestA4() {
             event.preventDefault();
             $("#tab4").empty();
             $.post('assistenteSocial/getEntidades', function (result) {
-                if (result === null) {
+                if (result === "") {
                     $('#tab4').append('<div class="alert alert-danger alert-dismissible p-2">' +
                         ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
                         '<strong>Aconteceu Um erro tente novamente mais tarde</strong>' +
@@ -206,9 +205,9 @@ function ajaxRequestA4() {
     })
 }
 
-function calculaIdade(input) { 
+function calculaIdade(input) {
     let tempo = Date.now() - new Date(input).getTime();
-    let idade = new Date(tempo); 
+    let idade = new Date(tempo);
     let x = Math.abs(idade.getUTCFullYear() - 1970);
     return x
 }

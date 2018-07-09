@@ -19,7 +19,7 @@ main.p-5.shadow-lg.container
         a#a3.nav-link(href='#tab3' data-toggle='tab') Pesquisar Processos
       li.nav-item
         a#a4.nav-link(href='#tab4' data-toggle='tab') Entidades
-  .tab-content.row.w-100.mx-auto
+  .tab-content.row.w-100
     #tab1.tab-pane.container.active.bg-light.col
     #tab2.tab-pane.container.fade.bg-light.col
       .input-group.mb-3.p-2
@@ -35,8 +35,41 @@ main.p-5.shadow-lg.container
           button#searchButton3.btn.btn-success(type='submit') Pesquisar
       .collapse3
         ul#list3.py-3.list-group
+        .btn-group#btnG(style="display: none;")
+          button#addA.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaAcao') Adicionar A&ccedil;&atilde;o
     #tab4.tab-pane.container.fade.bg-light.col
-  form.w-100.bg-light.rounded-bottom.row.mx-auto(action='assistenteSocial/criarDossierLanding' method='GET')
-    .btn-group 
+  #criaAcao.modal.fade
+    .modal-dialog.modal-lg.modal-dialog-centered
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Adicionar A&ccedil;&atilde;o
+          button.close(type='button' data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          form#form(action='assistenteSocial/addAcao' method='POST')
+            fieldset
+              .form-group
+                label(for='num') N&uacute;mero Interno:
+                input#num(name='numeroInterno' type='text' readonly='')
+              .w-50.form-group
+                label(for='tipo') Tipo de A&ccedil;&atilde;o:
+                select#tipo.form-control(name='tipo' required='')
+                  option(value='reunião') Reuni&atilde;o
+                  option(value='pedido') Pedido
+                  option(value='encaminhamento') Encaminhamento
+                  option(value='expulsão') Expuls&atilde;o
+                  option(value='suspensão') Suspens&atilde;o
+              .form-group
+                label(for='data') Data:
+                input#data(name='data' type='date' required='')
+              .form-group
+                label(for='dcs') Descri&ccedil;&atilde;o:
+                textarea#dcs.form-control(required='' name='descricao' rows='2')
+        // Modal footer
+        .modal-footer
+          button.btn.btn-danger(type='submit' form='form') Adicionar
+  form.w-100.bg-light.rounded-bottom.row.p-2(action='assistenteSocial/criarDossierLanding' method='GET')
+    .btn-group#tab1BtnG
       button.btn.btn-primary(type='submit') Criar Dossier
       button.btn.btn-primary(type='submit' formaction='assistenteSocial/criarProcessoLanding') Adicionar Processo a Dossier

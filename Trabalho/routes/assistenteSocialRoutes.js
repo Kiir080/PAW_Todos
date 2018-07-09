@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const assistenteSocialControler = require('../controller/assistenteSocialControler.js');
-const getEntidades=require('../controller/administracaoControler').getEntidades;
+const comumControler= require('../controller/comumControler.js');
+
 const subDomain = 'assistenteSocial';
 
 router.get('/'+subDomain,function(req,res){
@@ -24,9 +25,14 @@ router.get('/' + subDomain+'/criarDossierLanding', function (req, res) {
 });
 
 
-//A assistente social tb pode ver ações!! mas irá para uma pagina diferente aonde nao as possa Eliminar
-router.get('/'+subDomain+'/verAcoes',function(req,res){
-    res.render('acoes');
+router.post('/' + subDomain + '/addAcao', function (req, res) {
+    comumControler.criaAcao(req, function (err) {
+        if (err) res.status(300).send('Ocorreu um ERRO tente Novamente mais tarde!!!');
+        else {
+            res.status(200).redirect('/'+subDomain);
+        }
+
+    });
 });
 
 router.get('/' + subDomain+'/criarProcessoLanding', function (req, res) {
@@ -54,27 +60,33 @@ router.post('/' + subDomain + '/atualizarProblema', function (req, res) {
 });
 
 router.post('/'+subDomain+'/getProcessos',function(req,res){
-    assistenteSocialControler.getProcessos(function(err,result){
+    comumControler.getProcessosTabela(function(err,result){
         if(err !== null){
             console.log(err.message);
             res.send(null);
         }else{
             res.send(result);
         }
-    })
+    });
 });
 
 
 router.post('/'+subDomain+'/checkIfExistsNumAluno',function(req,res){
-    assistenteSocialControler.checkIfExistsNumeroAluno(req.sanitize(req.body.numeroAluno),function(err,result){
+    comumControler.checkIfExistsNumeroAluno(req.sanitize(req.body.numeroAluno),function(err,result){
         if(err === null){
             res.send(result);
         }
     })
 });
 
+router.post('/'+subDomain+'/countProcessos',function(req,res){
+    comumControler.countTotalProcessos(function(count){
+            res.send({num: count});
+    })
+});
+
 router.post('/'+subDomain+'/checkIfExistsAssSocial',function(req,res){
-    assistenteSocialControler.checkIfExistsAssSocial(req.sanitize(req.body.assistenteSocial),function(err,result){
+   comumControler.checkIfExistsAssSocial(req.sanitize(req.body.assistenteSocial),function(err,result){
         if(err === null){
             res.send(result);
         }
@@ -83,7 +95,7 @@ router.post('/'+subDomain+'/checkIfExistsAssSocial',function(req,res){
 
 
 router.post('/'+subDomain+'/getEntidades',function(req,res){
-    getEntidades(function(err,result){
+    comumControler.getEntidades(function(err,result){
         if(err !== null){
             console.log(err.message);
             res.send(null);
@@ -94,13 +106,13 @@ router.post('/'+subDomain+'/getEntidades',function(req,res){
 });
 
 router.post('/'+subDomain+'/getDossier',function(req,res){
-   assistenteSocialControler.getDossier(req.sanitize(req.body.data),function(result){
+   comumControler.getDossier(req.sanitize(req.body.numeroAluno),function(result){
         res.send(result);
    });
 });
 
 router.post('/'+subDomain+'/getProcesso',function(req,res){
-    assistenteSocialControler.getProcesso(req.sanitize(req.body.data),function(result){
+    comumControler.getProcesso(req.sanitize(req.body.numeroInterno),function(result){
          res.send(result);
     });
  });
