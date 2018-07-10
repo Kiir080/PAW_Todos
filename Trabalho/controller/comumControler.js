@@ -47,96 +47,126 @@ function countTotalProcessos(callback, queryObj) {
     }
 }
 
-function countTotalProcessosAssSocial(assistenteSocial,callback){
-    countTotalProcessos({'processo.assistenteSocial':assistenteSocial},function(count){
+function countTotalProcessosAssSocial(assistenteSocial, callback) {
+    countTotalProcessos({
+        'processo.assistenteSocial': assistenteSocial
+    }, function (count) {
         callback(count);
     });
 }
 
-function countTotalProcessosAluno(numeroAluno,callback){
-    countTotalProcessos({numeroAluno:numeroAluno},function(count){
+function countTotalProcessosAluno(numeroAluno, callback) {
+    countTotalProcessos({
+        numeroAluno: numeroAluno
+    }, function (count) {
         callback(count);
     });
 }
 
-function countTotalAtribuicoesEntidade(entidadeId,callback){
-    countTotalProcessos({'processo.entidade':entidadeId},function(count){
+function countTotalAtribuicoesEntidade(entidadeId, callback) {
+    countTotalProcessos({
+        'processo.entidade': entidadeId
+    }, function (count) {
         callback(count);
     });
 }
 
 
 
-function getProcessosTabela(callback,assistenteSocial){
+function getProcessosTabela(callback, assistenteSocial) {
 
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    
-    if(assistenteSocial){
-        Dossier.find({'processo.assistenteSocial':assistenteSocial}).select({ 'processo.numeroInterno': 1, numeroAluno: 1, nomeAluno: 1, 'processo.estado':1,'processo.anoLetivo':1,'processo.dataRegisto':1,'processo.problema.tipo':1,'processo.entidade':1}).exec(function(err,result){
+
+    if (assistenteSocial) {
+        Dossier.find({
+            'processo.assistenteSocial': assistenteSocial
+        }).select({
+            'processo.numeroInterno': 1,
+            numeroAluno: 1,
+            nomeAluno: 1,
+            'processo.estado': 1,
+            'processo.anoLetivo': 1,
+            'processo.dataRegisto': 1,
+            'processo.problema.tipo': 1,
+            'processo.entidade': 1
+        }).exec(function (err, result) {
             if (err) callback(err);
             else {
-                callback(null,result);
+                callback(null, result);
             }
         });
-    }else{
-        Dossier.find().select({ 'processo.numeroInterno': 1, numeroAluno: 1, nomeAluno: 1, 'processo.estado':1,'processo.assistenteSocial':1,'processo.assistenteSocial':1,'processo.anoLetivo':1,'processo.dataRegisto':1,'processo.problema.tipo':1,'processo.entidade':1}).exec(function(err,result){
+    } else {
+        Dossier.find().select({
+            'processo.numeroInterno': 1,
+            numeroAluno: 1,
+            nomeAluno: 1,
+            'processo.estado': 1,
+            'processo.assistenteSocial': 1,
+            'processo.assistenteSocial': 1,
+            'processo.anoLetivo': 1,
+            'processo.dataRegisto': 1,
+            'processo.problema.tipo': 1,
+            'processo.entidade': 1
+        }).exec(function (err, result) {
             if (err) callback(err);
             else {
-                callback(null,result);
+                callback(null, result);
             }
         });
     }
 }
 
 
-function getDossier(numeroAluno,callback){
+function getDossier(numeroAluno, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
         numeroAluno: `${numeroAluno}`
     }).exec((err, result) => {
         if (err) callback(err);
-        else{
+        else {
             callback(result);
         }
     });
 }
 
 
-function getProcesso(numeroInterno,callback){
+function getProcesso(numeroInterno, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
         'processo.numeroInterno': `${numeroInterno}`
     }).exec((err, result) => {
         if (err) callback(err);
-        else{
+        else {
             callback(result);
         }
     });
 }
 
-function checkIfExistsNumeroAluno(numeroAluno,callback){
+function checkIfExistsNumeroAluno(numeroAluno, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
-        numeroAluno : `${numeroAluno}`
+        numeroAluno: `${numeroAluno}`
     }).exec((err, result) => {
         if (err) callback(err);
-        else{
-            callback(null,result !== null);
+        else {
+            callback(null, result !== null);
         }
     });
 }
 
-function checkIfExistsAssSocial(assistenteSocial,callback){
-    const User =  mongoManager.connect(userSchema, 'users');
-    User.findOne({id: `${assistenteSocial}`}).exec(function(err,result){
+function checkIfExistsAssSocial(assistenteSocial, callback) {
+    const User = mongoManager.connect(userSchema, 'users');
+    User.findOne({
+        id: `${assistenteSocial}`
+    }).exec(function (err, result) {
         if (err) callback(err);
-        else if(result !== null){
-            callback(null,result.departamento === 'assistenteSocial')
-        }else{
-            callback(null,false);
+        else if (result !== null) {
+            callback(null, result.departamento === 'assistenteSocial')
+        } else {
+            callback(null, false);
         }
     })
-   
+
 }
 
 function procurarEntidade(id, callback) {
@@ -155,17 +185,17 @@ function procurarEntidade(id, callback) {
 
 }
 
-function getEntidades(callback){
+function getEntidades(callback) {
     const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
-    Entidade.find().exec(function(err,result){
+    Entidade.find().exec(function (err, result) {
         if (err) callback(err);
         else {
-            callback(null,result);
+            callback(null, result);
         }
     })
 }
 
-function countEntidades(callback){
+function countEntidades(callback) {
     const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
     Entidade.find().exec((err, result) => {
         if (err) callback(0);
@@ -175,16 +205,16 @@ function countEntidades(callback){
     });
 }
 
-exports.countEntidades=countEntidades;
-exports.criaAcao=criaAcao;
-exports.getEntidades=getEntidades;
+exports.countEntidades = countEntidades;
+exports.criaAcao = criaAcao;
+exports.getEntidades = getEntidades;
 exports.procurarEntidade = procurarEntidade;
-exports.checkIfExistsAssSocial=checkIfExistsAssSocial;
-exports.checkIfExistsNumeroAluno=checkIfExistsNumeroAluno;
-exports.getProcesso=getProcesso;
-exports.getDossier=getDossier;
-exports.getProcessosTabela=getProcessosTabela;
-exports.countTotalProcessosAssSocial=countTotalProcessosAssSocial;
-exports.countTotalAtribuicoesEntidade=countTotalAtribuicoesEntidade;
-exports.countTotalProcessosAluno=countTotalProcessosAluno;
-exports.countTotalProcessos=countTotalProcessos;
+exports.checkIfExistsAssSocial = checkIfExistsAssSocial;
+exports.checkIfExistsNumeroAluno = checkIfExistsNumeroAluno;
+exports.getProcesso = getProcesso;
+exports.getDossier = getDossier;
+exports.getProcessosTabela = getProcessosTabela;
+exports.countTotalProcessosAssSocial = countTotalProcessosAssSocial;
+exports.countTotalAtribuicoesEntidade = countTotalAtribuicoesEntidade;
+exports.countTotalProcessosAluno = countTotalProcessosAluno;
+exports.countTotalProcessos = countTotalProcessos;

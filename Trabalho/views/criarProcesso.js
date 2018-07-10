@@ -1,6 +1,7 @@
 
 $(function () {
     $(document).ready(function () {
+    getNumeroDeProcessos();
     getEntidades();
     checkIfExistsNumAluno();
     checkIfExistsAssSocial();
@@ -50,6 +51,15 @@ function checkIfExistsAssSocial() {
                     $('#nom').val(" ");
                 }
             });
+        });
+    });
+}
+
+function getNumeroDeProcessos() {
+    $(document).ready(function () {
+
+        $.post(window.location.origin+'/assistenteSocial/countProcessos', function (result) {
+            $('#num').val(result.num + 1);;
         });
     });
 }

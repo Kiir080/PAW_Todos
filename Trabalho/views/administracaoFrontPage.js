@@ -7,6 +7,7 @@ $(function () {
         ajaxRequestA3();
         ajaxRequestA4();
         ajaxRequestA5();
+        ajaxRequestA6();
         removeAcao();
         editaAcao();
         $('#addE').click(getNumeroDeEntidades);
@@ -313,6 +314,8 @@ function ajaxRequestA5() {
         }));
     });
 }
+
+
 
 function getNumeroDeEntidades() {
     $(document).ready(function () {

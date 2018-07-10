@@ -5,6 +5,7 @@ const {
 const dossierSchema = require('../Modulo_Mongoose/schemas/dossier');
 const entidadeSchema = require('../Modulo_Mongoose/schemas/entidade.js');
 const comumControler = require('../controller/comumControler.js');
+const tempoSchema = require('../Modulo_Mongoose/schemas/tempo.js');
 
 function eliminaAcao(req, callback) {
 
@@ -143,6 +144,73 @@ function getProcessosAssSocial(assistenteSocial, callback) {
     });
 }
 
+
+function getTempo(callback) {
+    const Tempo = mongoManager.connect(tempoSchema, 'tempos');
+    Tempo.getLastTempo(function(result){
+        callback(result);
+    });
+}
+
+function saveTempo(req,callback) {
+    const Tempo = mongoManager.connect(tempoSchema, 'tempos');
+    let temp = new Tempo({
+        tempo: req.sanitize(req.body.tempo),
+        idAdmin: req.sanitize(req.body.idAdmin)
+    });
+    temp.save(function(err){
+        callback(err);
+    });
+}
+
+function getProcessosEmEsperaMaxima(targetDays,callback) {
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    let array = [];
+    Dossier.find({
+        'processo.estado': 'aberto'
+    }).select({'processo.dataRegisto':1,'processo.numeroInterno':1,'processo.assistenteSocial':1}).exec(function(err,result){
+        if(err){
+            console.log(err);
+            callback(false);
+        }else{
+            if(result.length===0){
+                callback(false);
+            }else{
+                for(var i=0;i< result.length;i++){
+                    addToarray(targetDays,result[i],array);
+                }
+
+                if(array.length===0){
+                    callback(false);
+                }else{
+                    callback(array);
+                }
+            }
+        } 
+    })
+
+
+
+
+}
+
+function addToarray(targetDays, result, array) {
+    let dataProcesso = new Date(result.processo.dataRegisto);
+    let dataHj= new Date();
+    let mills = Math.abs(dataHj.getTime() - dataProcesso.getTime());
+    let dias = Math.ceil(mills / (24 * 3600 * 1000));
+    if (targetDays <= dias) {
+        array.push({
+            numeroInterno: result.processo.numeroInterno,
+            assistenteSocial: result.processo.assistenteSocial,
+            diasAtraso: dias-targetDays
+        })
+    }
+}
+
+exports.getProcessosEmEsperaMaxima=getProcessosEmEsperaMaxima;
+exports.saveTempo = saveTempo;
+exports.getTempo = getTempo;
 exports.editaAcao = editaAcao;
 exports.getProcessosAssSocial = getProcessosAssSocial;
 exports.criarEntidade = criarEntidade;

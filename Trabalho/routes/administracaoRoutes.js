@@ -84,4 +84,28 @@ router.post('/'+subDomain+'/getProcessosAssSocial',function(req,res){
     });
 });
 
+
+router.post('/'+subDomain+'/getProcessosEmEsperaMaxima',function(req,res){
+    adminControler.getProcessosEmEsperaMaxima(req.sanitize(req.body.targetDays),function(result){
+        res.status(200).send(result);
+    })
+});
+
+router.post('/'+subDomain+'/getTempo',function(req,res){
+    adminControler.getTempo(function(result){
+        res.status(200).send(result);
+    })
+});
+
+router.post('/'+subDomain+'/saveTempo',function(req,res){
+    adminControler.saveTempo(req,function(err){
+        if(err){
+            console.log(err);
+            res.send(false);
+        }else{
+            res.send(true);
+        }
+    })
+});
+
 module.exports = router;

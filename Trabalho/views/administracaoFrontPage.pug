@@ -10,6 +10,8 @@ header
  
   
   script(src='../administracaoFrontPage.js')
+  script(src='../administracaoFrontPage_processosEspera.js')
+  
 
 main.p-5.shadow-lg.container
   #tabs
@@ -24,6 +26,9 @@ main.p-5.shadow-lg.container
         a#a4.nav-link(href='#tab4' data-toggle='tab') Entidades
       li.nav-item
         a#a5.nav-link(href='#tab5' data-toggle='tab') Pesquisar Assistente Social
+      li.nav-item
+        a#a6.nav-link(href='#tab6' data-toggle='tab') Processos em Espera
+          span#notification.badge.badge-danger
   .tab-content
     #tab1.tab-pane.container.active
     #tab2.tab-pane.container.fade
@@ -56,6 +61,13 @@ main.p-5.shadow-lg.container
                 button#searchButton5.btn.btn-success(type='submit') Pesquisar
         .collapse5
             ul#list5.py-3.list-group
+    #tab6.tab-pane.container.fade
+        .input-group.mb-3.p-2.w-50
+          input#tempo.form-control(type='Number' placeholder='Tempo Maximo de Espera (DIAS)' readonly='')
+          .input-group-append
+            button#edtTempo.btn.btn-success(type='button') Editar
+            button#saveTempo.btn.btn-success(type='button' disabled='') Guardar
+        #tableTempo
   #criaAcao.modal.fade
     .modal-dialog.modal-lg.modal-dialog-centered
       .modal-content
