@@ -2,20 +2,72 @@ let clicked;
 
 $(function () {
     $(document).ready(function () {
-        ajaxRequestA1();
-        ajaxRequestA2();
+        teste();
+        /* ajaxRequestA2();
         ajaxRequestA3();
         ajaxRequestA4();
         ajaxRequestA5();
         ajaxRequestA6();
         removeAcao();
         editaAcao();
-        $('#addE').click(getNumeroDeEntidades);
-       
+        $('#addE').click(getNumeroDeEntidades); */
+
     });
 })()
 
+function teste() {
+    $(document).ready(function () {
+        $('#a1').on('click', function (event) {
+            event.preventDefault();
+            $('#table1').DataTable({
+                "processing": true,
+                "responsive": true,
+                "ajax": {
+                    "url": window.location.origin + '/assistenteSocial/getProcessos',
+                    "type": "POST",
+                    "dataSrc": ''
+                },
+                "columns": [{
+                        "data": "processo.numeroInterno"
+                    },
+                    {
+                        "data": "nomeAluno"
+                    },
+                    {
+                        "data": "numeroAluno"
+                    },
+                    {
+                        "data": "processo.estado"
+                    },
+                    {
+                        "data": "processo.assistenteSocial"
+                    },
+                    {
+                        "data": "processo.anoLetivo"
+                    },
+                    {
+                        "data": "processo.dataRegisto",
+                        "render": function (data, type, row) {
+                            if(type === 'display'){
+                              return new Date(data).toLocaleDateString()
+                            }else{
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        "data": "processo.entidade.nome"
+                    },
+                    {
+                        "data": "processo.problema.tipo"
+                    },
+                ]
+            });
 
+        });
+        $('#a1').click();
+    })
+}
 
 
 function ajaxRequestA1() {
@@ -198,7 +250,7 @@ function ajaxRequestA4() {
         $('#a4').on('click', function (event) {
             event.preventDefault();
             $("#table").empty();
-            
+
             $.post(window.location.origin + '/assistenteSocial/getEntidades', function (result) {
                 if (result === "") {
                     $('#tab4').append('<div class="alert alert-danger alert-dismissible p-2">' +
@@ -213,16 +265,14 @@ function ajaxRequestA4() {
                 } else {
                     $('#table').append('<table class="table table-striped table-hover table-responsive text-right">' + '<thead>' + '<tr>' + '<th>Identificador</th>' + '<th>Nome</th>' + '<th>Contacto</th>' + '</tr>' + '</thead>' + '<tbody id="targetA4"></tbody>')
                     for (i = 0; i < result.length; i++) {
-                        $("#targetA4").append("<tr class='line' id='L"+(i+1)+"' >" +
-                            "<td id='idL"+(i+1)+"'>" + result[i].id + "</td>" +
-                            "<td id='nomeL"+(i+1)+"'>" + result[i].nome + "</td>" +
-                            "<td id='contactoL"+(i+1)+"'>" + result[i].contacto + "</td>" + "</tr>");
+                        $("#targetA4").append("<tr class='line' id='L" + (i + 1) + "' >" +
+                            "<td id='idL" + (i + 1) + "'>" + result[i].id + "</td>" +
+                            "<td id='nomeL" + (i + 1) + "'>" + result[i].nome + "</td>" +
+                            "<td id='contactoL" + (i + 1) + "'>" + result[i].contacto + "</td>" + "</tr>");
                     }
 
                     clickOnLine();
-                    
-                    
-                     
+
                 }
             });
         })
@@ -319,7 +369,7 @@ function ajaxRequestA5() {
 
 function getNumeroDeEntidades() {
     $(document).ready(function () {
-        $.post(window.location.origin+'/administracao/countEntidades', function (result) {
+        $.post(window.location.origin + '/administracao/countEntidades', function (result) {
             $('#idE').val(result.num + 1);;
         });
     });
@@ -341,19 +391,19 @@ function clickOnAction() {
     });
 }
 
-function clickOnLine(){
+function clickOnLine() {
     $('#btnGE').show();
-    $('.line').click(function(){
+    $('.line').click(function () {
         $('#edtE').prop('disabled', false);
-        let clicked=$(this).attr('id');
-        let x=$('#id'+clicked).text();
+        let clicked = $(this).attr('id');
+        let x = $('#id' + clicked).text();
 
-        $('#edtE').click( function () {
-            $('#idEd').val($('#id'+clicked).text());
-            $('#contactoEd').val($('#contacto'+clicked).text());
-            $('#nomeEd').val($('#nome'+clicked).text());
-         });
-        
+        $('#edtE').click(function () {
+            $('#idEd').val($('#id' + clicked).text());
+            $('#contactoEd').val($('#contacto' + clicked).text());
+            $('#nomeEd').val($('#nome' + clicked).text());
+        });
+
     })
 }
 
@@ -409,9 +459,3 @@ function editaAcao() {
     });
 }
 
-function calculaIdade(input) {
-    let tempo = Date.now() - (new Date(input)).getTime();
-    let idade = new Date(tempo);
-    let x = Math.abs(idade.getUTCFullYear() - 1970);
-    return x
-}

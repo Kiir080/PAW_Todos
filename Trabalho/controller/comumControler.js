@@ -195,6 +195,7 @@ function getEntidades(callback) {
     })
 }
 
+
 function countEntidades(callback) {
     const Entidade = mongoManager.connect(entidadeSchema, 'entidades');
     Entidade.find().exec((err, result) => {
