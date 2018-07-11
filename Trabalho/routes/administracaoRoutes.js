@@ -122,4 +122,13 @@ router.post('/'+subDomain+'/saveTempo',function(req,res){
     })
 });
 
+router.post('/'+subDomain+'/terminarProcesso',function(req,res){
+    comumControler.terminarProcesso(function(result){
+        if (err) res.status(300).send(err.message);
+        else {
+            res.status(200).send("Processo terminado");
+        }
+    })     
+ });
+
 module.exports = router;
