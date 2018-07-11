@@ -1,6 +1,7 @@
+let table;
 $(function () {
     $(document).ready(function () {
-        let table = $('#table1').DataTable({
+     table = $('#table1').DataTable({
             "processing": true,
             "responsive": true,
             "ajax": {
