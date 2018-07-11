@@ -11,7 +11,7 @@ function currentId(){
 
 let userSchema = new Schema({
     id: {type: Number, min: 1, max: 500, required:true},
-    password: { type:String},
+    password: {type:String},
     departamento: {type:String, enum:['assistenteSocial','administracao'], required:true}
 });
 

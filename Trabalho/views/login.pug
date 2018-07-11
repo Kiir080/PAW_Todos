@@ -19,11 +19,11 @@ head
             label(for='username')
               | ID
               abbr(title='Value between 1 and 500')
-            input#username.form-control(type='text' minlength='1' maxlength='500' required='' name='username')
+            input#username.form-control(type='text' minlength='1' maxlength='500' required='' name='id')
           .form-group.text-left.font-weight-bold
             label(for='password')
               | Password
               abbr(title='More than 4 characters: at least one uppercase character and one digit ')
-            input#password.form-control(type='password' minlength='4' required='' name='password' pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters')
+            input#password.form-control(type='password' minlength='4' required='' name='password' title='Must contain at least one number and one letter, and at least 8 or more characters')
           .btn-group.d-flex.justify-content-center
             button.p-2.btn.btn-success.w-25(type='submit') Login

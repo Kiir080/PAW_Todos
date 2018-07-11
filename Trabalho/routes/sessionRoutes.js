@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 var passport = require('passport');
 
-
 const {
     mongoManager
 } = require('../Modulo_Mongoose/mongoManager.js');
@@ -16,6 +15,7 @@ router.get('/', function (req, res) {
 
 router.post('/signUp', function (req, res) {
     User.register(new User({
+           // username: req.sanitize(req.body.username),
             id: req.sanitize(req.body.id),
             departamento: req.sanitize(req.body.departamento)
         }),
@@ -23,9 +23,11 @@ router.post('/signUp', function (req, res) {
         function (err, user) {
             if (err) {
                 res.send(err.message);
-            }else{ passport.authenticate('local')(req, res, function () {
-                res.status(200).redirect('/'+ user.departamento);
-            });}
+            }else{
+                passport.authenticate('local')(req, res, function () {
+                    res.status(200).redirect('/');
+                });
+            }
            
         });
 });
