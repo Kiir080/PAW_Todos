@@ -206,6 +206,19 @@ function countEntidades(callback) {
     });
 }
 
+
+function countUtilizador(callback) {
+    const User = mongoManager.connect(userSchema, 'users');
+    User.find().exec((err, result) => {
+        if (err) callback(0);
+        else {
+            callback(result.length);
+        }
+    });
+}
+
+
+
 function terminarProcesso(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
     Dossier.findOne({
@@ -220,6 +233,8 @@ function terminarProcesso(req, callback) {
     });
 }
 
+exports.terminarProcesso = terminarProcesso;
+exports.countUtilizador = countUtilizador;
 exports.countEntidades = countEntidades;
 exports.criaAcao = criaAcao;
 exports.getEntidades = getEntidades;

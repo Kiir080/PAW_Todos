@@ -170,3 +170,21 @@ function editaAcao() {
         });
     });
 }
+
+function terminarProcesso() {
+    $(document).ready(function () {
+
+        $('#SimT').click(function () {
+            $.post(window.location.origin + "/administracao/terminarProcesso", {
+                numeroInterno: $('#searchBox3').val(),
+            }, function (result) {
+                $('#terminarProcesso').modal("hide");
+                $('#tabs').before('<div class="alert alert-primary alert-dismissible p-2">' +
+                    ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                    '<strong>' + result + '</strong>' +
+                    ' </div>');
+                $('#searchButton3').click();
+            });
+        })
+    })
+}

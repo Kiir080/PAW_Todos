@@ -46,6 +46,8 @@ $(function () {
         });
 
         ajaxRequestA1();
+        getNumeroDeUtilizadores();
+
     });
 })()
 
@@ -58,4 +60,14 @@ function ajaxRequestA1() {
             table.ajax.reload();
         });
     })
+}
+
+
+function getNumeroDeUtilizadores() {
+    $(document).ready(function () {
+
+        $.post(window.location.origin+'/administracao/countUtilizador', function (result) {
+            $('#idUt').val(result.num + 1);;
+        });
+    });
 }

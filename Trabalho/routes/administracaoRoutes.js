@@ -131,4 +131,10 @@ router.post('/'+subDomain+'/terminarProcesso',function(req,res){
     })     
  });
 
+router.post('/'+subDomain+'/countUtilizador',function(req,res){
+    comumControler.countUtilizador(function(result){
+        res.send({num: result});
+    })     
+ });
+
 module.exports = router;
