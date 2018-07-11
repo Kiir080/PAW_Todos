@@ -1,0 +1,6 @@
+
+// FAZER DROP DE CADA COLEÇÃO ANTES --> NO mongo FAZER db.(nome da coleção).drop()
+
+mongoimport --db segsocial --collection users --file users.json
+mongoimport --db segsocial --collection dossiers --file dossiers.json
+mongoimport --db segsocial --collection entidades --file entidades.json
