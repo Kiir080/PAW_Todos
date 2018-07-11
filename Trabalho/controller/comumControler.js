@@ -206,6 +206,20 @@ function countEntidades(callback) {
     });
 }
 
+function terminarProcesso(req, callback) {
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.findOne({
+        numeroInterno: `${req.sanitize(req.body.numeroInterno)}`
+    }).exec((err, result) => {
+        if (err) callback(err);
+        else {
+            result.estado = 'encerrado';
+
+            result.save();
+        }
+    });
+}
+
 exports.countEntidades = countEntidades;
 exports.criaAcao = criaAcao;
 exports.getEntidades = getEntidades;
