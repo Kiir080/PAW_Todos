@@ -80,6 +80,7 @@ main.p-5.shadow-lg.container
           button#addA.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaAcao') Adicionar A&ccedil;&atilde;o
           button#remA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#remAcao') Remover A&ccedil;&atilde;o
           button#edtA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#editaAcao') Editar A&ccedil;&atilde;o  
+          button#tp.btn.btn-primary(type='button' data-toggle='modal' data-target='#terminarProcesso') Terminar Processo
     #tab4.tab-pane.container.fade
       table#table4.table.table-striped.table-hover.table-responsive.text-right
         thead.thead-dark
@@ -228,3 +229,40 @@ main.p-5.shadow-lg.container
         // Modal footer
         .modal-footer
           button.btn.btn-danger(type='submit' form='formEA') Editar
+  #terminarProcesso.modal.fade
+    .modal-dialog.modal-sm
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Terminar Processo
+          button.close(type='button' data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          p Deseja terminar o processo?
+        // Modal footer
+        .modal-footer
+          button#SimT.btn.btn-danger(type='button') Sim
+          button.btn.btn-primary(type='button' data-dismiss='modal') N&atilde;o
+  #criaUtilizador.modal.fade
+    .modal-dialog.modal-lg.modal-dialog-centered
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Criar Utilizador
+          button.close(type='button' data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          form#formU(action='/signUp' method='POST')
+            fieldset
+              .form-group
+                label(for='idUt') Id:
+                input#idUt(name='id' type='text' readonly='')
+              .w-50.form-group
+                label(for='dep') Departamento:
+                input#dep(name='departamento' type='text' required='')
+              .form-group
+                label(for='pass') Password:
+                input#pass(name='password' type='password' required='')
+        // Modal footer
+        .modal-footer
+          button.btn.btn-danger(type='submit' form='form') Criar Utilizador

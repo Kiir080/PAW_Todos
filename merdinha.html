@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Triagem Doente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+    <div class="p-5 shadow-lg container">
+        <ul class="py-3 list-group">
+            <li class="list-group-item list-group-item-dark"><strong>Informações do Doente:</strong></li>
+            <li class="list-group-item"><strong>Numero Utente:</strong></li>
+            <li class="list-group-item"><strong>Nome:</strong></li>
+            <li class="list-group-item"><strong>Idade:</strong></li>
+            <li class="list-group-item"><strong>Genero:</strong></li>
+        </ul>
+        <form id="form">
+            <div class="w-50 form-group">
+                <label for="Estado">Estado:</label>
+                <select class=" form-control" name="Estado" id="Estado">
+                    <option class="text-success" value="Verde">Verde</option>
+                    <option class="text-warning" value="Amarelo">Amarelo</option>
+                    <option class="text-danger" value="Vermelho">Vermelho</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="comment">Observações:</label>
+                <textarea required id="Obs" name="Obs" class="form-control" rows="10"></textarea>
+            </div>
+            <div class="btn-group d-flex justify-content-end">
+                <button class="p-2 btn btn-light ">Ir para Exames </button>
+                <button type="submit" class="p-2 btn btn-success ">Ir para Consulta </button>
+            </div>
+        </form>
+    </div>
+
+</body>

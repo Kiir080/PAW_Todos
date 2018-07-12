@@ -12,18 +12,18 @@ function criaAcao(req, callback) {
     Dossier.update({
         'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
     }, {
-        $push: {
-            'processo.problema.acoes': {
-                data: new Date(req.sanitize(req.body.data)).toISOString(),
-                tipo: req.sanitize(req.body.tipo),
-                descricao: req.sanitize(req.body.descricao)
+            $push: {
+                'processo.problema.acoes': {
+                    data: new Date(req.sanitize(req.body.data)).toISOString(),
+                    tipo: req.sanitize(req.body.tipo),
+                    descricao: req.sanitize(req.body.descricao)
+                }
+            },
+            $set: {
+                'processo.estado': 'acompanhamento',
+                dataEncaminhamento: Date.now
             }
-        },
-        $set: {
-            'processo.estado': 'acompanhamento',
-            dataEncaminhamento: Date.now
-        }
-    }, callback);
+        }, callback);
 }
 
 
@@ -206,20 +206,34 @@ function countEntidades(callback) {
     });
 }
 
-function terminarProcesso(req, callback) {
-    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    Dossier.findOne({
-        numeroInterno: `${req.sanitize(req.body.numeroInterno)}`
-    }).exec((err, result) => {
-        if (err) callback(err);
-        else {
-            result.estado = 'encerrado';
 
-            result.save();
+function countUtilizador(callback) {
+    const User = mongoManager.connect(userSchema, 'users');
+    User.find().exec((err, result) => {
+        if (err) callback(0);
+        else {
+            callback(result.length);
         }
     });
 }
 
+
+
+function terminarProcesso(req, callback) {
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.updateOne({
+        'processo.numeroInterno': `${req.sanitize(req.body.numeroInterno)}`
+    }, {
+            $set: {
+                'processo.estado' : 'encerrado'
+            }
+        },
+        callback
+);
+}
+
+exports.terminarProcesso = terminarProcesso;
+exports.countUtilizador = countUtilizador;
 exports.countEntidades = countEntidades;
 exports.criaAcao = criaAcao;
 exports.getEntidades = getEntidades;
