@@ -42,8 +42,8 @@ router.get('/' + subDomain+'/criarDossierLanding', function (req, res) {
 });
 
 
-router.get('/' + subDomain+'/criarProcessoLanding', function (req, res) {
-    res.render('criarProcesso');
+router.post('/' + subDomain+'/criarProcessoLanding', function (req, res) {
+    res.render('criarProcesso',{ id : req.body.id});
 });
 
 router.post('/' + subDomain + '/addProcesso', function (req, res) {

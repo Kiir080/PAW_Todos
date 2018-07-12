@@ -109,7 +109,8 @@ main.p-5.shadow-lg.container
         // Modal footer
         .modal-footer
           button.btn.btn-danger(type='submit' form='form') Adicionar
-  form.w-100.bg-light.rounded-bottom.row.p-2(action='assistenteSocial/criarDossierLanding' method='GET')
+  form.w-100.bg-light.rounded-bottom.row.p-2(action='assistenteSocial/criarDossierLanding' method='POST')
+    input#idAssSocial(name='id' readonly='' style="display: none;") 
     .btn-group#tab1BtnG
       button.btn.btn-primary(type='submit') Criar Dossier
       button.btn.btn-primary(type='submit' formaction='assistenteSocial/criarProcessoLanding') Adicionar Processo a Dossier

@@ -4,6 +4,7 @@ let firstTime=true;
 $(function () {
     $(document).ready(function () {
         ajaxRequestA4();
+        $('#idAssSocial').val($('#idUser').text());
     });
 })()
 
