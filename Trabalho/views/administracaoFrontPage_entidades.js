@@ -22,7 +22,7 @@ function ajaxRequestA4() {
                     "responsive": true,
                     "select":'single',
                     "ajax": {
-                        "url": window.location.origin + '/assistenteSocial/getEntidades',
+                        "url": window.location.origin + '/getEntidades',
                         "type": "POST",
                         "dataSrc": ''
                     },

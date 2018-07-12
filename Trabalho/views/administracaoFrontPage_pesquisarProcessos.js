@@ -15,7 +15,7 @@ function ajaxRequestA3() {
         $('#searchButton3').click((function (event) {
             event.preventDefault();
             let id = $('#searchBox3').val();
-            $.post(window.location.origin + "/assistenteSocial/getProcesso", {
+            $.post(window.location.origin + "/getProcesso", {
                     numeroInterno: id
                 },
                 function (result) {
@@ -83,16 +83,24 @@ function ajaxRequestA3() {
 
                             clickOnAction();
                         }
-                            
-                        if(result.processo.estado !== 'encerrado'){
-                            ('#tp').prop('disabled', false);
-                            terminarProcesso();
-                        }
 
-                        $('#btnG').show();
-                        $('#addA').click(function () {
-                            $('#num').val(id);
-                        })
+                      
+                            $('#btnG').show();
+                            $('#addA').click(function () {
+                                $('#num').val(id);
+                            });
+                            $('#edtP').click(function () {
+                                $('#numInterno').val(id);
+                            });
+
+
+                            if(result.processo.estado === 'encerrado'){
+                                $('#tp').prop('disabled', true);
+                            }else{
+                                $('#tp').prop('disabled', false);
+                                terminarProcesso();
+                            }  
+                        
 
                     }
 
@@ -113,13 +121,13 @@ function clickOnAction() {
     $('.selected').click(function () {
         if ($(this.firstElementChild).is(':visible')) {
             $(this.firstElementChild).slideUp();
-            $('#remA').prop('disabled', true);
-            $('#edtA').prop('disabled', true);
+           $('#remA').hide();
+           $('#edtA').hide();
         } else {
             $(this.firstElementChild).slideDown();
             clicked = $(this.firstElementChild).attr('id');
-            $('#remA').prop('disabled', false);
-            $('#edtA').prop('disabled', false);
+            $('#remA').show();
+            $('#edtA').show();
 
         }
     });
@@ -181,7 +189,7 @@ function terminarProcesso() {
     $(document).ready(function () {
 
         $('#SimT').click(function () {
-            $.post(window.location.origin + "/administracao/terminarProcesso", {
+            $.post(window.location.origin + "/terminarProcesso", {
                 numeroInterno: $('#searchBox3').val(),
             }, function (result) {
                 $('#terminarProcesso').modal("hide");

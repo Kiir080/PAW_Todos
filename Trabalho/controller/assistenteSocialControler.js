@@ -92,29 +92,5 @@ function addProcesso(req, callback) {
 
 }
 
-function atualizarProblema (req, callback) {
-    const body=req.body;
-    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    Dossier.findByNumeroInterno(req.sanitize(body.numeroInterno),(err, result) => {
-    if (err) callback(err);
-    else if (result !== null) {
-        
-        result.processo.problema.descricao = req.sanitize(body.descricao);
-        result.processo.problema.tipo = req.sanitize(body.tipo);
-        result.processo.problema.data = new Date(req.sanitize(body.data)).toISOString;
-        
-        result.save();
-        callback();
-
-    } else {
-        callback(new Error('Não atualizou o problema'));
-    }
-})
-}
-
-
-
-
 exports.addProcesso = addProcesso;
-exports.atualizarProblema = atualizarProblema;
 exports.criarDossier = criarDossier;

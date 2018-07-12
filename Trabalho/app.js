@@ -22,6 +22,7 @@ const userSchema = require('./Modulo_Mongoose/schemas/user.js');
 const administracaoRoutes = require("./routes/administracaoRoutes.js");
 const assistenteSocialRoutes = require("./routes/assistenteSocialRoutes.js");
 const sessionRoutes = require("./routes/sessionRoutes.js");
+const comumRoutes = require("./routes/comumRoutes");
 const {
     mongoManager
 } = require('./Modulo_Mongoose/mongoManager.js');
@@ -66,6 +67,7 @@ app.use(passport.session());
 app.use('/', assistenteSocialRoutes);
 app.use('/', administracaoRoutes);
 app.use('/', sessionRoutes);
+app.use('/', comumRoutes);
 
 
 

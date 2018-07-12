@@ -6,7 +6,7 @@ const comumControler= require('../controller/comumControler.js');
 const subDomain = 'administracao';
 
 
-/* router.use('/' + subDomain + '*', (req, res, next) => {
+router.use('/' + subDomain + '*', (req, res, next) => {
     if (req.user) {
         if (req.user._doc.departamento !== subDomain) {
             res.status(403).send('FORBIDDEN!!');
@@ -17,7 +17,7 @@ const subDomain = 'administracao';
         res.redirect('/');
     }
     
-}); */
+}); 
 
 
 router.get('/'+subDomain,function(req,res){
@@ -54,15 +54,6 @@ router.post('/' + subDomain + '/editarEntidade', function (req, res) {
 });
 
 
-router.post('/' + subDomain + '/addAcao', function (req, res) {
-    comumControler.criaAcao(req, function (err) {
-        if (err) res.status(300).send('Ocorreu um ERRO tente Novamente mais tarde!!!');
-        else {
-            res.status(200).redirect('/'+subDomain);
-        }
-
-    });
-});
 
 router.post('/' + subDomain + '/eliminaAcao', function (req, res) {
     adminControler.eliminaAcao(req, function (err) {
@@ -125,19 +116,22 @@ router.post('/'+subDomain+'/saveTempo',function(req,res){
     })
 });
 
-router.post('/'+subDomain+'/terminarProcesso',function(req,res){
-    comumControler.terminarProcesso(req,function(err){
-        if (err) res.status(300).send(err.message);
-        else {
-            res.status(200).send("Processo terminado");
-        }
-    })     
- });
 
 router.post('/'+subDomain+'/countUtilizador',function(req,res){
     comumControler.countUtilizador(function(result){
         res.send({num: result});
     })     
  });
+
+ router.post('/' + subDomain + '/atualizarProblema', function (req, res) {
+    adminControler.atualizarProblema(req, function (err) {
+        if (!err) {
+            res.status(200).redirect('/'+ subDomain);
+        } else {
+            res.status(300).send(err.message);
+        }
+    });
+});
+
 
 module.exports = router;
