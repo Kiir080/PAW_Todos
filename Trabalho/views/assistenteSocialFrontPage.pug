@@ -17,6 +17,19 @@ header
   script(src='../assistenteSocialFrontPage_pesquisarProcessos.js')
   script(src='../assistenteSocialFrontPage_entidades.js')
 
+
+main.p-5.shadow-lg.container
+  #head.d-flex.flex-row.justify-content-between
+    .user.pb-2
+      img.rounded-circle(src='../user.png' alt='userImg' style="width:70px;")
+      p
+        span#idUser Id: #{id}
+      p
+        span Departamento: #{departamento}
+      form(action='/logOut' method='POST')
+        button#criarU.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaUtilizador') Criar Utilizador
+        button#termi.btn.btn-primary(type='submit') Terminar sessao
+
 main.p-5.shadow-lg.container
   #tabs
     ul.nav.nav-tabs.row.d-flex.justify-content-center

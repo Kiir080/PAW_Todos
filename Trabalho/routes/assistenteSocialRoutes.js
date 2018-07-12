@@ -21,7 +21,10 @@ const subDomain = 'assistenteSocial';
 
 
 router.get('/'+subDomain,function(req,res){
-    res.render('./assistenteSocialFrontPage');
+    res.render('./assistenteSocialFrontPage',
+    {id:req.user.id,
+    departamento: req.user.departamento
+    });
 })
 
 router.post('/' + subDomain + '/criarDossier', function (req, res) {
