@@ -21,7 +21,10 @@ const subDomain = 'administracao';
 
 
 router.get('/'+subDomain,function(req,res){
-    res.render('administracaoFrontPage');
+    res.render('administracaoFrontPage',
+    {id:req.user.id,
+    departamento: req.user.departamento
+    });
 });
 
 router.post('/'+subDomain+'/countEntidades',function(req,res){

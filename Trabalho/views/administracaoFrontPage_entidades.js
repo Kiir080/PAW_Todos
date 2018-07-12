@@ -37,6 +37,7 @@ function ajaxRequestA4() {
                         }
                     ]
                 });  
+                firstTime = false;
             }else{
             table.ajax.reload();
             }
