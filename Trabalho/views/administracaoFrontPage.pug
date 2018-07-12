@@ -25,8 +25,8 @@ main.p-5.shadow-lg.container
   #head.d-flex.flex-row.justify-content-between
     .user.pb-2
       img.rounded-circle(src='../user.png' alt='userImg' style="width:70px;")
-      p
-        span#idUser Id: #{id}
+      p Id:
+        span#idUser #{id}
       p
         span Departamento: #{departamento}
       form(action='/logOut' method='POST')
@@ -80,7 +80,7 @@ main.p-5.shadow-lg.container
           button#addA.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaAcao') Adicionar A&ccedil;&atilde;o
           button#remA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#remAcao') Remover A&ccedil;&atilde;o
           button#edtA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#editaAcao') Editar A&ccedil;&atilde;o  
-          button#tp.btn.btn-primary(type='button' data-toggle='modal' data-target='#terminarProcesso') Terminar Processo
+          button#tp.btn.btn-primary(type='button' data-toggle='modal' disabled='' data-target='#terminarProcesso') Terminar Processo
     #tab4.tab-pane.container.fade
       table#table4.table.table-striped.table-hover.table-responsive.text-right
         thead.thead-dark

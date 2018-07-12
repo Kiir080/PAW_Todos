@@ -84,15 +84,19 @@ function ajaxRequestA3() {
                             clickOnAction();
                         }
 
-                        if(result.processo.estado !== 'encerrado'){
-                            ('#tp').prop('disabled', false);
-                            terminarProcesso();
-                        }
+                        if(result.processo.assistenteSocial=== ('#idUser').val()){
+                            $('#btnG').show();
+                            $('#addA').click(function () {
+                                $('#num').val(id);
+                            });
 
-                        $('#btnG').show();
-                        $('#addA').click(function () {
-                            $('#num').val(id);
-                        })
+                            if(result.processo.estado !== 'encerrado'){
+                                ('#tp').prop('disabled', false);
+                                terminarProcesso();    
+                            }  
+
+                        }
+                        
 
                     }
 
