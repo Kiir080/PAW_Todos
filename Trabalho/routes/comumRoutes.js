@@ -25,14 +25,26 @@ router.post('/terminarProcesso',function(req,res){
 
 
 router.post('/getProcessos',function(req,res){
-    comumControler.getProcessosTabela(function(err,result){
-        if(err !== null){
-            console.log(err.message);
-            res.send(null);
-        }else{
-            res.send(result);
-        }
-    });
+    if(req.user.departamento==='assistenteSocial'){
+        comumControler.getProcessosTabela(function(err,result){
+            if(err !== null){
+                console.log(err.message);
+                res.send(null);
+            }else{
+                res.send(result);
+            }
+        }, req.user.id);
+    }else{
+        comumControler.getProcessosTabela(function(err,result){
+            if(err !== null){
+                console.log(err.message);
+                res.send(null);
+            }else{
+                res.send(result);
+            }
+        });
+    }
+    
 });
 
 router.post('/checkIfExistsNumAluno',function(req,res){

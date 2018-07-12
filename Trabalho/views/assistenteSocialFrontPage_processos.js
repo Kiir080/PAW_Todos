@@ -19,9 +19,6 @@ $(function () {
                     "data": "processo.estado"
                 },
                 {
-                    "data": "processo.assistenteSocial"
-                },
-                {
                     "data": "processo.anoLetivo"
                 },
                 {

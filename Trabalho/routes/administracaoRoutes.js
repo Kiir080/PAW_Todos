@@ -123,4 +123,15 @@ router.post('/'+subDomain+'/countUtilizador',function(req,res){
     })     
  });
 
+ router.post('/' + subDomain + '/atualizarProblema', function (req, res) {
+    adminControler.atualizarProblema(req, function (err) {
+        if (!err) {
+            res.status(200).redirect('/'+ subDomain);
+        } else {
+            res.status(300).send(err.message);
+        }
+    });
+});
+
+
 module.exports = router;

@@ -56,15 +56,6 @@ router.post('/' + subDomain + '/addProcesso', function (req, res) {
     })
 });
 
-router.post('/' + subDomain + '/atualizarProblema', function (req, res) {
-    assistenteSocialControler.atualizarProblema(req, function (err) {
-        if (!err) {
-            res.status(200).send("Problema atualizado");
-        } else {
-            res.status(300).send(err.message);
-        }
-    });
-});
 
 
 module.exports = router;

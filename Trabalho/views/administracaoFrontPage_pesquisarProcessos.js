@@ -89,6 +89,10 @@ function ajaxRequestA3() {
                             $('#addA').click(function () {
                                 $('#num').val(id);
                             });
+                            $('#edtP').click(function () {
+                                $('#numInterno').val(id);
+                            });
+
 
                             if(result.processo.estado === 'encerrado'){
                                 $('#tp').prop('disabled', true);
@@ -117,13 +121,13 @@ function clickOnAction() {
     $('.selected').click(function () {
         if ($(this.firstElementChild).is(':visible')) {
             $(this.firstElementChild).slideUp();
-            $('#remA').prop('disabled', true);
-            $('#edtA').prop('disabled', true);
+           $('#remA').hide();
+           $('#edtA').hide();
         } else {
             $(this.firstElementChild).slideDown();
             clicked = $(this.firstElementChild).attr('id');
-            $('#remA').prop('disabled', false);
-            $('#edtA').prop('disabled', false);
+            $('#remA').show();
+            $('#edtA').show();
 
         }
     });

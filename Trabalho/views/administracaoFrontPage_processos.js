@@ -19,7 +19,7 @@ function ajaxRequestA1() {
                     "processing": true,
                     "responsive": true,
                     "ajax": {
-                        "url": window.location.origin + '/assistenteSocial/getProcessos',
+                        "url": window.location.origin + '/getProcessos',
                         "type": "POST",
                         "dataSrc": ''
                     },
@@ -72,7 +72,7 @@ function getNumeroDeUtilizadores() {
     $(document).ready(function () {
 
         $.post(window.location.origin+'/administracao/countUtilizador', function (result) {
-            $('#idUt').val(result.num + 1);;
+            $('#idUt').val(result.num + 1);
         });
     });
 }

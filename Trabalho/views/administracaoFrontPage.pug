@@ -52,7 +52,7 @@ main.p-5.shadow-lg.container
         a#a6.nav-link(href='#tab6' data-toggle='tab') Processos em Espera
           span#notification.badge.badge-danger
   .tab-content
-    #tab1.tab-pane.container.active
+    #tab1.tab-pane.container.active.w-100
       table#table1.table.table-striped.table-hover.table-responsive.text-right
         thead.thead-dark
           tr
@@ -80,9 +80,10 @@ main.p-5.shadow-lg.container
         ul#list3.py-3.list-group
         .btn-group#btnG(style="display: none;")
           button#addA.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaAcao') Adicionar A&ccedil;&atilde;o
-          button#remA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#remAcao') Remover A&ccedil;&atilde;o
-          button#edtA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#editaAcao') Editar A&ccedil;&atilde;o  
+          button#remA.btn.btn-primary(type='button'  data-toggle='modal' data-target='#remAcao' style="display: none;") Remover A&ccedil;&atilde;o
+          button#edtA.btn.btn-primary(type='button' data-toggle='modal' data-target='#editaAcao' style="display: none;") Editar A&ccedil;&atilde;o  
           button#tp.btn.btn-primary(type='button' data-toggle='modal' data-target='#terminarProcesso') Terminar Processo
+          button#edtP.btn.btn-primary(type='button' data-toggle='modal' data-target='#editaProblema') Editar Problema
     #tab4.tab-pane.container.fade
       table#table4.table.table-striped.table-hover.table-responsive.text-right
         thead.thead-dark
@@ -270,3 +271,32 @@ main.p-5.shadow-lg.container
         // Modal footer
         .modal-footer
           button.btn.btn-danger(type='submit' form='formU') Criar Utilizador
+  #editaProblema.modal.fade
+    .modal-dialog.modal-lg.modal-dialog-centered
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Editar Problema
+          button.close(type='button' data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          form#formAP(action='administracao/atualizarProblema' method='POST')
+            fieldset
+              .form-group
+                label(for='numInterno') N&uacute;mero Interno:
+                input#numInterno(name='numeroInterno' type='text' readonly='')
+              .form-group
+               label(for='tipoPro') Tipo de Porblema:
+                select#tipoPro.form-control(name='tipo')
+                  option(value='absentismo') Absentismo
+                  option(value='consumoDrogas') Consumo de Drogas
+                  option(value='indisciplina') Indisciplina
+              .form-group  
+                label(for='descricaoPro') Descrição:
+                input#descricaoPro(type='text' required='' name='descricao')
+              .form-group
+                label(for='dataPro') Data:
+                input#dataPro(name='data' type='date' required='') 
+        // Modal footer
+        .modal-footer
+          button.btn.btn-danger(type='submit' form='formAP') Editar

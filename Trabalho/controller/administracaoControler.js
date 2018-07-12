@@ -208,6 +208,20 @@ function addToarray(targetDays, result, array) {
     }
 }
 
+
+function atualizarProblema (req, callback) {
+    const body=req.body;
+    const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
+    Dossier.updateOne({ 'processo.numeroInterno': req.sanitize(body.numeroInterno)},
+        {$set:{
+        'processo.problema.descricao': req.sanitize(body.descricao),
+        'processo.problema.tipo' : req.sanitize(body.tipo),
+        'processo.problema.data' : new Date(req.sanitize(body.data)).toISOString()}
+        },
+   callback);
+}
+
+exports.atualizarProblema = atualizarProblema;
 exports.getProcessosEmEsperaMaxima=getProcessosEmEsperaMaxima;
 exports.saveTempo = saveTempo;
 exports.getTempo = getTempo;
