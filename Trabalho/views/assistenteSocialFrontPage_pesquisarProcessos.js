@@ -4,8 +4,7 @@ let canChange=true;
 $(function () {
     $(document).ready(function () {
         ajaxRequestA3();
-        removeAcao();
-        editaAcao();
+
     });
 })()
 
@@ -81,9 +80,10 @@ function ajaxRequestA3() {
                                     '</li>' + '</ul>' + '</li>');
                             }
 
-                            clickOnAction();
-                        }
 
+                        }
+                        
+                        clickOnAction();
                         if(result.processo.assistenteSocial == $('#idUser').text()){
                             $('#btnG').show();
                             $('#addA').click(function () {
@@ -115,5 +115,35 @@ function ajaxRequestA3() {
     });
 }
 
+
+function clickOnAction() {
+    $('.selected').click(function () {
+        if ($(this.firstElementChild).is(':visible')) {
+            $(this.firstElementChild).slideUp();
+        } else {
+            $(this.firstElementChild).slideDown();
+            clicked = $(this.firstElementChild).attr('id');
+
+        }
+    });
+}
+
+function terminarProcesso() {
+    $(document).ready(function () {
+
+        $('#SimT').click(function () {
+            $.post(window.location.origin + "/terminarProcesso", {
+                numeroInterno: $('#searchBox3').val(),
+            }, function (result) {
+                $('#terminarProcesso').modal("hide");
+                $('#tabs').before('<div class="alert alert-primary alert-dismissible p-2">' +
+                    ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                    '<strong>' + result + '</strong>' +
+                    ' </div>');
+                $('#searchButton3').click();
+            });
+        })
+    })
+}
 
 
