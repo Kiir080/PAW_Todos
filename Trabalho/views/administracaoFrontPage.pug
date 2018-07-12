@@ -266,7 +266,7 @@ main.p-5.shadow-lg.container
                   option(value='assistenteSocial') Assistente Social
               .form-group
                 label(for='pass') Password:
-                input#pass(name='password' type='password' required='')
+                input#pass(name='password' type='password' required='' pattern='(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters')
         // Modal footer
         .modal-footer
           button.btn.btn-danger(type='submit' form='formU') Criar Utilizador

@@ -83,7 +83,7 @@ function ajaxRequestA3() {
 
                             clickOnAction();
                         }
-
+                            
                         if(result.processo.estado !== 'encerrado'){
                             ('#tp').prop('disabled', false);
                             terminarProcesso();
