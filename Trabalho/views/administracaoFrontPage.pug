@@ -254,17 +254,19 @@ main.p-5.shadow-lg.container
           button.close(type='button' data-dismiss='modal') &times;
         // Modal body
         .modal-body
-          form#formU(action='/signUp' method='POST')
+          form#formU(action='../signUp' method='POST')
             fieldset
               .form-group
                 label(for='idUt') Id:
                 input#idUt(name='id' type='text' readonly='')
               .w-50.form-group
                 label(for='dep') Departamento:
-                input#dep(name='departamento' type='text' required='')
+                select#tipo.form-control(name='departamento')
+                  option(value='administracao') Administra&ccedil;&atilde;o
+                  option(value='assistenteSocial') Assistente Social
               .form-group
                 label(for='pass') Password:
                 input#pass(name='password' type='password' required='')
         // Modal footer
         .modal-footer
-          button.btn.btn-danger(type='submit' form='form') Criar Utilizador
+          button.btn.btn-danger(type='submit' form='formU') Criar Utilizador
