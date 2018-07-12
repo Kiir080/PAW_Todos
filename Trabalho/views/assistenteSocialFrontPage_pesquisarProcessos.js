@@ -15,7 +15,7 @@ function ajaxRequestA3() {
         $('#searchButton3').click((function (event) {
             event.preventDefault();
             let id = $('#searchBox3').val();
-            $.post(window.location.origin + "/assistenteSocial/getProcesso", {
+            $.post(window.location.origin + "/getProcesso", {
                     numeroInterno: id
                 },
                 function (result) {
@@ -116,71 +116,4 @@ function ajaxRequestA3() {
 }
 
 
-function clickOnAction() {
-    $('.selected').click(function () {
-        if ($(this.firstElementChild).is(':visible')) {
-            $(this.firstElementChild).slideUp();
-            $('#remA').prop('disabled', true);
-            $('#edtA').prop('disabled', true);
-        } else {
-            $(this.firstElementChild).slideDown();
-            if(canChange){ //Se a assistente Social estiver a ver um processo dela
-                clicked = $(this.firstElementChild).attr('id');
-                $('#remA').prop('disabled', false);
-                $('#edtA').prop('disabled', false);
-            }   
-        }
-    });
-}
 
-function removeAcao() {
-    $(document).ready(function () {
-
-        $('#SimR').click(function () {
-            $.post(window.location.origin + "/administracao/eliminaAcao", {
-                numeroInterno: $('#searchBox3').val(),
-                data: $("#data" + clicked).text(),
-                tipo: $("#tipo" + clicked).text(),
-                descricao: $("#dcs" + clicked).text(),
-            }, function (result) {
-                $('#remAcao').modal("hide");
-                $('#tabs').before('<div class="alert alert-primary alert-dismissible p-2">' +
-                    ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                    '<strong>' + result + '</strong>' +
-                    ' </div>');
-                $('#searchButton3').click();
-            });
-        })
-    })
-}
-
-
-
-function editaAcao() {
-    $(document).ready(function () {
-        $('#editaAcao').on('show.bs.modal', function () {
-            $('#numE').val($('#searchBox3').val());
-            $('#tipoE').val($('#tipo' + clicked).text());
-            $('#dcsE').val($("#dcs" + clicked).text());
-
-            $('#edtButton').click(function () {
-                $.post(window.location.origin + "/administracao/editaAcao", {
-                    numeroInterno: $('#searchBox3').val(),
-                    data: $("#data" + clicked).text().replace(new RegExp('/', 'g'), '-'),
-                    tipo: $("#tipo" + clicked).text(),
-                    descricao: $("#dcs" + clicked).text(),
-                    dataNew: $("#dataE").val(),
-                    tipoNew: $("#tipoE").val(),
-                    descricaoNew: $("#dcsE").val()
-                }, function (result) {
-                    $('#editaAcao').modal("hide");
-                    $('#tabs').before('<div class="alert alert-primary alert-dismissible p-2">' +
-                        ' <button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                        '<strong>' + result + '</strong>' +
-                        ' </div>');
-                    $('#searchButton3').click();
-                });
-            });
-        });
-    });
-}

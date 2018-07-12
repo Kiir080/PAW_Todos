@@ -9,7 +9,7 @@ function ajaxRequestA2() {
     $('#searchButton2').click((function (event) {
         event.preventDefault();
         let id = $('#searchBox2').val();
-        $.post(window.location.origin + "/assistenteSocial/getDossier", {
+        $.post(window.location.origin + "/getDossier", {
                 numeroAluno: id
             },
             function (result) {

@@ -15,7 +15,7 @@ function ajaxRequestA3() {
         $('#searchButton3').click((function (event) {
             event.preventDefault();
             let id = $('#searchBox3').val();
-            $.post(window.location.origin + "/assistenteSocial/getProcesso", {
+            $.post(window.location.origin + "/getProcesso", {
                     numeroInterno: id
                 },
                 function (result) {
@@ -185,7 +185,7 @@ function terminarProcesso() {
     $(document).ready(function () {
 
         $('#SimT').click(function () {
-            $.post(window.location.origin + "/administracao/terminarProcesso", {
+            $.post(window.location.origin + "/terminarProcesso", {
                 numeroInterno: $('#searchBox3').val(),
             }, function (result) {
                 $('#terminarProcesso').modal("hide");

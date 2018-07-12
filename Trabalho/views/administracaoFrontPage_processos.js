@@ -4,7 +4,7 @@ $(function () {
             "processing": true,
             "responsive": true,
             "ajax": {
-                "url": window.location.origin + '/assistenteSocial/getProcessos',
+                "url": window.location.origin + '/getProcessos',
                 "type": "POST",
                 "dataSrc": ''
             },
