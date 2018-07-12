@@ -24,9 +24,7 @@ router.post('/signUp', function (req, res) {
             if (err) {
                 res.send(err.message);
             }else{
-                passport.authenticate('local')(req, res, function () {
-                    res.status(200).redirect('/' + 'administracao');
-                });
+                res.status(200).redirect('/' + 'administracao');
             }
            
         });
