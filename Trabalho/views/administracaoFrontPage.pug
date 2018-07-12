@@ -23,6 +23,8 @@ header
 
 main.p-5.shadow-lg.container
   #head.d-flex.flex-row.justify-content-between
+    .logo
+      img(src='../1.png' alt='logoImg' style="width:270px;")
     .user.pb-2
       img.rounded-circle(src='../user.png' alt='userImg' style="width:70px;")
       p Id:
@@ -33,7 +35,7 @@ main.p-5.shadow-lg.container
         button#criarU.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaUtilizador') Criar Utilizador
         button#termi.btn.btn-primary(type='submit') Terminar sessao
 
-    .logo
+    
   #tabs.row
     ul.nav.nav-tabs.mb-4
       li.nav-item
