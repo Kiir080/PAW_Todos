@@ -37,8 +37,8 @@ router.post('/' + subDomain + '/criarDossier', function (req, res) {
     })
 });
 
-router.get('/' + subDomain+'/criarDossierLanding', function (req, res) {
-    res.render('criarDossier');
+router.post('/' + subDomain+'/criarDossierLanding', function (req, res) {
+    res.render('criarDossier',{ id : req.body.id});
 });
 
 

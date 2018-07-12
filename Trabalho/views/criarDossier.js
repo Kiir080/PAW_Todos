@@ -12,7 +12,7 @@ $(function () {
 function getEntidades() {
     $(document).ready(function () {
 
-        $.post(window.location.origin+'/assistenteSocial/getEntidades', function (result) {
+        $.post(window.location.origin+'/getEntidades', function (result) {
             if (result === null || result.length === 0) {
                 $('#entidades').append('<option> Não existem entidades Disponiveis</option>');
             } else {
@@ -29,7 +29,7 @@ function getEntidades() {
 function getNumeroDeProcessos() {
     $(document).ready(function () {
 
-        $.post(window.location.origin+'/assistenteSocial/countProcessos', function (result) {
+        $.post(window.location.origin+'/countProcessos', function (result) {
             $('#num').val(result.num + 1);;
         });
     });
@@ -38,7 +38,7 @@ function getNumeroDeProcessos() {
 function checkIfExistsNumAluno() {
     $(document).ready(function () {
         $('#numero').blur(function (event) {
-            $.post(window.location.origin+'/assistenteSocial/checkIfExistsNumAluno', {
+            $.post(window.location.origin+'/checkIfExistsNumAluno', {
                 numeroAluno: $('#numero').val()
             }, function (result) {
                 if (result) {
@@ -55,7 +55,7 @@ function checkIfExistsNumAluno() {
 function checkIfExistsAssSocial() {
     $(document).ready(function () {
         $('#nom').blur(function (event) {
-            $.post(window.location.origin+'/assistenteSocial/checkIfExistsAssSocial', {
+            $.post(window.location.origin+'/checkIfExistsAssSocial', {
                 assistenteSocial: $('#nom').val()
             }, function (result) {
                 if (!result) {
