@@ -12,18 +12,18 @@ function criaAcao(req, callback) {
     Dossier.update({
         'processo.numeroInterno': req.sanitize(req.body.numeroInterno)
     }, {
-        $push: {
-            'processo.problema.acoes': {
-                data: new Date(req.sanitize(req.body.data)).toISOString(),
-                tipo: req.sanitize(req.body.tipo),
-                descricao: req.sanitize(req.body.descricao)
+            $push: {
+                'processo.problema.acoes': {
+                    data: new Date(req.sanitize(req.body.data)).toISOString(),
+                    tipo: req.sanitize(req.body.tipo),
+                    descricao: req.sanitize(req.body.descricao)
+                }
+            },
+            $set: {
+                'processo.estado': 'acompanhamento',
+                dataEncaminhamento: Date.now
             }
-        },
-        $set: {
-            'processo.estado': 'acompanhamento',
-            dataEncaminhamento: Date.now
-        }
-    }, callback);
+        }, callback);
 }
 
 
@@ -221,16 +221,15 @@ function countUtilizador(callback) {
 
 function terminarProcesso(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    Dossier.findOne({
-        numeroInterno: `${req.sanitize(req.body.numeroInterno)}`
-    }).exec((err, result) => {
-        if (err) callback(err);
-        else {
-            result.estado = 'encerrado';
-
-            result.save();
-        }
-    });
+    Dossier.updateOne({
+        'processo.numeroInterno': `${req.sanitize(req.body.numeroInterno)}`
+    }, {
+            $set: {
+                'processo.estado' : 'encerrado'
+            }
+        },
+        callback
+);
 }
 
 exports.terminarProcesso = terminarProcesso;
