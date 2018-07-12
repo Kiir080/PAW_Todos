@@ -22,10 +22,10 @@ main.p-5.shadow-lg.container
   #head.d-flex.flex-row.justify-content-between
     .user.pb-2
       img.rounded-circle(src='../user.png' alt='userImg' style="width:70px;")
-      p
-        span#idUser Id: #{id}
-      p
-        span Departamento: #{departamento}
+      p Id: 
+        span#idUser #{id}
+      p Departamento:  
+        span #{departamento}
       form(action='/logOut' method='POST')
         button#criarU.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaUtilizador') Criar Utilizador
         button#termi.btn.btn-primary(type='submit') Terminar sessao
@@ -70,6 +70,7 @@ main.p-5.shadow-lg.container
         ul#list3.py-3.list-group
         .btn-group#btnG(style="display: none;")
           button#addA.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaAcao') Adicionar A&ccedil;&atilde;o
+          button#tp.btn.btn-primary(type='button' data-toggle='modal' data-target='#terminarProcesso') Terminar Processo
     #tab4.tab-pane.container.fade.bg-light.col
       table#table4.table.table-striped.table-hover.table-responsive.text-right
         thead.thead-dark
@@ -112,3 +113,17 @@ main.p-5.shadow-lg.container
     .btn-group#tab1BtnG
       button.btn.btn-primary(type='submit') Criar Dossier
       button.btn.btn-primary(type='submit' formaction='assistenteSocial/criarProcessoLanding') Adicionar Processo a Dossier
+  #terminarProcesso.modal.fade
+    .modal-dialog.modal-sm
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Terminar Processo
+          button.close(type='button' data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          p Deseja terminar o processo?
+        // Modal footer
+        .modal-footer
+          button#SimT.btn.btn-danger(type='button') Sim
+          button.btn.btn-primary(type='button' data-dismiss='modal') N&atilde;o

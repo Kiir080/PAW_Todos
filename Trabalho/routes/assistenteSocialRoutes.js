@@ -6,7 +6,7 @@ const comumControler= require('../controller/comumControler.js');
 
 const subDomain = 'assistenteSocial';
 
-/*  router.use('/' + subDomain + '*', (req, res, next) => {
+  router.use('/' + subDomain + '*', (req, res, next) => {
     if (req.user) {
         if (req.user._doc.departamento !== subDomain) {
             res.status(403).send('FORBIDDEN!!');
@@ -17,7 +17,7 @@ const subDomain = 'assistenteSocial';
         res.redirect('/');
     }
     
-}); */
+}); 
 
 
 router.get('/'+subDomain,function(req,res){

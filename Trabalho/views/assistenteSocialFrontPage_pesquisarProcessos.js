@@ -84,10 +84,22 @@ function ajaxRequestA3() {
                             clickOnAction();
                         }
 
-                        $('#btnG').show();
-                        $('#addA').click(function () {
-                            $('#num').val(id);
-                        })
+                        if(result.processo.assistenteSocial == $('#idUser').text()){
+                            $('#btnG').show();
+                            $('#addA').click(function () {
+                                $('#num').val(id);
+                            });
+
+                            if(result.processo.estado === 'encerrado'){
+                                $('#tp').prop('disabled', true);
+                            }else{
+                                $('#tp').prop('disabled', false);
+                                terminarProcesso();
+                            }  
+
+                        }else{
+                            $('#btnG').hide();
+                        }
 
                     }
 

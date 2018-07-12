@@ -27,10 +27,10 @@ main.p-5.shadow-lg.container
       img(src='../1.png' alt='logoImg' style="width:270px;")
     .user.pb-2
       img.rounded-circle(src='../user.png' alt='userImg' style="width:70px;")
-      p Id:
+      p Id: 
         span#idUser #{id}
-      p
-        span Departamento: #{departamento}
+      p Departamento: 
+        span #{departamento}
       form(action='/logOut' method='POST')
         button#criarU.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaUtilizador') Criar Utilizador
         button#termi.btn.btn-primary(type='submit') Terminar sessao
@@ -82,7 +82,7 @@ main.p-5.shadow-lg.container
           button#addA.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaAcao') Adicionar A&ccedil;&atilde;o
           button#remA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#remAcao') Remover A&ccedil;&atilde;o
           button#edtA.btn.btn-primary(type='button' disabled='' data-toggle='modal' data-target='#editaAcao') Editar A&ccedil;&atilde;o  
-          button#tp.btn.btn-primary(type='button' data-toggle='modal' disabled='' data-target='#terminarProcesso') Terminar Processo
+          button#tp.btn.btn-primary(type='button' data-toggle='modal' data-target='#terminarProcesso') Terminar Processo
     #tab4.tab-pane.container.fade
       table#table4.table.table-striped.table-hover.table-responsive.text-right
         thead.thead-dark
