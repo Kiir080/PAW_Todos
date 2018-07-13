@@ -200,7 +200,7 @@ function addToarray(targetDays, result, array) {
     let dataHj= new Date();
     let mills = Math.abs(dataHj.getTime() - dataProcesso.getTime());
     let dias = Math.ceil(mills / (24 * 3600 * 1000));
-    if (targetDays <= dias) {
+    if (targetDays < dias) {
         array.push({
             numeroInterno: result.processo.numeroInterno,
             assistenteSocial: result.processo.assistenteSocial,

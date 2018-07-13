@@ -31,7 +31,8 @@ function ajaxRequestA4() {
                             "data": "contacto"
                         }
                     ]
-                });  
+                }); 
+                firstTime=false; 
             }else{
             table1.ajax.reload();
             }
