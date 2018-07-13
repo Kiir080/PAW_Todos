@@ -6,7 +6,7 @@ $(function () {
         ajaxRequestA4();
         $('#idAssSocial').val($('#idUser').text());
     });
-})()
+})
 
 function ajaxRequestA4() {
     $(document).ready(function () {

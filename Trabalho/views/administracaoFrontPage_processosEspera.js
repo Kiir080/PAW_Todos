@@ -14,7 +14,7 @@ $(function () {
     setInterval(ajaxRequestA6, refreshRate);
     });
 
-})()
+})
 
 function clickOnEditButton() {
 

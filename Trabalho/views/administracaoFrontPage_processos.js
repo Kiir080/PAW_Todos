@@ -6,7 +6,7 @@ $(function () {
         getNumeroDeUtilizadores();
 
     });
-})()
+})
 
 
 

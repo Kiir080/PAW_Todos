@@ -1,12 +1,12 @@
 let clicked;
-let canChange=true;
+
 
 $(function () {
     $(document).ready(function () {
         ajaxRequestA3();
 
     });
-})()
+})
 
 
 function ajaxRequestA3() {

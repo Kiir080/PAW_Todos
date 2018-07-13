@@ -1,23 +1,16 @@
-let table;
+let table1;
 let firstTime=true;
 
 $(function () {
-    $(document).ready(function () {
-
-        
         ajaxRequestA4();
-        
-        
-       
-       
-    });
-})()
+    
+})
 
 function ajaxRequestA4() {
     $(document).ready(function () {
         $('#a4').on('click', function (event) {
             if(firstTime){
-                table = $('#table4').DataTable({
+                table1 = $('#table4').DataTable({
                     "processing": true,
                     "responsive": true,
                     "select":'single',
@@ -39,7 +32,7 @@ function ajaxRequestA4() {
                 });  
                 firstTime = false;
             }else{
-            table.ajax.reload();
+            table1.ajax.reload();
             }
             
             $('#btnGE').show();
@@ -52,7 +45,7 @@ function ajaxRequestA4() {
 }
 
 function selectLine(){
-    table.on('select', function ( e, dt, type, indexes ) {
+    table1.on('select', function ( e, dt, type, indexes ) {
         if ( type === 'row' ) {
             var data = dt.row({ selected: true }).data();
             $('#edtE').prop('disabled', false);

@@ -7,7 +7,7 @@ $(function () {
         editaAcao();
        
     });
-})()
+})
 
 
 function ajaxRequestA3() {

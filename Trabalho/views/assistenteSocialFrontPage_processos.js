@@ -42,7 +42,7 @@ $(function () {
 
         ajaxRequestA1();
     });
-})()
+})
 
 
 

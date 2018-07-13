@@ -2,7 +2,7 @@ $(function () {
     $(document).ready(function () {
       ajaxRequestA2();
     });
-})()
+})
 
 
 function ajaxRequestA2() {
