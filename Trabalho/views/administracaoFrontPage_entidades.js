@@ -38,7 +38,6 @@ function ajaxRequestA4() {
             $('#btnGE').show();
             
             $('#addE').click(getNumeroDeEntidades);
-
             selectLine();
         });
     })
@@ -49,13 +48,12 @@ function selectLine(){
         if ( type === 'row' ) {
             var data = dt.row({ selected: true }).data();
             $('#edtE').prop('disabled', false);
-    
+
             $('#edtE').click(function () {
                 $('#idEd').val(data.id);
                 $('#contactoEd').val(data.contacto);
                 $('#nomeEd').val(data.nome);
             });
-            
         }
     } );
 }
