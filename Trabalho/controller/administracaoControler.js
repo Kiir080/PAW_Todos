@@ -101,8 +101,10 @@ function editarEntidade(req, callback) {
             result.nome = req.sanitize(req.body.nome);
             result.contacto = req.sanitize(req.body.contactoE);
 
-            result.save();
-            atualizarEntidade(req, callback);
+            result.save(function(){
+                atualizarEntidade(req, callback);
+            });
+           
 
         }
     });
@@ -112,20 +114,19 @@ function editarEntidade(req, callback) {
 
 function atualizarEntidade(req, callback) {
     const Dossier = mongoManager.connect(dossierSchema, 'dossiers');
-    comumControler.procurarEntidade(req.sanitize(req.body.id), function (res) {
         Dossier.updateMany({
             'processo.entidade.id': req.sanitize(req.body.id)
         }, {
-            'processo.entidade.nome': res.nome,
-            'processo.entidade.contacto': res.contacto
+            $set: {
+            'processo.entidade.nome': req.sanitize(req.body.nome),
+            'processo.entidade.contacto': req.sanitize(req.body.contacto)
+            }
         }).exec(function (err) {
             if (err) callback(err);
             else {
                 callback();
             }
         });
-
-    });
 }
 
 
