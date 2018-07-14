@@ -69,7 +69,7 @@ function ajaxRequestA3() {
                             $('#list3').append('<li class="list-group-item list-group-item-dark" ' + '<strong>Diligências Tomadas ' + '</strong>' +
                                 '</li>');
 
-                            for (i = 0; i < result.processo.problema.acoes.length; i++) {
+                            for (let i = 0; i < result.processo.problema.acoes.length; i++) {
                                 $('#list3').append(
                                     '<li class="list-group-item list-group-item-dark selected"' + '<strong>Ação ' + (i + 1) + '</strong>' + '<ul style="display: none;" id=' + (i + 1) + '>' +
                                     '<li class="list-group-item">' +
