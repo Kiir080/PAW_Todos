@@ -1,0 +1,50 @@
+doctype html
+head
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  title Criar Processo
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
+  script(src='../criarProcesso.js')
+.p-5.shadow-lg.container(align='center')
+  main
+    .criarProcesso
+    form(action='/assistenteSocial/addProcesso' method='POST')
+      fieldset
+        .page-header.font-weight-bold
+          legend
+            | Criar Processo
+            abbr(title='Mandatory fields')
+        .form-group.text-left.font-weight-bold
+          label(for='usr') N&uacute;mero Aluno:
+          input#numAluno.form-control(name='numeroAluno' type='number' required='')
+        .form-group.text-left.font-weight-bold
+          label(for='pwd') Assistente Social:
+          input#nom.form-control(name='assistenteSocial' type='text' required='' readonly=''  value = id) 
+        .form-group.text-left.font-weight-bold
+          label(for='pwd') N&uacute;mero Interno:
+          input#num.form-control(name='numeroInterno' type='number' required='' readonly='')
+        .form-group.text-left.font-weight-bold
+          label(for='ano') Ano Letivo:
+          input#ano.form-control(type='text' minlenght='9' maxlength='9' required='' name='anoLetivo' pattern='(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' title='Formato: AAAA-AAAA')  
+        .form-group.text-left.font-weight-bold
+          label(for='Obs') Observa&ccedil;&otilde;es:
+          textarea#Obs.form-control(required='' name='observacoes' rows='5')
+        .form-group.text-left.font-weight-bold
+          label(for='dcs') Descri&ccedil;&atilde;o do Problema:
+          textarea#dcs.form-control(required='' name='descricao' rows='2')
+        .form-group.text-left.font-weight-bold
+          label(for='tipo') Tipo:
+          select#tipo.form-control(name='tipo')
+            option(value='absentismo') Absentismo
+            option(value='indisciplina') Indisciplina
+            option(value='consumoDrogas') Consumo de Drogas
+        .form-group.form-group.text-left.font-weight-bold
+          label(for='entidade') Entidade:
+          select#entidade.form-control(name='id')
+        .form-group.form-group.text-left.font-weight-bold
+          label(for='pwd') Data:
+          input#data.form-control(name='data' type='date' required='')
+        .btn-group.d-flex.justify-content-end
+          button.p-2.btn.btn-success(type='submit') Submeter

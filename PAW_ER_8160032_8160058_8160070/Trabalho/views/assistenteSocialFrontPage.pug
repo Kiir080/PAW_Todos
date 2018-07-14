@@ -1,0 +1,130 @@
+doctype html
+header
+  meta(charset='utf-8' name='viewport' content='width=device-width, initial-scale=1')
+  title Assistente Social
+  link(rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css')
+  link(rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.css')
+  link(rel='stylesheet' type='text/css' href='https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.css')
+  script(type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.js')
+  script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js')
+  script(type='text/javascript' src='https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js')
+  script(type='text/javascript' src='https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.js')
+  script(type='text/javascript' src='https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.js')
+  script(type='text/javascript' src='https://cdn.datatables.net/select/1.2.6/js/dataTables.select.js')
+
+  script(src='../administracaoFrontPage_pesquisarDossiers.js')
+  script(src='../assistenteSocialFrontPage_processos.js')
+  script(src='../assistenteSocialFrontPage_pesquisarProcessos.js')
+  script(src='../assistenteSocialFrontPage_entidades.js')
+
+
+main.p-5.shadow-lg.container
+  #head.d-flex.flex-row.justify-content-between
+    .logo
+      img(src='../1.png' alt='logoImg' style="width:270px;")
+    .user.pb-2
+      img.rounded-circle(src='../user.png' alt='userImg' style="width:70px;")
+      p Id: 
+        span#idUser #{id}
+      p Departamento:  
+        span #{departamento}
+      form(action='/logOut' method='POST')
+        button#termi.btn.btn-primary(type='submit') Terminar sessao
+
+main.p-5.shadow-lg.container
+  #tabs
+    ul.nav.nav-tabs.row.d-flex.justify-content-center
+      li.nav-item
+        a#a1.nav-link.active(href='#tab1' data-toggle='tab') Processos Atribuidos
+      li.nav-item
+        a#a2.nav-link(href='#tab2' data-toggle='tab') Pesquisar Dossiers
+      li.nav-item
+        a#a3.nav-link(href='#tab3' data-toggle='tab') Pesquisar Processos
+      li.nav-item
+        a#a4.nav-link(href='#tab4' data-toggle='tab') Entidades
+  .tab-content.row.w-100
+    #tab1.tab-pane.container.active.bg-light.col
+       table#table1.table.table-striped.table-hover.table-responsive.text-right
+        thead.thead-dark
+          tr
+            th Numero Interno
+            th Numero Aluno
+            th Estado
+            th Ano Letivo
+            th Data de Registo 
+            th Entidade
+            th Tipo de Problema
+    #tab2.tab-pane.container.fade.bg-light.col
+      .input-group.mb-3.p-2
+        input#searchBox2.form-control(type='text' placeholder='Introduza o Numero do Aluno')
+        .input-group-append
+          button#searchButton2.btn.btn-success(type='submit') Pesquisar
+      .collapse2
+        ul#list2.py-3.list-group
+    #tab3.tab-pane.container.fade.bg-light.col
+      .input-group.mb-3.p-2
+        input#searchBox3.form-control(type='text' placeholder='Introduza o Numero Interno do Processo')
+        .input-group-append
+          button#searchButton3.btn.btn-success(type='submit') Pesquisar
+      .collapse3
+        ul#list3.py-3.list-group
+        .btn-group#btnG(style="display: none;")
+          button#addA.btn.btn-primary(type='button' data-toggle='modal' data-target='#criaAcao') Adicionar A&ccedil;&atilde;o
+          button#tp.btn.btn-primary(type='button' data-toggle='modal' data-target='#terminarProcesso') Terminar Processo
+    #tab4.tab-pane.container.fade.bg-light.col
+      table#table4.table.table-striped.table-hover.table-responsive.text-right
+        thead.thead-dark
+          tr
+            th Identificador
+            th Nome
+            th Contacto
+  #criaAcao.modal.fade
+    .modal-dialog.modal-lg.modal-dialog-centered
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Adicionar A&ccedil;&atilde;o
+          button.close(type='button' data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          form#form(action='../addAcao' method='POST')
+            fieldset
+              .form-group
+                label(for='num') N&uacute;mero Interno:
+                input#num(name='numeroInterno' type='text' readonly='')
+              .w-50.form-group
+                label(for='tipo') Tipo de A&ccedil;&atilde;o:
+                select#tipo.form-control(name='tipo' required='')
+                  option(value='reunião') Reuni&atilde;o
+                  option(value='pedido') Pedido
+                  option(value='encaminhamento') Encaminhamento
+                  option(value='expulsão') Expuls&atilde;o
+                  option(value='suspensão') Suspens&atilde;o
+              .form-group
+                label(for='data') Data:
+                input#data(name='data' type='date' required='')
+              .form-group
+                label(for='dcs') Descri&ccedil;&atilde;o:
+                textarea#dcs.form-control(required='' name='descricao' rows='2')
+        // Modal footer
+        .modal-footer
+          button.btn.btn-danger(type='submit' form='form') Adicionar
+  form.w-100.bg-light.rounded-bottom.row.p-2(action='assistenteSocial/criarDossierLanding' method='POST')
+    input#idAssSocial(name='id' readonly='' style="display: none;") 
+    .btn-group#tab1BtnG
+      button.btn.btn-primary(type='submit') Criar Dossier
+      button.btn.btn-primary(type='submit' formaction='assistenteSocial/criarProcessoLanding') Adicionar Processo a Dossier
+  #terminarProcesso.modal.fade
+    .modal-dialog.modal-sm
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Terminar Processo
+          button.close(type='button' data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          p Deseja terminar o processo?
+        // Modal footer
+        .modal-footer
+          button#SimT.btn.btn-danger(type='button') Sim
+          button.btn.btn-primary(type='button' data-dismiss='modal') N&atilde;o

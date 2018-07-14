@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5b3e59b010238b58b8461404"},"id":1,"nome":"GNR","contacto":123456789,"__v":0}
+{"_id":{"$oid":"5b43b7ece22b257df89d0019"},"id":2,"nome":"PSP","contacto":9999,"__v":0}
+{"_id":{"$oid":"5b43b829e3128770b86236d4"},"id":3,"nome":"Psicologa","contacto":11112,"__v":0}
+{"_id":{"$oid":"5b44f12fd5debe3250e7a788"},"id":4,"nome":"Maria Leal","contacto":122,"__v":0}
