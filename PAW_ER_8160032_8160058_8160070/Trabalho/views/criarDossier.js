@@ -6,7 +6,7 @@ $(function () {
         checkIfExistsNumAluno();
         checkIfExistsAssSocial();
     });
-})()
+})
 
 
 function getEntidades() {
@@ -16,7 +16,7 @@ function getEntidades() {
             if (result === null || result.length === 0) {
                 $('#entidades').append('<option> Não existem entidades Disponiveis</option>');
             } else {
-                for (i = 0; i < result.length; i++) {
+                for (let i = 0; i < result.length; i++) {
                     $("#entidade").append(
                         '<option value="' + result[i].id + '">' + result[i].nome + '</option>');
                 }
