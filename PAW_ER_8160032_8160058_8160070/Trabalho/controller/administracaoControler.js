@@ -157,7 +157,7 @@ function saveTempo(req,callback) {
     const Tempo = mongoManager.connect(tempoSchema, 'tempos');
     let temp = new Tempo({
         tempo: req.sanitize(req.body.tempo),
-        idAdmin: req.sanitize(req.body.idAdmin)
+        idAdmin: req.sanitize(req.user.id)
     });
     temp.save(function(err){
         callback(err);

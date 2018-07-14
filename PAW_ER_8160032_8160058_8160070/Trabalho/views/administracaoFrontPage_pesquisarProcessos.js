@@ -1,11 +1,12 @@
 let clicked;
+let terminado = false;
 
 $(function () {
     $(document).ready(function () {
         ajaxRequestA3();
         removeAcao();
         editaAcao();
-       
+
     });
 })
 
@@ -81,26 +82,32 @@ function ajaxRequestA3() {
                                     '</li>' + '</ul>' + '</li>');
                             }
 
-                            clickOnAction();
+
                         }
 
-                      
-                            $('#btnG').show();
-                            $('#addA').click(function () {
-                                $('#num').val(id);
-                            });
-                            $('#edtP').click(function () {
-                                $('#numInterno').val(id);
-                            });
+
+                        $('#btnG').show();
+                        $('#addA').click(function () {
+                            $('#num').val(id);
+                        });
+                        $('#edtP').click(function () {
+                            $('#numInterno').val(id);
+                        });
 
 
-                            if(result.processo.estado === 'encerrado'){
-                                $('#tp').prop('disabled', true);
-                            }else{
-                                $('#tp').prop('disabled', false);
-                                terminarProcesso();
-                            }  
-                        
+                        if (result.processo.estado === 'encerrado') {
+                            $('#tp').prop('disabled', true);
+                            $('#edtP').prop('disabled', true);
+                            $('#remA').hide();
+                            $('#edtA').hide();
+                            terminado = true;
+                        } else {
+                            $('#tp').prop('disabled', false);
+                            terminado = false;
+                            terminarProcesso();
+                        }
+
+                        clickOnAction();
 
                     }
 
@@ -121,13 +128,16 @@ function clickOnAction() {
     $('.selected').click(function () {
         if ($(this.firstElementChild).is(':visible')) {
             $(this.firstElementChild).slideUp();
-           $('#remA').hide();
-           $('#edtA').hide();
+            $('#remA').hide();
+            $('#edtA').hide();
         } else {
             $(this.firstElementChild).slideDown();
             clicked = $(this.firstElementChild).attr('id');
-            $('#remA').show();
-            $('#edtA').show();
+            if (!terminado) {
+                $('#remA').show();
+                $('#edtA').show();
+            }
+
 
         }
     });
