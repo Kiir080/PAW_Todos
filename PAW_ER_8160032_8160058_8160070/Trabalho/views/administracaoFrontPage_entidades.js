@@ -1,3 +1,4 @@
+"use strict";
 let table1;
 let firstTime=true;
 

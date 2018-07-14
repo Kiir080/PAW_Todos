@@ -1,3 +1,4 @@
+"use strict";
 let clicked;
 let terminado = false;
 

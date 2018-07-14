@@ -1,3 +1,4 @@
+"use strict";
 let refreshRate = 5000;
 let flag = true;
 let tempoValue;

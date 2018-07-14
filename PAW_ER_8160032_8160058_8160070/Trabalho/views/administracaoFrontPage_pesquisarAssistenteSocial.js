@@ -1,3 +1,5 @@
+"use strict";
+
 $(function () {
     $(document).ready(function () {
         ajaxRequestA5();
@@ -20,16 +22,16 @@ function ajaxRequestA5() {
                             '<strong>Esse Assistente Social não tem Processos!!!</strong>' +
                             ' </div>');
                     } else {
-                        for (x = 0; x < result.length; x++) {
-                            $('#list5').append(
-                                '<li class="list-group-item list-group-item-dark" ' +
-                                '<strong>Processo Numero ' + (x + 1) + '</strong>' +
-                                '</li>' +
-                                '<li class="list-group-item" ' +
-                                '<strong>Numero do Aluno:</strong>' + '<span>' + result[x].numeroAluno + '</span>' +
-                                '</li>' +
+                        for (let x = 0; x < result.length; x++) {
+                            $('#list5').append('<li class="list-group-item list-group-item-dark selectedP" ' +
+                            '<strong>Processo Numero ' + (x + 1) + '</strong>'  + '<ul style="display: none;" id=P' + (x + 1) + '>'+
+                            '</li>');
+                            $('#P'+(x + 1)).append(
                                 '<li class="list-group-item">' +
                                 '<strong>Numero Interno: </strong>' + '<span>' + result[x].processo.numeroInterno + '</span>' +
+                                '</li>' +
+                                '<li class="list-group-item">' +
+                                '<strong>Identificador de Assistente Social Atribuido: </strong>' + '<span>' + result[x].processo.assistenteSocial + '</span>' +
                                 '</li>' +
                                 '<li class="list-group-item">' +
                                 '<strong>Ano Letivo: </strong>' + '<span>' + result[x].processo.anoLetivo + '</span>' +
@@ -60,32 +62,45 @@ function ajaxRequestA5() {
 
                             if (result[x].processo.problema.acoes.length > 0) {
 
-                                $('#list5').append('<li class="list-group-item list-group-item-dark" ' + '<strong>Diligências Tomadas ' + '</strong>' +
+                                $('#P'+(x + 1)).append('<li class="list-group-item list-group-item-dark" ' + '<strong>Diligências Tomadas ' + '</strong>' +
                                     '</li>');
 
-                                for (i = 0; i < result[x].processo.problema.acoes.length; i++) {
-                                    $('#list5').append('<div>' +
-                                        '<li class="list-group-item list-group-item-dark" ' + '<strong>Ação ' + (i + 1) + '</strong>' + '</li>' +
+                                for (let i = 0; i < result[x].processo.problema.acoes.length; i++) {
+                                    $('#P'+(x + 1)).append(
+                                        '<li class="list-group-item list-group-item-dark"' + '<strong>Ação ' + (i + 1) + '</strong>' + '<ul id=' + (i + 1) + '>' +
                                         '<li class="list-group-item">' +
-                                        '<strong>Tipo:</strong>' + '<span>' + result[x].processo.problema.acoes[i].tipo + '</span>' +
+                                        '<strong>Tipo:</strong>' + '<span id="tipo' + (i + 1) + '">' + result[x].processo.problema.acoes[i].tipo + '</span>' +
                                         '</li>' +
                                         '<li class="list-group-item">' +
-                                        '<strong>Data:</strong>' + '<span>' + (result[x].processo.problema.acoes[i].data).split('T')[0] + '</span>' +
+                                        '<strong>Data:</strong>' + '<span id="data' + (i + 1) + '">' + (result[x].processo.problema.acoes[i].data).split('T')[0] + '</span>' +
                                         '</li>' +
                                         '<li class="list-group-item">' +
-                                        '<strong>Descricão:</strong>' + '<span>' + result[x].processo.problema.acoes[i].descricao + '</span>' +
-                                        '</li>' + '</div>');
+                                        '<strong>Descricão:</strong>' + '<span id="dcs' + (i + 1) + '">' + result[x].processo.problema.acoes[i].descricao + '</span>' +
+                                        '</li>' + '</ul>'+ '</ul>' + '</li>');
                                 }
+
+
                             }
-
                         }
+                        clickOnProcesso();
+
+                        $('.collapse5').collapse();
+
                     }
-                    $('.collapse5').collapse();
 
-                }
-
-            );
+                });
 
         }));
+    });
+}
+
+
+function clickOnProcesso() {
+    $('.selectedP').click(function () {
+        if ($(this.firstElementChild).is(':visible')) {
+            $(this.firstElementChild).slideUp();
+        } else {
+            $(this.firstElementChild).slideDown();
+        }
     });
 }
